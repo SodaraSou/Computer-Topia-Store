@@ -1,14 +1,15 @@
-function ProfileSection({ editSvg, logOut }) {
+import Button from "../../../ui/shared/Button";
+
+function ProfileSection({ editSvg, logOut, userProfile }) {
   return (
     <div className="w-full border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4 md:mb-10">
         <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
-        <button
+        <Button
+          title="Log Out"
           onClick={logOut}
-          className="bg-red-500 h-10 w-32 rounded-full font-bold"
-        >
-          Log Out
-        </button>
+          customClass="bg-red-500"
+        ></Button>
       </div>
       <div className="flex flex-col items-center md:flex-row gap-10">
         <div className="w-full md:w-1/4 flex flex-col gap-4 justify-center items-center">
@@ -38,8 +39,8 @@ function ProfileSection({ editSvg, logOut }) {
               placeholder=""
               id="username"
               className="rounded-lg w-full h-[38px] px-4 border"
-              //   disabled={editStatus}
-              // value={test}
+              // disabled={editStatus}
+              value={userProfile.username}
             />
           </div>
           <div className="w-full flex flex-col gap-2">

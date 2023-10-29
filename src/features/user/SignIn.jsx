@@ -35,7 +35,7 @@ function SignIn() {
     e.preventDefault();
     const loginStatus = await signInUser(inputData);
     if (loginStatus) {
-      navigate("/");
+      navigate("/profile");
     }
   };
   const googleAuth = async (e) => {
@@ -81,7 +81,7 @@ function SignIn() {
   ) : (
     <div className="max-w-7xl mx-auto">
       <section className="p-4 xl:py-10 xl:px-0">
-        <div className="max-w-[1000px] flex justify-center h-auto bg-[#D9D9D9] rounded-2xl my-10 mx-auto">
+        <div className="max-w-[1000px] flex justify-center h-auto bg-[#EAECF6] rounded-2xl my-10 mx-auto">
           <div className="hidden w-full md:w-1/2 md:flex items-center justify-center p-10">
             {/* <img src={AuthPageImg} alt="AuthPageImg" /> */}
           </div>
@@ -102,26 +102,26 @@ function SignIn() {
                 id="password"
                 onChange={onChange}
               />
-              <div className="flex justify-end mt-6">
+              <div className="flex justify-end mb-6">
                 <button
                   onClick={() => setShowForgetPassword(true)}
-                  className="underline hover:text-sky-400"
+                  className="underline hover:text-[#5E17EB]"
                 >
                   Forgot Password?
                 </button>
               </div>
-              <Button title="Login" onClick={onSubmit} />
-              <div className="mb-6 flex justify-center">
+              <Button title="Login" onClick={onSubmit} customClass="w-full"/>
+              <div className="my-6 flex justify-center">
                 <p>
                   Don't Have Account?{" "}
-                  <Link to="/signup" className="underline hover:text-sky-400">
+                  <Link to="/signup" className="underline hover:text-[#5E17EB]">
                     SIGN UP
                   </Link>
                 </p>
               </div>
               <div className="relative flex items-center justify-center py-2">
                 <div className="h-[1px] bg-black flex-grow"></div>
-                <p className="absolute text-lg bg-[#D9D9D9] px-3">
+                <p className="absolute text-lg bg-[#EAECF6] px-3">
                   or sign in with
                 </p>
               </div>

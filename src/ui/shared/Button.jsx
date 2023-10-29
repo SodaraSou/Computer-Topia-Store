@@ -1,9 +1,11 @@
-function Button({ title, onClick }) {
+function Button({ title, onClick, customClass }) {
+  const defaultClass =
+    "rounded-xl bg-[#5E17EB] text-white p-2 h-10 w-32 font-semibold";
+  const buttonClass = customClass
+    ? `${defaultClass} ${customClass}`
+    : defaultClass;
   return (
-    <button
-      onClick={onClick}
-      className="w-full my-6 rounded-xl bg-white p-2 font-semibold hover:bg-sky-400 hover:duration-200"
-    >
+    <button onClick={onClick} className={buttonClass}>
       {title}
     </button>
   );

@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import cartSvg from "../assets/svg/cart-plus-solid.svg";
 import accountSvg from "../assets/svg/user-regular.svg";
+import Logo from "../assets/img/Logo 240 x 56.png";
 
 function Header() {
   return (
     <nav>
       <div className="max-w-7xl mx-auto p-4 xl:px-0 xl:py-6 flex flex-col gap-4 md:gap-8">
         <div className="flex justify-between items-center">
-          <Link to="/" className="text-4xl font-bold">
-            Logo
+          <Link to="/">
+            <img src={Logo} alt="Logo" />
           </Link>
           <div className="flex items-center text-lg">
             <div className="hidden md:block">

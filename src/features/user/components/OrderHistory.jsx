@@ -1,3 +1,5 @@
+import Button from "../../../ui/shared/Button";
+
 function OrderHistory() {
   return (
     <div className="w-full border rounded-xl p-4 md:p-10">
@@ -11,9 +13,7 @@ function OrderHistory() {
             <p>Order status: Complete</p>
             <p>Delivery by: J&T</p>
           </div>
-          <button className="h-10 w-32 rounded-full bg-[#D9D9D9] font-bold">
-            Detail
-          </button>
+          <Button title="Detail"></Button>
         </div>
         <div className="flex justify-between">
           <div className="w-full">
@@ -22,9 +22,7 @@ function OrderHistory() {
             <p>Order status: Complete</p>
             <p>Delivery by: J&T</p>
           </div>
-          <button className="h-10 w-32 rounded-full bg-[#D9D9D9] font-bold">
-            Detail
-          </button>
+          <Button title="Detail"></Button>
         </div>
       </div>
     </div>

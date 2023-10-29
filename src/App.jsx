@@ -9,7 +9,6 @@ import Profile from "./features/user/Profile";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import SignIn from "./features/user/SignIn";
 import SignUp from "./features/user/SignUp";
-import LaptopForm from "./features/admin/components/LaptopForm";
 
 function App() {
   const router = createBrowserRouter([

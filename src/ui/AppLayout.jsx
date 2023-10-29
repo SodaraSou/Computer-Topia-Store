@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 function AppLayout() {
   return (
-    <div>
+    <div className="font-poppins">
       <Header />
       <main className="max-w-7xl mx-auto">
         <Outlet />
