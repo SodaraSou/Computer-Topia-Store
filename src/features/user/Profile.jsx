@@ -1,38 +1,20 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { signOutUser, getUser } from "../../services/user.api";
 import { getProfile } from "./userSlice";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase.config";
-import { toast } from "react-toastify";
+import { getUserId } from "../../services/user.api";
 import EditSvg from "../../assets/svg/pen-to-square-solid.svg";
 import ProfileSection from "./components/ProfileSection";
 import Address from "./components/Address";
 import Payment from "./components/Payment";
 import OrderHistory from "./components/OrderHistory";
-// import { getUserProfile } from "./userSlice";
 
 function Profile() {
-  const userProfile = useSelector((state) => state.user.userProfile);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        onAuthStateChanged(auth, async (user) => {
-          if (user) {
-            const userId = user.uid;
-            const data = await getUser(userId);
-            dispatch(getProfile(data));
-          }
-        });
-      } catch (error) {
-        console.error(error);
-        toast.error("Error!");
-      }
-    };
-    fetchUserProfile();
-  }, []);
+  const userProfileData = useLoaderData();
+  dispatch(getProfile(userProfileData));
+
+  const userProfile = useSelector((state) => state.user.userProfile);
   const navigate = useNavigate();
   const logOut = (e) => {
     e.preventDefault();
@@ -43,6 +25,7 @@ function Profile() {
   };
   return (
     <section className="p-4 xl:py-10 xl:px-0">
+      {/* {loading && <Spinner />} */}
       <div className="w-full md:max-w-[1000px] mx-auto flex flex-col gap-4 md:gap-10">
         {/* Profile Section */}
         <ProfileSection
@@ -62,17 +45,13 @@ function Profile() {
   );
 }
 
-export default Profile;
+export const loader = async () => {
+  const userId = await getUserId();
+  if (userId) {
+    const data = await getUser(userId);
+    return data;
+  }
+  return null;
+};
 
-// export const loader = async () => {
-//   const userRole = () => {
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) {
-//         return user.uid;
-//       }
-//     });
-//   };
-//   console.log(userRole());
-//   const data = await getUser(userRole());
-//   return data;
-// };
+export default Profile;

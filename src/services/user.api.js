@@ -5,6 +5,7 @@ import {
   sendPasswordResetEmail,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth, dbFirestore } from "../firebase.config";
 import {
@@ -15,9 +16,9 @@ import {
   setDoc,
   query,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 
 export const createAccount = async (inputData) => {
   const { username, email, password, confirmPassword } = inputData;
@@ -37,6 +38,7 @@ export const createAccount = async (inputData) => {
         await setDoc(doc(dbFirestore, "users", user.uid), {
           username,
           email,
+          phoneNumber: "XXX-XXX-XXX",
           profileImg: "",
           role: "user",
         });
@@ -117,8 +119,33 @@ export const signOutUser = () => {
   }
 };
 
-export const updateUser = () => {};
+export const updateUserProfile = async (username, phoneNumber) => {
+  try {
+    const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
+    await updateDoc(userRef, {
+      username,
+      phoneNumber,
+    });
+    toast.success("Update Success!");
+  } catch (error) {
+    console.log(error);
+    toast.error("Update Error!");
+  }
+};
+
 export const deleteUser = () => {};
+
+export const getUserId = () => {
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(user.uid);
+      } else {
+        resolve(null);
+      }
+    });
+  });
+};
 
 export const getUser = async (userId) => {
   try {
@@ -127,9 +154,9 @@ export const getUser = async (userId) => {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      console.log("no");
+      return null;
     }
   } catch (error) {
-    console.log("no");
+    console.log(error);
   }
 };

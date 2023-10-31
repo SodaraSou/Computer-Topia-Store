@@ -6,12 +6,12 @@ import {
   resetPassword,
   signInWithGoogle,
 } from "../../services/user.api";
+// import AuthPageImg from "../../assets/img/auth_img.png";
 import Input from "../../ui/shared/Input";
 import Button from "../../ui/shared/Button";
-// import AuthPageImg from "../../assets/img/auth_img.png";
+import ForgotPassword from "./ForgotPassword";
 
 function SignIn() {
-  const [showForgetPassword, setShowForgetPassword] = useState(false);
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -21,14 +21,6 @@ function SignIn() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
-  };
-  const [resetEmail, setResetEmail] = useState("");
-  const onChangeResetEmail = (e) => {
-    setResetEmail(e.target.value);
-  };
-  const forgetPassword = (e) => {
-    e.preventDefault();
-    resetPassword(resetEmail);
   };
   const navigate = useNavigate();
   const onSubmit = async (e) => {
@@ -45,39 +37,12 @@ function SignIn() {
       navigate("/profile");
     }
   };
-  return showForgetPassword ? (
-    <section className="p-4 xl:py-10 xl:px-0">
-      <div className="max-w-7xl mx-auto">
-        <div className="max-w-[500px] h-auto flex flex-col gap-4 bg-[#D9D9D9] rounded-2xl my-10 p-5 mx-auto">
-          <h1 className="text-2xl font-bold">Reset Password</h1>
-          <div className="h-[1px] bg-white flex-grow"></div>
-          <h2 className="text-lg ">
-            Please put your email to search for your account.
-          </h2>
-          <input
-            type="text"
-            placeholder="example@gmail.com"
-            className="rounded-xl w-full h-[38px] px-4"
-            onChange={onChangeResetEmail}
-          />
-          <div className="h-[1px] bg-white flex-grow"></div>
-          <div className="w-ful flex justify-end">
-            <button
-              onClick={() => setShowForgetPassword(false)}
-              className="text-xl px-4 h-[38px] w-[90px]  ml-3 bg-white rounded-lg font-semibold hover:bg-sky-400 hover:duration-200"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={forgetPassword}
-              className="text-xl ml-3  px-4 h-[38px] w-[90px]  bg-white rounded-lg font-semibold hover:bg-sky-400 hover:duration-200"
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+  const [forgetPassword, setForgetPassword] = useState(false);
+  const showForgetPassword = () => {
+    setForgetPassword(!forgetPassword);
+  };
+  return forgetPassword ? (
+    <ForgotPassword showForgetPassword={showForgetPassword} />
   ) : (
     <div className="max-w-7xl mx-auto">
       <section className="p-4 xl:py-10 xl:px-0">
@@ -104,13 +69,13 @@ function SignIn() {
               />
               <div className="flex justify-end mb-6">
                 <button
-                  onClick={() => setShowForgetPassword(true)}
+                  onClick={() => setForgetPassword(true)}
                   className="underline hover:text-[#5E17EB]"
                 >
                   Forgot Password?
                 </button>
               </div>
-              <Button title="Login" onClick={onSubmit} customClass="w-full"/>
+              <Button title="Login" onClick={onSubmit} customClass="w-full" />
               <div className="my-6 flex justify-center">
                 <p>
                   Don't Have Account?{" "}

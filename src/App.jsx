@@ -5,10 +5,10 @@ import Cart from "./features/cart/Cart";
 import Order from "./features/order/Order";
 import Checkout from "./features/checkout/Checkout";
 import Product from "./features/product/Product";
-import Profile from "./features/user/Profile";
+import Profile, { loader as profileDataLoader } from "./features/user/Profile";
 import ProtectedRoute from "./features/user/ProtectedRoute";
-import SignIn from "./features/user/SignIn";
-import SignUp from "./features/user/SignUp";
+import SignIn from "./features/auth/SignIn";
+import SignUp from "./features/auth/SignUp";
 
 function App() {
   const router = createBrowserRouter([
@@ -37,13 +37,12 @@ function App() {
         },
         {
           path: "/profile",
-          element: <ProtectedRoute />,
-          children: [
-            {
-              path: "/profile",
-              element: <Profile />,
-            },
-          ],
+          element: (
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          ),
+          loader: profileDataLoader,
         },
         {
           path: "/signUp",

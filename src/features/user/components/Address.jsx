@@ -8,11 +8,25 @@ function Address({ editSvg }) {
         </button>
       </div>
       <div className="text-lg">
-        <p>Sou Sodara</p>
-        <p>
-          123, St. Norodom, <br />
-          Boeung Kok, Toul Kork, <br /> Phnom Penh, 100100
-        </p>
+        {/* <p>Sou Sodara</p> */}
+        <input
+          type="text"
+          value="Sou Sodara"
+          className="outline-none"
+          disabled={true}
+        />
+        <input
+          type="text"
+          value="No. 123, St. Norodom"
+          className="outline-none"
+          disabled={true}
+        />
+        <input
+          type="text"
+          value="Boeung kok, Toul Kork, Phnom Penh"
+          className="outline-none w-full"
+          disabled={true}
+        />
       </div>
     </div>
   );

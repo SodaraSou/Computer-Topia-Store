@@ -1,6 +1,28 @@
+import { useState } from "react";
+import { updateUserProfile } from "../../../services/user.api";
+import SaveSvg from "../../../assets/svg/floppy-disk-solid.svg";
 import Button from "../../../ui/shared/Button";
 
 function ProfileSection({ editSvg, logOut, userProfile }) {
+  const [inputData, setInputData] = useState({
+    username: userProfile.username,
+    email: userProfile.email,
+    phoneNumber: userProfile.phoneNumber,
+  });
+  const { username, email, phoneNumber } = inputData;
+  const [editMode, setEditMode] = useState(true);
+  const onChange = (e) => {
+    setInputData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+  const onSubmit = async () => {
+    if (!editMode) {
+      await updateUserProfile(username, phoneNumber);
+    }
+    setEditMode(!editMode);
+  };
   return (
     <div className="w-full border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4 md:mb-10">
@@ -19,11 +41,19 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
             className="rounded-full w-40 h-40"
           />
           <button
-            // onClick={() => setEditStatus(!editStatus)}
+            onClick={onSubmit}
             className="text-lg flex items-center gap-2"
           >
-            <img src={editSvg} alt="edit" width={18} height={18} />
-            Edit Profile
+            {editMode ? (
+              <>
+                <img src={editSvg} alt="editMode" width={18} height={18} />
+                Edit
+              </>
+            ) : (
+              <>
+                <img src={SaveSvg} alt="editMode" width={18} height={18} /> Save
+              </>
+            )}
           </button>
         </div>
         <div className="w-full flex flex-col gap-4">
@@ -38,9 +68,10 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
               type="text"
               placeholder=""
               id="username"
-              className="rounded-lg w-full h-[38px] px-4 border"
-              // disabled={editStatus}
-              value={userProfile.username}
+              className="outline-none text-lg"
+              disabled={editMode}
+              onChange={onChange}
+              value={username}
             />
           </div>
           <div className="w-full flex flex-col gap-2">
@@ -51,8 +82,10 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
               type="text"
               placeholder=""
               id="email"
-              className="rounded-lg w-full h-[38px] px-4 border"
-              //   disabled={editStatus}
+              className="outline-none text-lg"
+              disabled={true}
+              onChange={onChange}
+              value={email}
             />
           </div>
           <div className="w-full md:w-1/2 flex flex-col gap-2">
@@ -66,8 +99,10 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
               type="text"
               placeholder=""
               id="phoneNumber"
-              className="rounded-lg w-full h-[38px] px-4 border"
-              //   disabled={editStatus}
+              className="outline-none text-lg"
+              disabled={editMode}
+              onChange={onChange}
+              value={phoneNumber}
             />
           </div>
         </div>

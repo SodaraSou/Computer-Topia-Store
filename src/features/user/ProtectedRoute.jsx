@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase.config";
 
-function ProtectedRoute() {
-  const [userState, setUserState] = useState(true);
+function ProtectedRoute({ children }) {
+  const [userState, setUserState] = useState(null);
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserState(true);
-      } else {
-        setUserState(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUserState(!!user);
     });
+    return () => unsubscribe();
   }, []);
-  return userState ? <Outlet /> : <Navigate to="/signIn" />;
+
+  if (userState === null) {
+    return null;
+  }
+  return userState ? children : <Navigate to="/signIn" />;
 }
 
 export default ProtectedRoute;

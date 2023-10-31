@@ -26,7 +26,7 @@ function DropdownButton({ children, dropdownContent }) {
     <div className="relative inline-block" ref={buttonRef}>
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 bg-[#EAECF6] flex items-center justify-between text-lg rounded-full dropdown-button-size"
+        className="px-4 py-2 bg-[#EAECF6] flex items-center justify-between text-lg rounded-full"
       >
         {children}
         <img
