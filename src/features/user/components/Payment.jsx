@@ -1,16 +1,71 @@
-function Payment({ editSvg }) {
+import { useState } from "react";
+import { updateUserPayment } from "../../../services/user.api";
+import SaveSvg from "../../../assets/svg/floppy-disk-solid.svg";
+
+function Payment({ editSvg, userProfile }) {
+  const [inputData, setInputData] = useState({
+    cardName: userProfile.cardName,
+    cardNumber: userProfile.cardNumber,
+    cardExpDate: userProfile.cardExpDate,
+  });
+  const { cardName, cardNumber, cardExpDate } = inputData;
+  const onChange = (e) => {
+    setInputData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+  const [editMode, setEditMode] = useState(true);
+  const onSubmit = async () => {
+    if (!editMode) {
+      await updateUserPayment(inputData);
+    }
+    setEditMode(!editMode);
+  };
   return (
     <div className="w-full md:w-1/2 border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-bold">Payment</h1>
-        <button>
-          <img src={editSvg} alt="edit" className="svg-size" />
+        <button onClick={onSubmit}>
+          {editMode ? (
+            <>
+              <img src={editSvg} alt="editMode" width={18} height={18} />
+            </>
+          ) : (
+            <>
+              <img src={SaveSvg} alt="editMode" width={18} height={18} />
+            </>
+          )}
         </button>
       </div>
       <div className="text-lg">
-        <p>*************1234</p>
-        <p>Expiration date: 01/2024</p>
-        <p>Sou Sodara</p>
+        <input
+          type="text"
+          placeholder="Card Name"
+          id="cardName"
+          className="outline-none text-lg w-full"
+          disabled={editMode}
+          onChange={onChange}
+          value={cardName}
+        />
+        <input
+          type="text"
+          placeholder="Card Number"
+          id="cardNumber"
+          className="outline-none text-lg w-full"
+          disabled={editMode}
+          onChange={onChange}
+          value={cardNumber}
+        />
+        <input
+          type="text"
+          placeholder="Expiration Date"
+          id="cardExpDate"
+          className="outline-none text-lg w-full"
+          disabled={editMode}
+          onChange={onChange}
+          value={cardExpDate}
+        />
       </div>
     </div>
   );

@@ -1,27 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userId: "",
   userProfile: {},
+  userOrderHistoryList: [],
+  userOrderHistoryItem: {},
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getId: (state, action) => {
-      state.userId = action.payload;
-    },
     getProfile: (state, action) => {
       state.userProfile = action.payload;
+    },
+    getOrderHistoryList: (state, action) => {
+      state.userOrderHistoryList = action.payload;
+    },
+    getOrderHistoryItem: (state, action) => {
+      state.userOrderHistoryItem = action.payload;
     },
   },
 });
 
-export const { getProfile, getId } = userSlice.actions;
+export const { getProfile, getOrderHistoryList, getOrderHistoryItem } =
+  userSlice.actions;
 
 export default userSlice.reducer;
-
-// export const getUserProfile = (state) => {
-//   state.user.userProfile;
-// };

@@ -24,7 +24,7 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full border rounded-xl p-4 md:p-10">
+    <div className="w-full md:w-1/2 border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4 md:mb-10">
         <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
         <Button
@@ -34,7 +34,7 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
         ></Button>
       </div>
       <div className="flex flex-col items-center md:flex-row gap-10">
-        <div className="w-full md:w-1/4 flex flex-col gap-4 justify-center items-center">
+        <div className="w-full md:w-1/2 flex flex-col gap-4 justify-center items-center">
           <img
             src="https://static.vecteezy.com/system/resources/previews/001/840/612/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
             alt="Profile Image"
@@ -56,7 +56,7 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
             )}
           </button>
         </div>
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full md:w-1/2 flex flex-col gap-4">
           <div className="w-full flex flex-col gap-2">
             <label
               htmlFor="username"
@@ -88,12 +88,12 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
               value={email}
             />
           </div>
-          <div className="w-full md:w-1/2 flex flex-col gap-2">
+          <div className="w-full flex flex-col gap-2">
             <label
               htmlFor="phoneNumber"
               className="text-md md:text-lg font-semibold"
             >
-              Phone Number
+              Phone
             </label>
             <input
               type="text"
