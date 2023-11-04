@@ -24,7 +24,7 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full md:w-1/2 border rounded-xl p-4 md:p-10">
+    <div className="w-full border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4 md:mb-10">
         <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
         <Button

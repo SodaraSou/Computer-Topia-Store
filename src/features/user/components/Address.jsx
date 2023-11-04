@@ -26,7 +26,7 @@ function Address({ editSvg, userProfile }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full md:w-1/2 border rounded-xl p-4 md:p-10">
+    <div className="w-full border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-bold">Address</h1>
         <button onClick={onSubmit}>
@@ -65,7 +65,7 @@ function Address({ editSvg, userProfile }) {
         <div className="flex">
           <input
             type="text"
-            placeholder="Village/ភូមិ"
+            placeholder="Village"
             id="village"
             className="outline-none text-lg w-full"
             disabled={editMode}
@@ -74,7 +74,7 @@ function Address({ editSvg, userProfile }) {
           />
           <input
             type="text"
-            placeholder="Commune/សង្កាត់"
+            placeholder="Commune"
             id="commune"
             className="outline-none text-lg w-full"
             disabled={editMode}
@@ -85,7 +85,7 @@ function Address({ editSvg, userProfile }) {
         <div className="flex">
           <input
             type="text"
-            placeholder="District/ខណ្ឌ"
+            placeholder="District"
             id="district"
             className="outline-none text-lg w-full"
             disabled={editMode}
@@ -94,7 +94,7 @@ function Address({ editSvg, userProfile }) {
           />
           <input
             type="text"
-            placeholder="រាជធានី/ខេត្ត"
+            placeholder="City/Province"
             id="province"
             className="outline-none text-lg w-full"
             disabled={editMode}

@@ -1,6 +1,6 @@
 import Button from "../../../ui/shared/Button";
 
-function OrderHistoryCard({ item }) {
+function OrderItem({ item }) {
   return (
     <div className="flex justify-between">
       <div className="w-full">
@@ -14,4 +14,4 @@ function OrderHistoryCard({ item }) {
   );
 }
 
-export default OrderHistoryCard;
+export default OrderItem;

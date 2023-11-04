@@ -23,7 +23,7 @@ function Payment({ editSvg, userProfile }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full md:w-1/2 border rounded-xl p-4 md:p-10">
+    <div className="w-full border rounded-xl p-4 md:p-10">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-bold">Payment</h1>
         <button onClick={onSubmit}>
