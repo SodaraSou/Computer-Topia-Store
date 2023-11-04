@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import downArrowSvg from "../../assets/svg/chevron-down-solid.svg";
 
-function DropdownButton({ children, dropdownContent }) {
+function DropdownButton({ children, dropdownContent, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef();
   useEffect(() => {
@@ -22,11 +22,16 @@ function DropdownButton({ children, dropdownContent }) {
     setIsOpen(!isOpen);
   };
 
+  const handleItemClick = (item) => {
+    onSelect(item);
+    setIsOpen(false);
+  };
+
   return (
     <div className="relative inline-block" ref={buttonRef}>
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 bg-[#EAECF6] flex items-center justify-between text-lg rounded-full"
+        className="p-2 h-10 w-28 bg-[#5E17EB] text-white font-semibold flex justify-center items-center rounded-xl"
       >
         {children}
         <img
@@ -42,7 +47,9 @@ function DropdownButton({ children, dropdownContent }) {
           <ul>
             {dropdownContent.map((item) => (
               <li key={item.id}>
-                <Link to="/">{item.type}</Link>
+                <button onClick={() => handleItemClick(item.type)}>
+                  {item.type}
+                </button>
               </li>
             ))}
           </ul>

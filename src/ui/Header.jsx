@@ -30,13 +30,13 @@ function Header() {
                     alt="instagramSvg"
                     className="svg-size"
                   />
-                  <span className="hidden md:block">Account</span>
+                  <span className="hidden md:block font-semibold">Account</span>
                 </Link>
               </li>
               <li className="flex items-center">
                 <Link to="/cart" className="flex flex-row items-center gap-2">
                   <img src={cartSvg} alt="cartSvg" className="svg-size" />
-                  <span className="hidden md:block">Cart</span>
+                  <span className="hidden md:block font-semibold">Cart</span>
                 </Link>
               </li>
             </ul>
