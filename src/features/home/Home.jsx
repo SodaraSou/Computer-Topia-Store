@@ -19,7 +19,7 @@ function Home() {
         <Slider />
         {/* Categories Section */}
         <section className="p-4 xl:py-10 xl:px-0 flex items-center justify-between">
-          <div className="w-full flex justify-evenly md:justify-start md:gap-4">
+          <div className="w-full flex justify-evenly md:justify-start gap-4">
             <DropdownButton dropdownContent={type}>Type</DropdownButton>
             <DropdownButton dropdownContent={price}>Price</DropdownButton>
             <DropdownButton dropdownContent={price}>Offer</DropdownButton>
