@@ -11,7 +11,7 @@ function Cart() {
           <h2 className="text-xl md:text-2xl font-bold">2 Items</h2>
         </div>
         <div className="overflow-x-auto">
-          <div className="w-[918px] flex justify-between items-center">
+          <div className="w-[750px] md:w-[918px] flex justify-between items-center">
             <div className="w-[400px]">
               <p className="text-lg">Product</p>
             </div>
@@ -21,10 +21,10 @@ function Cart() {
               <p>Sub Total</p>
             </div>
           </div>
-          <div className="h-[1px] w-[918px] bg-[#D9D9D9] my-5"></div>
-          <div className="w-[918px] flex flex-col gap-10">
+          <div className="h-[1px] w-[750px] md:w-[918px] bg-[#D9D9D9] my-5"></div>
+          <div className="w-[750px] md:w-[918px] flex flex-col gap-10">
             <div className="flex justify-between items-center">
-              <div className="w-auto md:w-[400px] flex items-center gap-4 md:gap-10">
+              <div className="w-[400px] flex items-center gap-4 md:gap-10">
                 <div className="bg-[#D9D9d9] w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-2xl"></div>
                 <h2 className="text-lg md:text-2xl font-semibold">
                   AirPods Max
@@ -82,7 +82,7 @@ function Cart() {
               </div>
             </div>
           </div>
-          <div className="h-[1px] w-[918px] bg-[#D9D9D9] flex-grow my-5"></div>
+          <div className="h-[1px] w-[750px] md:w-[918px] bg-[#D9D9D9] flex-grow my-5"></div>
         </div>
         <div className="flex flex-col gap-2 items-end justify-center">
           <p className="text-lg font-semibold">$549.00</p>
