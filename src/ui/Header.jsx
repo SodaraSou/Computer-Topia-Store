@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import cartSvg from "../assets/svg/cart-plus-solid.svg";
 import accountSvg from "../assets/svg/user-regular.svg";
+import SearhSvg from "../assets/svg/magnifying-glass-solid.svg";
 import Logo from "../assets/img/Logo 240 x 56.png";
 
 function Header() {
@@ -12,12 +13,15 @@ function Header() {
             <img src={Logo} alt="Logo" />
           </Link>
           <div className="flex items-center text-lg">
-            <div className="hidden md:block">
+            <div className="hidden md:flex relative">
               <input
                 type="text"
-                className="w-[347px] h-[38px] px-4 rounded-lg bg-[#D9D9D9] mr-10"
+                className="w-[347px] h-[38px] bg-[#EAECF6] rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB] mr-10"
                 placeholder="Search Product"
               />
+              <button className="svg-size absolute top-[10px] right-14">
+                <img src={SearhSvg} alt="Search" />
+              </button>
             </div>
             <ul className="flex gap-4 md:gap-8">
               <li className="flex items-center">
@@ -42,12 +46,15 @@ function Header() {
             </ul>
           </div>
         </div>
-        <div className="block md:hidden">
+        <div className="flex md:hidden relative">
           <input
             type="text"
-            className="w-full h-[38px] px-4 rounded-lg bg-[#D9D9D9]"
+            className="w-full h-[38px] bg-[#EAECF6] rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
             placeholder="Search Product"
           />
+          <button className="svg-size absolute top-[10px] right-4">
+            <img src={SearhSvg} alt="Search" />
+          </button>
         </div>
       </div>
     </nav>
