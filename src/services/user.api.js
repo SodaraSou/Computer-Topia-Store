@@ -209,6 +209,28 @@ export const deleteUser = async () => {
   return true;
 };
 
+export const getUserOrderList = async (userId) => {
+  try {
+    const docRef = collection(dbFirestore, "order");
+    const q = query(docRef, where("userId", "==", userId));
+    const queryDocSnap = await getDocs(q);
+    const list = [];
+    if (queryDocSnap) {
+      queryDocSnap.forEach((order) => {
+        list.push({
+          id: order.id,
+          data: order.data(),
+        });
+      });
+      return list;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    toast.error("Can't Load Order!");
+  }
+};
+
 export const getUserOrderHistoryList = async (userId) => {
   try {
     const docRef = collection(dbFirestore, "orderHistory");
