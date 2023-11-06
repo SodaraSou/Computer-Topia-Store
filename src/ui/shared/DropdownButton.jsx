@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import downArrowSvg from "../../assets/svg/chevron-down-solid.svg";
 
 function DropdownButton({ children, dropdownContent, onSelect }) {
@@ -31,13 +30,13 @@ function DropdownButton({ children, dropdownContent, onSelect }) {
     <div className="relative inline-block" ref={buttonRef}>
       <button
         onClick={toggleDropdown}
-        className="p-2 h-10 w-28 bg-[#5E17EB] text-white font-semibold flex justify-center items-center rounded-xl"
+        className="px-4 md:px-2 py-2 md:h-10 md:w-28 bg-[#5E17EB] text-white font-semibold flex justify-center items-center rounded-xl"
       >
         {children}
         <img
           src={downArrowSvg}
           alt="downArrowSvg"
-          className={`ml-4 svg-size transform ${
+          className={`ml-2 md:ml-4 svg-size transform ${
             isOpen ? "rotate-180" : "rotate-0"
           }`}
         />

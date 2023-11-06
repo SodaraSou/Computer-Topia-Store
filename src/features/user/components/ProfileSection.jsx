@@ -2,14 +2,20 @@ import { useState } from "react";
 import { updateUserProfile } from "../../../services/user.api";
 import SaveSvg from "../../../assets/svg/floppy-disk-solid.svg";
 import Button from "../../../ui/shared/Button";
+import ProfileAvatar from "../../../ui/ProfileAvatar";
 
 function ProfileSection({ editSvg, logOut, userProfile }) {
   const [inputData, setInputData] = useState({
     username: userProfile.username,
     email: userProfile.email,
     phoneNumber: userProfile.phoneNumber,
+    profileImg: userProfile.profileImg,
   });
-  const { username, email, phoneNumber } = inputData;
+  const [imgUrl, setImgUrl] = useState("");
+  const onImgUrlChange = (e) => {
+    setImgUrl(e.target.files[0]);
+  };
+  const { username, email, phoneNumber, profileImg } = inputData;
   const [editMode, setEditMode] = useState(true);
   const onChange = (e) => {
     setInputData((prevState) => ({
@@ -19,7 +25,7 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
   };
   const onSubmit = async () => {
     if (!editMode) {
-      await updateUserProfile(username, phoneNumber);
+      await updateUserProfile(username, phoneNumber, imgUrl);
     }
     setEditMode(!editMode);
   };
@@ -35,10 +41,10 @@ function ProfileSection({ editSvg, logOut, userProfile }) {
       </div>
       <div className="flex flex-col items-center md:flex-row gap-10">
         <div className="w-full md:w-1/2 flex flex-col gap-4 justify-center items-center">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/001/840/612/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg"
-            alt="Profile Image"
-            className="rounded-full w-40 h-40"
+          <ProfileAvatar
+            disabled={editMode}
+            onChange={onImgUrlChange}
+            imgUrl={profileImg}
           />
           <button
             onClick={onSubmit}

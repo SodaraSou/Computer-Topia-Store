@@ -31,9 +31,8 @@ function ForgotPassword({ showForgetPassword }) {
             <Button
               title="Cancel"
               onClick={showForgetPassword}
-              customClass="w-28"
             />
-            <Button title="Send" onClick={forgetPassword} customClass="w-28" />
+            <Button title="Send" onClick={forgetPassword} />
           </div>
         </div>
       </div>

@@ -17,7 +17,9 @@ function Input({ title, type, placeholder, id, onChange, value }) {
       <div className="relative flex">
         <input
           type={isPasswordInput && showPassword ? "text" : type}
-          placeholder={placeholder}
+          placeholder={
+            isPasswordInput && showPassword ? "password" : placeholder
+          }
           id={id}
           onChange={onChange}
           value={value}

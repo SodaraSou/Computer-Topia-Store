@@ -1,6 +1,6 @@
 function Button({ title, onClick, customClass }) {
   const defaultClass =
-    "rounded-xl bg-[#5E17EB] text-white p-2 h-10 w-32 font-semibold";
+    "rounded-xl bg-[#5E17EB] text-white px-4 md:px-2 py-2 md:h-10 md:w-28 font-semibold";
   const buttonClass = customClass
     ? `${defaultClass} ${customClass}`
     : defaultClass;

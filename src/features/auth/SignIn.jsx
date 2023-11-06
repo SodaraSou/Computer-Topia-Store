@@ -75,7 +75,11 @@ function SignIn() {
                   Forgot Password?
                 </button>
               </div>
-              <Button title="Login" onClick={onSubmit} customClass="w-full" />
+              <Button
+                title="Login"
+                onClick={onSubmit}
+                customClass="md:w-full"
+              />
               <div className="my-6 flex justify-center">
                 <p>
                   Don't Have Account?{" "}

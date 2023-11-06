@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth, dbFirestore } from "../firebase.config";
+import { auth, dbFirestore, storage } from "../firebase.config";
 import {
   collection,
   doc,
@@ -20,6 +20,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const getUserId = () => {
   return new Promise((resolve) => {
@@ -157,13 +158,31 @@ export const signOutUser = () => {
   }
 };
 
-export const updateUserProfile = async (username, phoneNumber) => {
+export const updateUserProfile = async (username, phoneNumber, img) => {
   try {
+    const userData = await getUser(auth.currentUser.uid);
     const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
-    await updateDoc(userRef, {
-      username,
-      phoneNumber,
-    });
+    if (username !== userData.username) {
+      await updateDoc(userRef, {
+        username,
+      });
+    }
+    if (phoneNumber !== userData.phoneNumber) {
+      await updateDoc(userRef, {
+        phoneNumber,
+      });
+    }
+    const existingProfileImg = userData.profileImg || null;
+    if (img) {
+      const imageRef = ref(storage, `profile-image/${auth.currentUser.uid}`);
+      if (!existingProfileImg || img !== existingProfileImg) {
+        await uploadBytes(imageRef, img);
+        const profileImg = await getDownloadURL(imageRef);
+        await updateDoc(userRef, {
+          profileImg,
+        });
+      }
+    }
     toast.success("Update Success!");
   } catch (error) {
     toast.error("Update Error!");

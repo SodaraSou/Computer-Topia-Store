@@ -72,7 +72,7 @@ function SignUp() {
                 id="confirmPassword"
                 onChange={onChange}
               />
-              <Button title="Sign Up" customClass="w-full my-6" />
+              <Button title="Sign Up" customClass="md:w-full my-6" />
             </div>
           </form>
           <div className="my-6 flex justify-center">

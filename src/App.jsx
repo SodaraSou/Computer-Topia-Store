@@ -6,8 +6,7 @@ import Order from "./features/order/Order";
 import Checkout from "./features/checkout/Checkout";
 import Product from "./features/product/Product";
 import Profile, { loader as profileDataLoader } from "./features/user/Profile";
-// import Profile from "./features/user/Profile";
-import ProtectedRoute from "./features/user/ProtectedRoute";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
 import SignIn from "./features/auth/SignIn";
 import SignUp from "./features/auth/SignUp";
 
