@@ -1,8 +1,22 @@
 import { Link } from "react-router-dom";
+import { setListProduct } from "./homeslice";
+import ProductList from "../../ui/ProductList";
 import Slider from "../../ui/Slider";
 import DropdownButton from "../../ui/shared/DropdownButton";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProduct } from "../../services/product.api";
 
 function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchAllProduct = async () => {
+      const data = await getAllProduct();
+      dispatch(setListProduct(data));
+    };
+    fetchAllProduct();
+  }, []);
+  const productList = useSelector((state) => state.home.listProduct);
   const type = [
     { id: 1, type: "Laptop" },
     { id: 2, type: "PC Hardware" },
@@ -28,34 +42,8 @@ function Home() {
         {/* Main Product Grid Section */}
         <section className="p-4 xl:py-10 xl:px-0">
           <h1 className="text-4xl font-bold mb-10">This For You!</h1>
-          <div className="grid grid-cols-2 grid-rows-4 md:grid-cols-4 md:grid-rows-2 gap-4">
-            <Link
-              to="/productpage"
-              className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl"
-            >
-              test
-            </Link>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
-            <div className="w-full h-[300px] md:h-[400px] bg-[#D9D9D9] rounded-2xl">
-              test
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <ProductList productList={productList} />
           </div>
         </section>
         {/* Top Categories Section */}

@@ -32,7 +32,7 @@ function App() {
           element: <Checkout />,
         },
         {
-          path: "/product/:productType/:productId",
+          path: "/product/:id",
           element: <Product />,
         },
         {
