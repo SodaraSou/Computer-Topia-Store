@@ -5,7 +5,11 @@
 /* 
   primary: #5E17EB
   secondary: #EAECF6
- */
+*/
+
+html {
+  font-family: "Poppins", sans-serif;
+}
 
 * {
   padding: 0;
