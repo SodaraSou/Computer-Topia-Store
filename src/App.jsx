@@ -21,7 +21,11 @@ function App() {
         },
         {
           path: "/cart",
-          element: <Cart />,
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/order",
@@ -29,10 +33,14 @@ function App() {
         },
         {
           path: "/checkout",
-          element: <Checkout />,
+          element: (
+            <ProtectedRoute>
+              <Checkout />
+            </ProtectedRoute>
+          ),
         },
         {
-          path: "/product/:id",
+          path: "/product/:productId",
           element: <Product />,
         },
         {
