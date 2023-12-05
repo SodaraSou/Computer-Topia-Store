@@ -25,6 +25,12 @@ function Header() {
             </div>
             <ul className="flex gap-4 md:gap-8">
               <li className="flex items-center">
+                <Link to="/cart" className="flex flex-row items-center gap-2">
+                  <img src={cartSvg} alt="cartSvg" className="svg-size" />
+                  <span className="hidden md:block font-semibold">Cart</span>
+                </Link>
+              </li>
+              <li className="flex items-center">
                 <Link
                   to="/profile"
                   className="flex flex-row items-center gap-2"
@@ -35,12 +41,6 @@ function Header() {
                     className="svg-size"
                   />
                   <span className="hidden md:block font-semibold">Account</span>
-                </Link>
-              </li>
-              <li className="flex items-center">
-                <Link to="/cart" className="flex flex-row items-center gap-2">
-                  <img src={cartSvg} alt="cartSvg" className="svg-size" />
-                  <span className="hidden md:block font-semibold">Cart</span>
                 </Link>
               </li>
             </ul>

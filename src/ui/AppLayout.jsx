@@ -3,17 +3,19 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 
 function AppLayout() {
   return (
-    <div className="font-poppins">
+    <>
       <Header />
       <main className="max-w-7xl mx-auto">
         <Outlet />
       </main>
       <Footer />
       <ToastContainer />
-    </div>
+      <ScrollToTop />
+    </>
   );
 }
 

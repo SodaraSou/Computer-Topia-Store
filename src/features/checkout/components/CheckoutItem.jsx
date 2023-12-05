@@ -4,7 +4,7 @@ function CheckoutItem({ item }) {
   return (
     <div className="flex justify-between items-center gap-4 md:gap-10">
       <img
-        src={StockImg}
+        src={item.productImg ? item.productImg : StockImg}
         alt="stock_img"
         className="w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-2xl"
       />

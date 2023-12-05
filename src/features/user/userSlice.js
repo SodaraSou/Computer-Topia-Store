@@ -4,29 +4,30 @@ const initialState = {
   userProfile: {},
   userOrderList: [],
   userOrderHistoryList: [],
-  userOrderItem: {},
+  loading: false,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getProfile: (state, action) => {
+    setProfile: (state, action) => {
       state.userProfile = action.payload;
     },
-    getOrderList: (state, action) => {
+    setOrderList: (state, action) => {
       state.userOrderList = action.payload;
     },
-    getOrderHistoryList: (state, action) => {
+    setOrderListHistory: (state, action) => {
       state.userOrderHistoryList = action.payload;
+      state.loading = false;
     },
-    getOrderItem: (state, action) => {
-      state.userOrderItem = action.payload;
+    setLoading: (state) => {
+      state.loading = true;
     },
   },
 });
 
-export const { getProfile, getOrderList, getOrderHistoryList, getOrderItem } =
+export const { setProfile, setOrderList, setOrderListHistory, setLoading } =
   userSlice.actions;
 
 export default userSlice.reducer;

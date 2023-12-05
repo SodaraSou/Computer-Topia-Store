@@ -18,6 +18,7 @@ import {
   where,
   updateDoc,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -34,19 +35,19 @@ export const getUserId = () => {
   });
 };
 
-export const getUser = async (userId) => {
-  try {
-    const docRef = doc(dbFirestore, "users", userId);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data();
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const getUser = async (userId) => {
+//   try {
+//     const userRef = doc(dbFirestore, "users", userId);
+//     const docSnap = await getDoc(userRef);
+//     if (docSnap.exists()) {
+//       return docSnap.data();
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const createAccount = async (inputData) => {
   const { username, email, password, confirmPassword } = inputData;
@@ -228,56 +229,74 @@ export const deleteUser = async () => {
   return true;
 };
 
-export const getUserOrderList = async (userId) => {
+export const getUser = (callback) => {
+  try {
+    const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
+    const q = query(userRef);
+    const unsubscribe = onSnapshot(userRef, (user) => {
+      if (user.exists()) {
+        const userData = user.data();
+        callback(userData);
+      }
+    });
+    return unsubscribe;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const getUser = async () => {
+//   try {
+//     const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
+//     const docSnap = await getDoc(userRef);
+//     if (docSnap.exists()) {
+//       return docSnap.data();
+//     } else {
+//       return null;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const getUserOrderList = async (callback) => {
   try {
     const docRef = collection(dbFirestore, "order");
-    const q = query(docRef, where("userId", "==", userId));
-    const queryDocSnap = await getDocs(q);
-    const list = [];
-    if (queryDocSnap) {
-      queryDocSnap.forEach((order) => {
+    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
+    const unsubscirbe = onSnapshot(q, (orderSnap) => {
+      const list = [];
+      orderSnap.forEach((order) => {
         list.push({
           id: order.id,
           data: order.data(),
         });
       });
-      return list;
-    }
-    return null;
+      callback(list);
+    });
+    return unsubscirbe;
   } catch (error) {
     console.log(error);
     toast.error("Can't Load Order!");
   }
 };
 
-export const getUserOrderHistoryList = async (userId) => {
+export const getUserOrderHistoryList = async (callback) => {
   try {
     const docRef = collection(dbFirestore, "orderHistory");
-    const q = query(docRef, where("userId", "==", userId));
-    const queryDocSnap = await getDocs(q);
-    const list = [];
-    if (queryDocSnap) {
-      queryDocSnap.forEach((order) => {
+    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
+    const unsubscirbe = onSnapshot(q, (orderSnap) => {
+      const list = [];
+      orderSnap.forEach((order) => {
         list.push({
           id: order.id,
           data: order.data(),
         });
       });
-      return list;
-    }
-    return null;
+      return callback(list);
+    });
+    return unsubscirbe;
   } catch (error) {
     console.log(error);
     toast.error("Can't Load Order History!");
   }
 };
-
-// export const getUserOrderHistoryItem = async () => {
-//   try {
-//     const docRef = collection(dbFirestore, "orderHistory");
-//     const q = query(docRef, where("id", "==", auth.currentUser.uid));
-//     const queryDocSnap = await getDocs(q);
-//   } catch (error) {
-//     toast.error("Error!");
-//   }
-// };

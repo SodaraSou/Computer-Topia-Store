@@ -1,25 +1,34 @@
-import PlusSvg from "../../../assets/svg/plus-solid.svg";
-import MinusSvg from "../../../assets/svg/minus-solid.svg";
+import { Link } from "react-router-dom";
+import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
+import QuantityButton from "../../../ui/shared/QuantityButton";
 
-function CartItem() {
+function CartItem({ item, handleRemove }) {
   return (
-    <div className="flex justify-between items-center">
-      <div className="w-[400px] flex items-center gap-4 md:gap-10">
-        <div className="bg-[#D9D9d9] w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-2xl"></div>
-        <h2 className="text-lg md:text-2xl font-semibold">AirPods Max</h2>
-      </div>
-      <div className="w-[400px] flex justify-between items-center">
-        <p className="text-md md:text-lg font-semibold">$549.00</p>
-        <span className="px-4 py-2 bg-[#5E17EB] flex items-center justify-between text-lg rounded-full dropdown-button-size text-white">
-          <button>
-            <img src={MinusSvg} alt="MinusSvg" className="mr-4 svg-size" />
+    <div className="flex justify-between items-center gap-4 md:gap-10">
+      <img
+        src={item.productImg ? item.productImg : StockImg}
+        alt="stock_img"
+        className="w-[100px] md:w-[200px] h-[100px] md:h-[200px] rounded-2xl"
+      />
+      <div className="flex flex-grow justify-between items-center">
+        <div className="flex flex-col gap-2">
+          <Link to={`/product/${item.productId}`} className="hover:underline">
+            <h2 className="text-lg md:text-2xl font-semibold">{item.model}</h2>
+          </Link>
+          <p className="text-sm">Price: ${item.price}</p>
+        </div>
+        <div>
+          <h2 className="text-md md:text-xl font-semibold">${item.subTotal}</h2>
+          <p className="text-sm">Quantity: {item.quantity}</p>
+          <button
+            onClick={() =>
+              handleRemove(item.productId, item.quantity, item.price)
+            }
+            className="text-sm text-gray-500 hover:underline hover:text-red-500"
+          >
+            Remove
           </button>
-          1
-          <button>
-            <img src={PlusSvg} alt="PlusSvg" className="ml-4 svg-size" />
-          </button>
-        </span>
-        <p className="text-md md:text-lg font-semibold">$549.00</p>
+        </div>
       </div>
     </div>
   );

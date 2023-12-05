@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createAccount, signInWithGoogle } from "../../services/user.api";
-// import AuthPageImg from "../../assets/img/auth_img.png";
+import AuthPageImg from "../../assets/img/auth_img.png";
 import GoogleSvg from "../../assets/svg/google.svg";
 import Input from "../../ui/shared/Input";
 import Button from "../../ui/shared/Button";
@@ -38,7 +38,7 @@ function SignUp() {
     <section className=" p-4 xl:py-10 xl:px-0">
       <div className="max-w-[1000px] flex justify-center h-auto bg-[#EAECF6] rounded-2xl my-10 mx-auto">
         <div className="hidden w-full md:w-1/2 md:flex items-center justify-center p-10">
-          {/* <img src={AuthPageImg} alt="AuthPageImg" /> */}
+          <img src={AuthPageImg} alt="AuthPageImg" />
         </div>
         <div className="w-full md:w-1/2 p-10">
           <h1 className="text-4xl font-bold mb-10">Sign Up</h1>
@@ -72,7 +72,7 @@ function SignUp() {
                 id="confirmPassword"
                 onChange={onChange}
               />
-              <Button title="Sign Up" customClass="md:w-full my-6" />
+              <Button customClass="md:w-full my-6">Sign Up</Button>
             </div>
           </form>
           <div className="my-6 flex justify-center">

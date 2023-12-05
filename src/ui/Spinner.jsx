@@ -1,6 +1,6 @@
-function Spinner() {
+function Spinner({ fullScreenSpinner }) {
   return (
-    <div className="loadingSpinnerContainer">
+    <div className={fullScreenSpinner ? "loadingSpinnerContainer" : null}>
       <div className="loadingSpinner"></div>
     </div>
   );

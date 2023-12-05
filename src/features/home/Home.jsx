@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { setListProduct } from "./homeslice";
 import ProductList from "../../ui/ProductList";
 import Slider from "../../ui/Slider";
