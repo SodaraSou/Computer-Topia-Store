@@ -232,7 +232,6 @@ export const deleteUser = async () => {
 export const getUser = (callback) => {
   try {
     const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
-    const q = query(userRef);
     const unsubscribe = onSnapshot(userRef, (user) => {
       if (user.exists()) {
         const userData = user.data();
@@ -245,24 +244,14 @@ export const getUser = (callback) => {
   }
 };
 
-// export const getUser = async () => {
-//   try {
-//     const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
-//     const docSnap = await getDoc(userRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data();
-//     } else {
-//       return null;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-export const getUserOrderList = async (callback) => {
+export const getUserOrderList = (callback) => {
   try {
     const docRef = collection(dbFirestore, "order");
-    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
+    const q = query(
+      docRef,
+      where("userId", "==", auth.currentUser.uid),
+      where("orderStatus", "in", ["Pending Approval", "Approved", "Shipping"])
+    );
     const unsubscirbe = onSnapshot(q, (orderSnap) => {
       const list = [];
       orderSnap.forEach((order) => {
@@ -280,7 +269,7 @@ export const getUserOrderList = async (callback) => {
   }
 };
 
-export const getUserOrderHistoryList = async (callback) => {
+export const getUserOrderHistoryList = (callback) => {
   try {
     const docRef = collection(dbFirestore, "orderHistory");
     const q = query(docRef, where("userId", "==", auth.currentUser.uid));

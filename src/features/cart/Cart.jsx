@@ -13,6 +13,7 @@ import {
   getListItemFromCart,
   removeItemFromCart,
 } from "../../services/order.api";
+import { formatCurrency } from "../../utils/helpers";
 import CartItem from "./components/CartItem";
 import Spinner from "../../ui/Spinner";
 
@@ -22,7 +23,7 @@ function Cart() {
   const totalPrice = useSelector((state) => state.cart.totalCartPrice);
   const totalItem = useSelector((state) => state.cart.totalCartItem);
   const loading = useSelector((state) => state.cart.loading);
-
+  const totalPriceDisplay = formatCurrency(totalPrice);
   useEffect(() => {
     dispatch(setLoading(true));
     const unsubscribe = getListItemFromCart((data) => {
@@ -32,7 +33,6 @@ function Cart() {
     });
     return () => unsubscribe;
   }, [dispatch]);
-
   // const [quantity, setQuantity] = useState(1);
   // const handleQuantity = (quantityReturn) => {
   //   setQuantity(quantityReturn);
@@ -91,9 +91,9 @@ function Cart() {
         <div className="flex flex-col gap-2 items-end justify-center">
           <p className="text-lg font-semibold">
             {listProduct.length !== 0 ? (
-              <span>${totalPrice}</span>
+              <span>{totalPriceDisplay}</span>
             ) : (
-              <span>$0</span>
+              <span>$0.00</span>
             )}
           </p>
           <Link

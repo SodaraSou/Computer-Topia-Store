@@ -17,6 +17,8 @@ function OrderItem({ item }) {
     case "Shipping":
       spanClass = "text-blue-500";
       break;
+    case "Cancelled":
+      spanClass = "text-red-500";
     default:
       spanClass = "text-green-500";
       break;
@@ -42,11 +44,13 @@ function OrderItem({ item }) {
               <div>
                 <h1 className="text-2xl font-bold">Order Id: {item.id}</h1>
               </div>
-              <div>
-                <Button onClick={handleRecieve} customClass="bg-green-500">
-                  Recieve
-                </Button>
-              </div>
+              {orderStatus == "Shipping" && (
+                <div>
+                  <Button onClick={handleRecieve} customClass="bg-green-500">
+                    Recieve
+                  </Button>
+                </div>
+              )}
             </div>
             <div className="h-[1px] w-full bg-[#D9D9D9] my-4"></div>
             <div className="flex flex-col gap-4">

@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { formatCurrency } from "../../../utils/helpers";
 import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
 import QuantityButton from "../../../ui/shared/QuantityButton";
 
 function CartItem({ item, handleRemove }) {
+  const { price, subTotal } = item;
+  const priceToDisplay = formatCurrency(price);
+  const subTotalToDisplay = formatCurrency(subTotal);
   return (
     <div className="flex justify-between items-center gap-4 md:gap-10">
       <img
@@ -15,10 +19,12 @@ function CartItem({ item, handleRemove }) {
           <Link to={`/product/${item.productId}`} className="hover:underline">
             <h2 className="text-lg md:text-2xl font-semibold">{item.model}</h2>
           </Link>
-          <p className="text-sm">Price: ${item.price}</p>
+          <p className="text-sm">Price: {priceToDisplay}</p>
         </div>
         <div>
-          <h2 className="text-md md:text-xl font-semibold">${item.subTotal}</h2>
+          <h2 className="text-md md:text-xl font-semibold">
+            {subTotalToDisplay}
+          </h2>
           <p className="text-sm">Quantity: {item.quantity}</p>
           <button
             onClick={() =>

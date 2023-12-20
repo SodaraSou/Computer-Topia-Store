@@ -9,6 +9,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { getUserId } from "./user.api";
 import { auth, dbFirestore } from "../firebase.config";
 import { toast } from "react-toastify";
 
@@ -27,50 +28,69 @@ export const addItemToCart = async (
   quantity
 ) => {
   try {
-    const userRef = doc(dbFirestore, "cart", auth.currentUser.uid);
-    const cartSnapshot = await getDoc(userRef);
-    const currentCartData = cartSnapshot.exists()
-      ? cartSnapshot.data()
-      : { items: [], totalPrice: 0 };
-    let isItemInCart = false;
-    const updatedItems = currentCartData.items.map((item) => {
-      if (item.productId === productId) {
-        isItemInCart = true;
-        const updatedQuantity = item.quantity + quantity;
-        const updatedSubTotal = price * updatedQuantity;
-        return {
-          ...item,
-          quantity: updatedQuantity,
-          subTotal: updatedSubTotal,
-        };
-      }
-      return item;
-    });
-    if (!isItemInCart) {
-      const subTotal = price * quantity;
-      updatedItems.push({
-        productId,
-        productImg,
-        model,
-        price,
-        quantity,
-        subTotal,
+    const userId = await getUserId();
+    if (userId !== null) {
+      const userRef = doc(dbFirestore, "cart", auth.currentUser.uid);
+      const cartSnapshot = await getDoc(userRef);
+      const currentCartData = cartSnapshot.exists()
+        ? cartSnapshot.data()
+        : { items: [], totalPrice: 0 };
+      let isItemInCart = false;
+      const updatedItems = currentCartData.items.map((item) => {
+        if (item.productId === productId) {
+          isItemInCart = true;
+          const updatedQuantity = item.quantity + quantity;
+          const updatedSubTotal = price * updatedQuantity;
+          return {
+            ...item,
+            quantity: updatedQuantity,
+            subTotal: updatedSubTotal,
+          };
+        }
+        return item;
       });
-    }
-    const stock = await checkStock(productId);
-    updatedItems.forEach(async (item) => {
-      if (stock < item.quantity) {
-        toast.error("Exceeds Available Stock!");
-        return;
-      } else {
-        const totalPrice = updatedItems.reduce(
-          (total, item) => total + item.subTotal,
-          0
-        );
-        await setDoc(userRef, { items: updatedItems, totalPrice });
-        toast.success("Add to Cart Success!");
+      if (!isItemInCart) {
+        const subTotal = price * quantity;
+        updatedItems.push({
+          productId,
+          productImg,
+          model,
+          price,
+          quantity,
+          subTotal,
+        });
       }
-    });
+      const stock = await checkStock(productId);
+      for (const item of updatedItems) {
+        if (stock < item.quantity) {
+          toast.error("Exceeds Available Stock!");
+          return;
+        }
+      }
+      // updatedItems.forEach(async (item) => {
+      //   if (stock < item.quantity) {
+      //     toast.error("Exceeds Available Stock!");
+      //     return;
+      //   }
+      //   // else {
+      //   //   const totalPrice = updatedItems.reduce(
+      //   //     (total, item) => total + item.subTotal,
+      //   //     0
+      //   //   );
+      //   //   await setDoc(userRef, { items: updatedItems, totalPrice });
+      //   //   toast.success("Add to Cart Success!");
+      //   // }
+      // });
+      const totalPrice = updatedItems.reduce(
+        (total, item) => total + item.subTotal,
+        0
+      );
+      await setDoc(userRef, { items: updatedItems, totalPrice });
+      toast.success("Add to Cart Success!");
+    } else {
+      toast.error("Sign In Required!");
+      return true;
+    }
   } catch (error) {
     console.log(error);
     toast.error("Something Went Wrong!");
@@ -103,7 +123,8 @@ export const removeItemFromCart = async (
 };
 
 export const getListItemFromCart = async (callback) => {
-  const userRef = doc(dbFirestore, "cart", auth.currentUser.uid);
+  const userId = auth.currentUser ? auth.currentUser.uid : await getUserId();
+  const userRef = doc(dbFirestore, "cart", userId);
   const unsubscribe = onSnapshot(
     userRef,
     (docSnap) => {
@@ -154,6 +175,14 @@ export const recieveProduct = async (
   orderAt
 ) => {
   try {
+    const orderRef = doc(dbFirestore, "order", orderId);
+    await updateDoc(orderRef, {
+      userId: auth.currentUser.uid,
+      items: productList,
+      checkoutPrice,
+      orderStatus: "Complete",
+      orderAt: orderAt,
+    });
     const orderHistoryRef = doc(dbFirestore, "orderHistory", orderId);
     await setDoc(orderHistoryRef, {
       userId: auth.currentUser.uid,
@@ -162,7 +191,7 @@ export const recieveProduct = async (
       orderStatus: "Complete",
       orderAt: orderAt,
     });
-    await deleteDoc(doc(dbFirestore, "order", orderId));
+    // await deleteDoc(doc(dbFirestore, "order", orderId));
     toast.success("Order Complete!");
   } catch (error) {
     console.log(error);

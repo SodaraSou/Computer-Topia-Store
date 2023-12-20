@@ -20,7 +20,7 @@ function Modal({ children, handleModal }) {
     };
   }, []);
   return (
-    <div className="p-4 fixed z-40 inset-0 bg-black bg-opacity-40 flex justify-center items-center">
+    <div className="p-4 fixed z-50 inset-0 bg-black bg-opacity-40 flex justify-center items-center">
       <motion.div
         key="modal"
         initial={{ opacity: 0, scale: 0.8 }}

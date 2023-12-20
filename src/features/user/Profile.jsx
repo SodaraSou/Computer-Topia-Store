@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import {
@@ -20,6 +20,7 @@ import Address from "./components/Address";
 import Payment from "./components/Payment";
 import OrderSection from "./components/OrderSection";
 import OrderHistory from "./components/OrderHistory";
+import Spinner from "../../ui/Spinner";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -43,18 +44,20 @@ function Profile() {
       dispatch(setOrderListHistory(data));
     });
     return () => {
-      unsubscribeGetUser,
-        unsubscribeGetOrderList,
-        unsubscribeGetOrderListHistory;
+      unsubscribeGetUser;
+      unsubscribeGetOrderList;
+      unsubscribeGetOrderListHistory;
     };
   }, [dispatch]);
-
   const logOut = () => {
     const response = signOutUser();
     if (response) {
       navigate("/signin");
     }
   };
+  if (loading) {
+    return <Spinner fullScreenSpinner={true} />;
+  }
   return (
     <section className="p-4 xl:py-10 xl:px-0">
       <div className="w-full md:max-w-[1000px] mx-auto flex flex-col gap-4 md:gap-10">
@@ -63,23 +66,11 @@ function Profile() {
             editSvg={EditSvg}
             logOut={logOut}
             userProfile={userProfile}
-            loading={loading}
           />
           <OrderSection orderList={userOrderList} loading={loading} />
-          <Address
-            editSvg={EditSvg}
-            userProfile={userProfile}
-            loading={loading}
-          />
-          <Payment
-            editSvg={EditSvg}
-            userProfile={userProfile}
-            loading={loading}
-          />
-          <OrderHistory
-            orderHistoryList={userOrderHistoryList}
-            loading={loading}
-          />
+          <Address editSvg={EditSvg} userProfile={userProfile} />
+          <Payment editSvg={EditSvg} userProfile={userProfile} />
+          <OrderHistory orderHistoryList={userOrderHistoryList} />
         </div>
       </div>
     </section>

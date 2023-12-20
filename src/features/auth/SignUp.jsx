@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { createAccount, signInWithGoogle } from "../../services/user.api";
+import { useAuthStatus } from "../../hooks/useAuthStatus";
 import AuthPageImg from "../../assets/img/auth_img.png";
 import GoogleSvg from "../../assets/svg/google.svg";
 import Input from "../../ui/shared/Input";
 import Button from "../../ui/shared/Button";
 
 function SignUp() {
+  const { loggedIn } = useAuthStatus();
   const [inputData, setInputData] = useState({
     username: "",
     email: "",
@@ -34,8 +36,11 @@ function SignUp() {
       navigate("/profile");
     }
   };
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
   return (
-    <section className=" p-4 xl:py-10 xl:px-0">
+    <section className="max-w-7xl md:h-[80vh] flex flex-col justify-center p-4">
       <div className="max-w-[1000px] flex justify-center h-auto bg-[#EAECF6] rounded-2xl my-10 mx-auto">
         <div className="hidden w-full md:w-1/2 md:flex items-center justify-center p-10">
           <img src={AuthPageImg} alt="AuthPageImg" />

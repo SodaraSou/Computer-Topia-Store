@@ -5,6 +5,7 @@ import Cart from "./features/cart/Cart";
 import Order from "./features/order/Order";
 import Checkout from "./features/checkout/Checkout";
 import Product from "./features/product/Product";
+import ProductListPage from "./features/product/ProductListPage";
 // import Profile, { loader as profileDataLoader } from "./features/user/Profile";
 import Profile from "./features/user/Profile";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
@@ -43,6 +44,10 @@ function App() {
         {
           path: "/product/:productId",
           element: <Product />,
+        },
+        {
+          path: "/productList/:type/:productType",
+          element: <ProductListPage />,
         },
         {
           path: "/profile",

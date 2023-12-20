@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store.js";
+import { register } from "swiper/element/bundle";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -12,3 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </Provider>
   </React.StrictMode>
 );
+
+register();

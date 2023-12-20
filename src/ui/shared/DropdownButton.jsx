@@ -30,7 +30,7 @@ function DropdownButton({ children, dropdownContent, onSelect }) {
     <div className="relative inline-block" ref={buttonRef}>
       <button
         onClick={toggleDropdown}
-        className="px-4 md:px-2 py-2 md:h-10 md:w-28 bg-[#5E17EB] text-white font-semibold flex justify-center items-center rounded-xl"
+        className="px-4 md:px-2 py-2 md:h-10 bg-[#5E17EB] text-white font-semibold flex justify-center items-center rounded-xl"
       >
         {children}
         <img
@@ -42,7 +42,7 @@ function DropdownButton({ children, dropdownContent, onSelect }) {
         />
       </button>
       {isOpen && (
-        <div className="p-2 w-[150px] absolute top-full left-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
+        <div className="p-2 w-[150px] absolute top-full right-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
           <ul>
             {dropdownContent.map((item) => (
               <li key={item.id}>

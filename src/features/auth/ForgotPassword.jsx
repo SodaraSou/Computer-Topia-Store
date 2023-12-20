@@ -28,11 +28,8 @@ function ForgotPassword({ showForgetPassword }) {
           />
           <div className="h-[1px] bg-white flex-grow"></div>
           <div className="w-ful flex justify-end gap-2">
-            <Button
-              title="Cancel"
-              onClick={showForgetPassword}
-            />
-            <Button title="Send" onClick={forgetPassword} />
+            <Button onClick={showForgetPassword}>Cancel</Button>
+            <Button onClick={forgetPassword}>Send</Button>
           </div>
         </div>
       </div>
