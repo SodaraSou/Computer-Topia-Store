@@ -39,10 +39,10 @@ function Product() {
     setQuantity(quantityReturn);
   };
   const addToCart = async () => {
-    const { model, price, productImg } = product;
+    const { model, price, productImgs } = product;
     const reponse = await addItemToCart(
       productId,
-      productImg,
+      productImgs[0],
       model,
       price,
       quantity
@@ -59,14 +59,22 @@ function Product() {
       {/* Main Product Section */}
       <section className="flex flex-col md:flex-row gap-10 mb-10">
         <img
-          src={product.productImg ? product.productImg : StockImg}
+          src={
+            product && product.productImgs && product.productImgs.length > 0
+              ? product.productImgs[0]
+              : StockImg
+          }
           alt="stock_img"
-          className="w-full md:w-1/2 p-4 h-[490px] xl:h-[590px] rounded-3xl border"
+          className="w-full md:w-1/2 p-4 border"
         />
         <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-bold mb-5">{product.model}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-5">
+            {product.model}
+          </h1>
           <hr className="mb-5" />
-          <h1 className="text-4xl font-bold mb-5">{priceToDisplay}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold mb-5">
+            {priceToDisplay}
+          </h1>
           <hr className="mb-5" />
           {/* {product.color.length !== 0 && (
             <>
@@ -83,7 +91,9 @@ function Product() {
           )} */}
           <div className="flex gap-5 items-center mb-5">
             <QuantityButton handleQuantity={handleQuantity} />
-            <p className="text-lg">Only {product.stock} items left</p>
+            <p className="text-base md:text-lg">
+              Only {product.stock} items left
+            </p>
           </div>
           <Button
             onClick={addToCart}
@@ -97,7 +107,7 @@ function Product() {
       {/* Details Section */}
       <section>
         <div className="w-full p-4 md:p-10 border">
-          <h2 className="text-2xl font-bold mb-4 md:mb-10">
+          <h2 className="text-lg md:text-2xl font-bold mb-4 md:mb-10">
             {product.model} Full Specification
           </h2>
           {product.type === "Laptop" && (

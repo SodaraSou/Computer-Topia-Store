@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { updateUserAddress } from "../../../services/user.api";
 import SaveSvg from "../../../assets/svg/floppy-disk-solid.svg";
-import Spinner from "../../../ui/Spinner";
 
-function Address({ editSvg, userProfile, loading }) {
+function Address({ editSvg, userProfile }) {
   const [inputData, setInputData] = useState({
     houseNo: userProfile.houseNo,
     streetNo: userProfile.streetNo,
@@ -43,74 +42,68 @@ function Address({ editSvg, userProfile, loading }) {
         </button>
       </div>
       <div className="h-[1px] w-full bg-[#D9D9D9] my-4"></div>
-      {loading ? (
-        <div className="w-full flex justify-center items-center">
-          <Spinner />
+      <div className="text-lg">
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="House No"
+            id="houseNo"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={houseNo}
+          />
+          <input
+            type="text"
+            placeholder="Street No"
+            id="streetNo"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={streetNo}
+          />
         </div>
-      ) : (
-        <div className="text-lg">
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="House No"
-              id="houseNo"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={houseNo}
-            />
-            <input
-              type="text"
-              placeholder="Street No"
-              id="streetNo"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={streetNo}
-            />
-          </div>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="Village"
-              id="village"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={village}
-            />
-            <input
-              type="text"
-              placeholder="Commune"
-              id="commune"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={commune}
-            />
-          </div>
-          <div className="flex">
-            <input
-              type="text"
-              placeholder="District"
-              id="district"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={district}
-            />
-            <input
-              type="text"
-              placeholder="City/Province"
-              id="province"
-              className="outline-none text-lg w-full"
-              disabled={editMode}
-              onChange={onChange}
-              value={province}
-            />
-          </div>
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Village"
+            id="village"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={village}
+          />
+          <input
+            type="text"
+            placeholder="Commune"
+            id="commune"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={commune}
+          />
         </div>
-      )}
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="District"
+            id="district"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={district}
+          />
+          <input
+            type="text"
+            placeholder="City/Province"
+            id="province"
+            className="outline-none text-lg w-full"
+            disabled={editMode}
+            onChange={onChange}
+            value={province}
+          />
+        </div>
+      </div>
     </div>
   );
 }

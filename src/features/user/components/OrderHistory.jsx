@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import OrderItem from "./OrderItem";
 import Spinner from "../../../ui/Spinner";
 
-function OrderHistory({ orderHistoryList, loading }) {
+function OrderHistory({ orderList, loading }) {
+  const test = orderList.filter((order) => order.orderStatus === "Complete");
+  console.log(orderList);
   return (
     <div className="w-full h-[386px] border border-[#D9D9D9] rounded-xl p-4 md:p-10">
       <h1 className="text-2xl md:text-4xl font-bold">Order History</h1>
@@ -13,7 +15,7 @@ function OrderHistory({ orderHistoryList, loading }) {
         <div className="flex p-10 justify-center items-center">
           <Spinner />
         </div>
-      ) : orderHistoryList.length === 0 ? (
+      ) : test.length === 0 ? (
         <div className="flex flex-col justify-center items-center h-[224px] gap-4">
           <FontAwesomeIcon
             icon={faBoxesPacking}
@@ -30,7 +32,7 @@ function OrderHistory({ orderHistoryList, loading }) {
       ) : (
         <div className="h-[224px] overflow-hidden overflow-y-auto scrollbar-hide">
           <div className="flex flex-col gap-6">
-            {orderHistoryList.map((item) => (
+            {test.map((item) => (
               <OrderItem item={item} key={item.id} />
             ))}
           </div>

@@ -1,19 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   signOutUser,
   getUser,
   getUserOrderList,
-  getUserOrderHistoryList,
-  getUserId,
 } from "../../services/user.api";
-import {
-  setProfile,
-  setOrderList,
-  setOrderListHistory,
-  setLoading,
-} from "./userSlice";
+import { setProfile, setOrderList, setLoading } from "./userSlice";
 import EditSvg from "../../assets/svg/pen-to-square-solid.svg";
 import ProfileSection from "./components/ProfileSection";
 import Address from "./components/Address";
@@ -25,11 +18,7 @@ import Spinner from "../../ui/Spinner";
 function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const user = useLoaderData();
   const userProfile = useSelector((state) => state.user.userProfile);
-  const userOrderHistoryList = useSelector(
-    (state) => state.user.userOrderHistoryList
-  );
   const userOrderList = useSelector((state) => state.user.userOrderList);
   const loading = useSelector((state) => state.user.loading);
   useEffect(() => {
@@ -40,13 +29,9 @@ function Profile() {
     const unsubscribeGetOrderList = getUserOrderList((data) => {
       dispatch(setOrderList(data));
     });
-    const unsubscribeGetOrderListHistory = getUserOrderHistoryList((data) => {
-      dispatch(setOrderListHistory(data));
-    });
     return () => {
       unsubscribeGetUser;
       unsubscribeGetOrderList;
-      unsubscribeGetOrderListHistory;
     };
   }, [dispatch]);
   const logOut = () => {
@@ -70,17 +55,11 @@ function Profile() {
           <OrderSection orderList={userOrderList} loading={loading} />
           <Address editSvg={EditSvg} userProfile={userProfile} />
           <Payment editSvg={EditSvg} userProfile={userProfile} />
-          <OrderHistory orderHistoryList={userOrderHistoryList} />
+          <OrderHistory orderList={userOrderList} />
         </div>
       </div>
     </section>
   );
 }
-
-// export const loader = async () => {
-//   const userId = await getUserId();
-//   const user = await getUser(userId);
-//   return user;
-// };
 
 export default Profile;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formatDate } from "../../../utils/helpers";
+import { formatDate, formatCurrency } from "../../../utils/helpers";
 import { recieveProduct } from "../../../services/order.api";
 import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
 import Button from "../../../ui/shared/Button";
@@ -11,7 +11,7 @@ function OrderItem({ item }) {
   const formattedDate = formatDate(item.data.orderAt.toDate());
   let spanClass = "";
   switch (orderStatus) {
-    case "Pending Approval":
+    case "Pending":
       spanClass = "text-orange-500";
       break;
     case "Shipping":
@@ -39,11 +39,11 @@ function OrderItem({ item }) {
     <>
       {openModal && (
         <Modal handleModal={handleModal}>
-          <div className="max-w-[600px] max-h-[600px]">
-            <div className="flex items-center gap-4">
-              <div>
-                <h1 className="text-2xl font-bold">Order Id: {item.id}</h1>
-              </div>
+          <div className="max-w-[1200px] flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold">
+                Order Id: <span className="text-blue-500">{item.id}</span>
+              </h2>
               {orderStatus == "Shipping" && (
                 <div>
                   <Button onClick={handleRecieve} customClass="bg-green-500">
@@ -52,44 +52,43 @@ function OrderItem({ item }) {
                 </div>
               )}
             </div>
-            <div className="h-[1px] w-full bg-[#D9D9D9] my-4"></div>
-            <div className="flex flex-col gap-4">
-              {item.data.items.map((test, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center gap-4"
-                >
+            <div className="h-[1px] w-full bg-[#D9D9D9]"></div>
+            {item.data.items.map((item, index) => (
+              <div key={index} className="flex justify-between items-center">
+                <div className="flex items-center">
                   <img
-                    src={test.productImg ? test.productImg : StockImg}
+                    src={item.productImg ? item.productImg : StockImg}
                     alt="stock_img"
-                    className="w-[100px] h-[100px] rounded-2xl"
+                    className="w-[100px] h-[100px] mr-4"
                   />
-                  <div className="flex flex-grow justify-between items-center">
-                    <div className="flex flex-col gap-2">
-                      <h2 className="text-lg font-semibold">{test.model}</h2>
-                      <p className="text-sm">Price: ${test.price}</p>
-                    </div>
-                    <div>
-                      <h2 className="text-md font-semibold">
-                        ${test.subTotal}
-                      </h2>
-                      <p className="text-sm">Quantity: {test.quantity}</p>
-                    </div>
-                  </div>
+                  <span className="w-[200px] md:w-auto">
+                    <h2 className="text-lg font-semibold">{item.model}</h2>
+                    <p className="text-sm">
+                      Price: {formatCurrency(item.price)}
+                    </p>
+                  </span>
                 </div>
-              ))}
-            </div>
-            <div className="h-[1px] w-full bg-[#D9D9D9] my-4"></div>
-            <div className="flex justify-end">
-              <p className="font-semibold">Total: ${item.data.checkoutPrice}</p>
-            </div>
+                <div className="ml-4">
+                  <h2 className="text-lg font-semibold">
+                    {formatCurrency(item.subTotal)}
+                  </h2>
+                  <p className="text-sm">Quantity: {item.quantity}</p>
+                </div>
+              </div>
+            ))}
+            <div className="h-[1px] w-full bg-[#D9D9D9]"></div>
+            <p className="font-semibold flex justify-end">
+              Total: {formatCurrency(item.data.checkoutPrice)}
+            </p>
           </div>
         </Modal>
       )}
       <div className="flex justify-between">
         <div className="w-full">
           <h1 className="font-bold">Date Order: {formattedDate}</h1>
-          <p>Order Id: {item.id}</p>
+          <p className="font-semibold">
+            Order Id: <span className="text-blue-500">{item.id}</span>
+          </p>
           <p>
             Order status:{" "}
             <span className={`font-semibold ${spanClass}`}>

@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userProfile: {},
   userOrderList: [],
-  userOrderHistoryList: [],
   loading: false,
 };
 
@@ -16,9 +15,6 @@ const userSlice = createSlice({
     },
     setOrderList: (state, action) => {
       state.userOrderList = action.payload;
-    },
-    setOrderListHistory: (state, action) => {
-      state.userOrderHistoryList = action.payload;
       state.loading = false;
     },
     setLoading: (state) => {
@@ -27,7 +23,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setProfile, setOrderList, setOrderListHistory, setLoading } =
-  userSlice.actions;
+export const { setProfile, setOrderList, setLoading } = userSlice.actions;
 
 export default userSlice.reducer;

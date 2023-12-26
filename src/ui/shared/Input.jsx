@@ -2,7 +2,7 @@ import { useState } from "react";
 import ShowPassword from "../../assets/svg/eye-solid.svg";
 import HidePassword from "../../assets/svg/eye-slash-solid.svg";
 
-function Input({ title, type, placeholder, id, onChange, value }) {
+function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
   const isPasswordInput = type === "password";
   const [showPassword, setShowPassword] = useState(false);
 
@@ -11,7 +11,7 @@ function Input({ title, type, placeholder, id, onChange, value }) {
   };
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-lg font-semibold">
+      <label htmlFor={id} className="text-sm md:text-base">
         {title}
       </label>
       <div className="relative flex">
@@ -23,6 +23,7 @@ function Input({ title, type, placeholder, id, onChange, value }) {
           id={id}
           onChange={onChange}
           value={value}
+          required={isRequired}
           className="rounded-xl w-full px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
         />
         {isPasswordInput && (

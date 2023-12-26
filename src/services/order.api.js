@@ -67,20 +67,6 @@ export const addItemToCart = async (
           return;
         }
       }
-      // updatedItems.forEach(async (item) => {
-      //   if (stock < item.quantity) {
-      //     toast.error("Exceeds Available Stock!");
-      //     return;
-      //   }
-      //   // else {
-      //   //   const totalPrice = updatedItems.reduce(
-      //   //     (total, item) => total + item.subTotal,
-      //   //     0
-      //   //   );
-      //   //   await setDoc(userRef, { items: updatedItems, totalPrice });
-      //   //   toast.success("Add to Cart Success!");
-      //   // }
-      // });
       const totalPrice = updatedItems.reduce(
         (total, item) => total + item.subTotal,
         0
@@ -146,7 +132,7 @@ export const checkout = async (checkoutList, checkoutPrice) => {
       userId: auth.currentUser.uid,
       items: checkoutList,
       checkoutPrice,
-      orderStatus: "Pending Approval",
+      orderStatus: "Pending",
       orderAt: serverTimestamp(),
     });
     const orderRefToRemove = doc(dbFirestore, "cart", auth.currentUser.uid);

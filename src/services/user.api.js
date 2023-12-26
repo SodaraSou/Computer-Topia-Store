@@ -35,20 +35,6 @@ export const getUserId = () => {
   });
 };
 
-// export const getUser = async (userId) => {
-//   try {
-//     const userRef = doc(dbFirestore, "users", userId);
-//     const docSnap = await getDoc(userRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data();
-//     } else {
-//       return null;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const createAccount = async (inputData) => {
   const { username, email, password, confirmPassword } = inputData;
   if (password === confirmPassword) {
@@ -161,7 +147,7 @@ export const signOutUser = () => {
 
 export const updateUserProfile = async (username, phoneNumber, img) => {
   try {
-    const userData = await getUser(auth.currentUser.uid);
+    const userData = getUser(auth.currentUser.uid);
     const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
     if (username !== userData.username) {
       await updateDoc(userRef, {
@@ -223,6 +209,8 @@ export const updateUserPayment = async (inputData) => {
   }
 };
 
+export const updatePhoneNumber = async (phoneNumber) => {};
+
 export const deleteUser = async () => {
   const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
   await deleteDoc(userRef);
@@ -247,11 +235,7 @@ export const getUser = (callback) => {
 export const getUserOrderList = (callback) => {
   try {
     const docRef = collection(dbFirestore, "order");
-    const q = query(
-      docRef,
-      where("userId", "==", auth.currentUser.uid),
-      where("orderStatus", "in", ["Pending Approval", "Approved", "Shipping"])
-    );
+    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
     const unsubscirbe = onSnapshot(q, (orderSnap) => {
       const list = [];
       orderSnap.forEach((order) => {
@@ -266,26 +250,5 @@ export const getUserOrderList = (callback) => {
   } catch (error) {
     console.log(error);
     toast.error("Can't Load Order!");
-  }
-};
-
-export const getUserOrderHistoryList = (callback) => {
-  try {
-    const docRef = collection(dbFirestore, "orderHistory");
-    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
-    const unsubscirbe = onSnapshot(q, (orderSnap) => {
-      const list = [];
-      orderSnap.forEach((order) => {
-        list.push({
-          id: order.id,
-          data: order.data(),
-        });
-      });
-      return callback(list);
-    });
-    return unsubscirbe;
-  } catch (error) {
-    console.log(error);
-    toast.error("Can't Load Order History!");
   }
 };

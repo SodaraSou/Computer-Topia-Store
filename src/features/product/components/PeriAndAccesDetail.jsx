@@ -66,7 +66,9 @@ function PeriAndAccesDetail({ productDetails }) {
           <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
             Official Warranty
           </td>
-          <td className="md:text-lg w-5/6 py-2 px-4 text-sm">3 Years</td>
+          <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+            {productDetails.warranty}
+          </td>
         </tr>
       </tbody>
     </table>

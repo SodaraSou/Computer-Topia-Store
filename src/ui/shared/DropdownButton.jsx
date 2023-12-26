@@ -36,7 +36,7 @@ function DropdownButton({ children, dropdownContent, onSelect }) {
         <img
           src={downArrowSvg}
           alt="downArrowSvg"
-          className={`ml-2 md:ml-4 svg-size transform ${
+          className={`ml-2 svg-size transform ${
             isOpen ? "rotate-180" : "rotate-0"
           }`}
         />
