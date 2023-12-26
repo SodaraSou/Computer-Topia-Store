@@ -1,10 +1,5 @@
 import { Link } from "react-router-dom";
-
-import facebookSvg from "../assets/svg/facebook.svg";
-import instagramSvg from "../assets/svg/instagram.svg";
-import telegramSvg from "../assets/svg/telegram.svg";
-import xSvg from "../assets/svg/x-twitter.svg";
-import Logo from "../assets/img/Logo 150 x 100.png";
+import Logo from "../user/assets/img/Logo 150 x 100.png";
 
 function Footer() {
   return (
@@ -76,37 +71,25 @@ function Footer() {
             <ul className="flex flex-col gap-4 text-lg">
               <li>
                 <Link className="flex flex-row items-center gap-2">
-                  <img
-                    src={facebookSvg}
-                    alt="facebookSvg"
-                    className="svg-size"
-                  />
+                  <img src={null} alt="facebookSvg" className="svg-size" />
                   Facebook
                 </Link>
               </li>
               <li>
                 <Link className="flex flex-row items-center gap-2">
-                  <img
-                    src={instagramSvg}
-                    alt="instagramSvg"
-                    className="svg-size"
-                  />
+                  <img src={null} alt="instagramSvg" className="svg-size" />
                   Instagram
                 </Link>
               </li>
               <li>
                 <Link className="flex flex-row items-center gap-2">
-                  <img
-                    src={telegramSvg}
-                    alt="telegramSvg"
-                    className="svg-size"
-                  />
+                  <img src={null} alt="telegramSvg" className="svg-size" />
                   Telegram
                 </Link>
               </li>
               <li>
                 <Link className="flex flex-row items-center gap-2">
-                  <img src={xSvg} alt="xSvg" className="svg-size" />
+                  <img src={null} alt="xSvg" className="svg-size" />
                   Twitter
                 </Link>
               </li>

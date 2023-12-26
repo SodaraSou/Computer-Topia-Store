@@ -17,8 +17,8 @@ import {
   faTelegram,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { setDropdownVisible, setQuery } from "../features/home/homeslice";
-import Logo from "../assets/img/Logo 240 x 56.png";
+import { setDropdownVisible, setQuery } from "../user/features/home/homeslice";
+import Logo from "../user/assets/img/Logo 240 x 56.png";
 
 function Header({ totalItem }) {
   const dispatch = useDispatch();

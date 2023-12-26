@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import downArrowSvg from "../../assets/svg/chevron-down-solid.svg";
+import downArrowSvg from "../../user/assets/svg/chevron-down-solid.svg";
 
 function DropdownButton({ children, dropdownContent, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);

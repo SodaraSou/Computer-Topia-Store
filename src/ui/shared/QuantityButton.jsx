@@ -1,5 +1,5 @@
-import PlusSvg from "../../assets/svg/plus-solid.svg";
-import MinusSvg from "../../assets/svg/minus-solid.svg";
+import PlusSvg from "../../user/assets/svg/plus-solid.svg";
+import MinusSvg from "../../user/assets/svg/minus-solid.svg";
 import { useState } from "react";
 
 function QuantityButton({ handleQuantity, handleRemoveItem, handleAddItem }) {

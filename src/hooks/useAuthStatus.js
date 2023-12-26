@@ -4,19 +4,22 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
   const isMounted = useRef(true);
 
   useEffect(() => {
     if (isMounted) {
-      onAuthStateChanged(auth, (user) => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
           setLoggedIn(true);
+          setUserId(user.uid);
         }
       });
+      return () => {
+        unsubscribe();
+        isMounted.current = false;
+      };
     }
-    return () => {
-      isMounted.current = false;
-    };
   }, [isMounted]);
-  return { loggedIn };
+  return { loggedIn, userId };
 };

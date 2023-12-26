@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ShowPassword from "../../assets/svg/eye-solid.svg";
-import HidePassword from "../../assets/svg/eye-slash-solid.svg";
+import ShowPassword from "../../user/assets/svg/eye-solid.svg";
+import HidePassword from "../../user/assets/svg/eye-slash-solid.svg";
 
 function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
   const isPasswordInput = type === "password";
