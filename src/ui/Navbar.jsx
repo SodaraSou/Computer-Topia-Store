@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <nav className="bg-[#5E17EB] text-white p-4 xl:py-4 xl:px-0 sticky top-0 z-40">
       <ul className="max-w-7xl mx-auto flex justify-between items-center">
-        |
+        <li>|</li>
         <li>
           <Link
             to="productList/type/Laptop"
@@ -24,7 +24,7 @@ function Navbar() {
             <span className="hidden md:block">Laptop</span>
           </Link>
         </li>
-        |
+        <li>|</li>
         <li>
           <Link
             to="productList/type/PC-Hardware"
@@ -34,7 +34,7 @@ function Navbar() {
             <span className="hidden md:block">PC-Hardware</span>
           </Link>
         </li>
-        |
+        <li>|</li>
         <li>
           <Link
             to="productList/type/Peripherals"
@@ -44,7 +44,7 @@ function Navbar() {
             <span className="hidden md:block">Peripherals</span>
           </Link>
         </li>
-        |
+        <li>|</li>
         <li>
           <Link
             to="productList/type/Accessories"
@@ -54,7 +54,7 @@ function Navbar() {
             <span className="hidden md:block">Accessories</span>
           </Link>
         </li>
-        |
+        <li>|</li>
       </ul>
     </nav>
   );

@@ -48,7 +48,7 @@ function Product() {
       quantity
     );
     if (reponse) {
-      navigate("/signin");
+      navigate("/signIn");
     }
   };
   if (loading) {
@@ -66,6 +66,7 @@ function Product() {
           }
           alt="stock_img"
           className="w-full md:w-1/2 p-4 border"
+          loading="lazy"
         />
         <div className="w-full md:w-1/2">
           <h1 className="text-2xl md:text-4xl font-bold mb-5">
