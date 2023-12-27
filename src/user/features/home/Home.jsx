@@ -6,12 +6,16 @@ import {
   faEthernet,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import StockImg from "../../assets/img/Computer_Topia_Stock_Img.png";
 import ProductItem from "../../../ui/ProductItem";
 import Spinner from "../../../ui/Spinner";
+import { setLoading, setListProduct } from "./homeslice";
+import { getAllProduct } from "../../../services/product.api";
 
 function Home() {
+  const dispatch = useDispatch();
   const type = [
     { id: 1, type: "Laptop", icon: faLaptop },
     { id: 2, type: "PC-Hardware", icon: faMicrochip },
@@ -30,6 +34,14 @@ function Home() {
   ];
   const productList = useSelector((state) => state.home.listProduct);
   const loading = useSelector((state) => state.home.loading);
+  useEffect(() => {
+    dispatch(setLoading());
+    const fetchAllProduct = async () => {
+      const data = await getAllProduct();
+      dispatch(setListProduct(data));
+    };
+    fetchAllProduct();
+  }, [dispatch]);
 
   if (loading) {
     return <Spinner fullScreenSpinner={true} />;
