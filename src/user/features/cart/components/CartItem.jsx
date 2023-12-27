@@ -11,7 +11,6 @@ function CartItem({ item, handleRemove }) {
           src={item.productImg ? item.productImg : StockImg}
           alt="stock_img"
           className="w-[100px] md:w-[200px]"
-          loading="lazy"
         />
         <span className="w-[200px] md:w-auto">
           <h2 className="text-lg font-semibold">{item.model}</h2>

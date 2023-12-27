@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { QrCode, VisaABA, VisaAceleda, VisaPrince } from "../../../assets/img";
+// import { QrCode, VisaABA, VisaAceleda, VisaPrince } from "../../../assets/img";
+import QrCode from "../../../assets/img/ABA_QR_Code.webp";
+import VisaABA from "../../../assets/img/visa_aba.webp";
+import VisaAceleda from "../../../assets/img/visa_aceleda.webp";
+import VisaPrince from "../../../assets/img/visa_prince.webp";
 import { checkout } from "../../../../services/order.api";
 import Button from "../../../../ui/shared/Button";
 import Input from "../../../../ui/shared/Input";

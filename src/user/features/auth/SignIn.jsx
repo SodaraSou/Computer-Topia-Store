@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import GoogleSvg from "../../assets/svg/google.svg";
 import { signInUser, signInWithGoogle } from "../../../services/user.api";
 import { useAuthStatus } from "../../../hooks/useAuthStatus";
-import AuthPageImg from "../../assets/img/auth_img.png";
+import AuthPageImg from "../../assets/img/auth_img.webp";
 import Input from "../../../ui/shared/Input";
 import Button from "../../../ui/shared/Button";
 import ForgotPassword from "./ForgotPassword";

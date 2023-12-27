@@ -1,5 +1,5 @@
 import { Link } from "react-scroll";
-import { Router } from "../../../assets/img/index";
+import Router from "../../../assets/img/wifi-router.png";
 
 function AccessoryNavbar() {
   const accessoriesType = [

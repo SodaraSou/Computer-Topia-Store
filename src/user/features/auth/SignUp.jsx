@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { createAccount, signInWithGoogle } from "../../../services/user.api";
 import { useAuthStatus } from "../../../hooks/useAuthStatus";
-import AuthPageImg from "../../assets/img/auth_img.png";
+import AuthPageImg from "../../assets/img/auth_img.webp";
 import GoogleSvg from "../../assets/svg/google.svg";
 import Input from "../../../ui/shared/Input";
 import Button from "../../../ui/shared/Button";

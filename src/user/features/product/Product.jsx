@@ -65,8 +65,7 @@ function Product() {
               : StockImg
           }
           alt="stock_img"
-          className="w-full md:w-1/2 p-4 border"
-          loading="lazy"
+          className="w-full h-[398px] md:w-1/2 md:h-[385.5px] lg:h-[467.55px] xl:h-[620.03px] border"
         />
         <div className="w-full md:w-1/2">
           <h1 className="text-2xl md:text-4xl font-bold mb-5">

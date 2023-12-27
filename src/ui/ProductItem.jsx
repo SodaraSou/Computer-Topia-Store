@@ -11,8 +11,7 @@ function ProductItem({ item, id }) {
         <img
           src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}
           alt="stock_img"
-          className="w-full rounded-t-2xl"
-          loading="lazy"
+          className="w-full md:h-[375.5px] lg:h-[312.33px] xl:h-[306px]"
         />
       </div>
       <div className="p-4 md:p-10 flex flex-col gap-2 md:gap-4 text-center">

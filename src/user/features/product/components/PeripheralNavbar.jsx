@@ -1,12 +1,10 @@
 import { Link } from "react-scroll";
-import {
-  GamingChair,
-  Keyboard,
-  Mouse,
-  Headphone,
-  Microphone,
-  Webcam,
-} from "../../../assets/img";
+import GamingChair from "../../../assets/img/gaming-chair.webp";
+import Keyboard from "../../../assets/img/keyboard.webp";
+import Mouse from "../../../assets/img/mouse.webp";
+import Headphone from "../../../assets/img/headphones.webp";
+import Microphone from "../../../assets/img/mic.webp";
+import Webcam from "../../../assets/img/web-camera.png";
 
 function PeripheralNavbar() {
   const peripheralType = [

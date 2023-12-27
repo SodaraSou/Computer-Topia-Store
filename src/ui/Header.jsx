@@ -6,10 +6,6 @@ import {
   faCartPlus,
   faUser,
   faMagnifyingGlass,
-  faLaptop,
-  faMicrochip,
-  faHeadphones,
-  faEthernet,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
@@ -18,7 +14,7 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { setDropdownVisible, setQuery } from "../user/features/home/homeslice";
-import Logo from "../user/assets/img/Logo 240 x 56.png";
+import Logo from "../user/assets/img/Logo 240 x 56.webp";
 
 function Header({ totalItem }) {
   const dispatch = useDispatch();

@@ -1,14 +1,13 @@
 import { Link } from "react-scroll";
-import {
-  CPU,
-  GPU,
-  MOTHERBOARD,
-  RAM,
-  HDD,
-  PSU,
-  CASE,
-  MONITOR,
-} from "../../../assets/img";
+import CPU from "../../../assets/img/cpu.webp";
+import GPU from "../../../assets/img/gpu.webp";
+import COOLER from "../../../assets/img/cooler.webp";
+import MOTHERBOARD from "../../../assets/img/motherboard.webp";
+import RAM from "../../../assets/img/ram.webp";
+import HDD from "../../../assets/img/hdd.webp";
+import PSU from "../../../assets/img/psu.webp";
+import CASE from "../../../assets/img/computer.webp";
+import MONITOR from "../../../assets/img/television.webp";
 
 function HardwareTypeNavbar() {
   const hardwareType = [
@@ -24,31 +23,36 @@ function HardwareTypeNavbar() {
     },
     {
       id: 3,
-      name: "MB",
-      img: MOTHERBOARD,
+      name: "Cooler",
+      img: COOLER,
     },
     {
       id: 4,
+      name: "Motherboard",
+      img: MOTHERBOARD,
+    },
+    {
+      id: 5,
       name: "RAM",
       img: RAM,
     },
     {
-      id: 5,
+      id: 6,
       name: "Storage",
       img: HDD,
     },
     {
-      id: 6,
+      id: 7,
       name: "PSU",
       img: PSU,
     },
     {
-      id: 7,
+      id: 8,
       name: "Case",
       img: CASE,
     },
     {
-      id: 8,
+      id: 9,
       name: "Monitor",
       img: MONITOR,
     },

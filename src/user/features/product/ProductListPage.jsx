@@ -95,6 +95,9 @@ function ProductListPage() {
           name: "GPU",
         },
         {
+          name: "Cooler",
+        },
+        {
           name: "Motherboard",
         },
         {

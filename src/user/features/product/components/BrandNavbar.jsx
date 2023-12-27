@@ -1,15 +1,13 @@
 import { Link } from "react-scroll";
-import {
-  ASUS,
-  TUFGAMING,
-  ROG,
-  MSI,
-  MICROSOFT,
-  LENOVO,
-  DELL,
-  GIGABYTE,
-  APPLE,
-} from "../../../assets/img";
+import ASUS from "../../../assets/img/ASUS.webp";
+import TUFGAMING from "../../../assets/img/TUFGAMING.webp";
+import ROG from "../../../assets/img/ROG.webp";
+import MSI from "../../../assets/img/MSI.webp";
+import MICROSOFT from "../../../assets/img/MICROSOFT.webp";
+import LENOVO from "../../../assets/img/LENOVO.webp";
+import DELL from "../../../assets/img/DELL.webp";
+import GIGABYTE from "../../../assets/img/GIGABYTE.webp";
+import APPLE from "../../../assets/img/APPLE.webp";
 
 function BrandNavbar() {
   const brand = [

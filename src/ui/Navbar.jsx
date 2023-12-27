@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCartPlus,
-  faUser,
-  faMagnifyingGlass,
   faLaptop,
   faMicrochip,
   faHeadphones,
