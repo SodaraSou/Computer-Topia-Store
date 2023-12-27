@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../../../utils/helpers";
-import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
+import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.webp";
 import QuantityButton from "../../../../ui/shared/QuantityButton";
 
 function CartItem({ item, handleRemove }) {

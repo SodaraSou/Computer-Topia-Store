@@ -1,4 +1,4 @@
-import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
+import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.webp";
 import { formatCurrency } from "../../../../utils/helpers";
 
 function CheckoutItem({ item }) {

@@ -16,6 +16,7 @@ function Navbar() {
           <Link
             to="productList/type/Laptop"
             className="flex items-center gap-4"
+            aria-label="Explore our Laptop"
           >
             <FontAwesomeIcon icon={faLaptop} />
             <span className="hidden md:block">Laptop</span>
@@ -26,6 +27,7 @@ function Navbar() {
           <Link
             to="productList/type/PC-Hardware"
             className="flex items-center gap-4"
+            aria-label="Explore our PC-Hardware"
           >
             <FontAwesomeIcon icon={faMicrochip} />
             <span className="hidden md:block">PC-Hardware</span>
@@ -36,6 +38,7 @@ function Navbar() {
           <Link
             to="productList/type/Peripherals"
             className="flex items-center gap-4"
+            aria-label="Explore our Peripherals"
           >
             <FontAwesomeIcon icon={faHeadphones} />
             <span className="hidden md:block">Peripherals</span>
@@ -46,6 +49,7 @@ function Navbar() {
           <Link
             to="productList/type/Accessories"
             className="flex items-center gap-4"
+            aria-label="Explore our Accessories"
           >
             <FontAwesomeIcon icon={faEthernet} />
             <span className="hidden md:block">Accessories</span>

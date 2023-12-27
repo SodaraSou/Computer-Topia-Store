@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formatDate, formatCurrency } from "../../../../utils/helpers";
 import { recieveProduct } from "../../../../services/order.api";
-import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.png";
+import StockImg from "../../../assets/img/Computer_Topia_Stock_Img.webp";
 import Button from "../../../../ui/shared/Button";
 import Modal from "../../../../ui/shared/Modal";
 

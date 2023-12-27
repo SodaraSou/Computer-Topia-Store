@@ -74,7 +74,11 @@ function Header({ totalItem }) {
             <FontAwesomeIcon icon={faXTwitter} className="text-[#5E17EB]" />
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/profile" className="flex flex-row items-center gap-2">
+            <Link
+              to="/profile"
+              className="flex flex-row items-center gap-2"
+              aria-label="View your profile"
+            >
               <FontAwesomeIcon icon={faUser} className="text-[#5E17EB]" />
             </Link>
             <span>
@@ -88,7 +92,11 @@ function Header({ totalItem }) {
           <Link to="/">
             <img src={Logo} alt="Logo" className="w-[200px] md:w-full" />
           </Link>
-          <Link to="/cart" className="flex flex-row md:hidden items-center">
+          <Link
+            to="/cart"
+            className="flex flex-row md:hidden items-center"
+            aria-label="View your Shopping Cart"
+          >
             <div className="relative">
               <FontAwesomeIcon icon={faCartPlus} className="text-[#5E17EB]" />
               {totalItem > 0 && (
@@ -100,7 +108,7 @@ function Header({ totalItem }) {
           </Link>
         </div>
         <div className="flex items-center gap-4 text-lg">
-          <div className="relative w-full" ref={searchBoxRef}>
+          <div className="w-full" ref={searchBoxRef}>
             <input
               type="text"
               onFocus={handleFocus}
@@ -121,12 +129,6 @@ function Header({ totalItem }) {
                 ))}
               </div>
             )}
-            <button className="svg-size absolute top-[6px] right-4">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="text-[#5E17EB]"
-              />
-            </button>
           </div>
           <Link to="/cart" className="hidden md:flex flex-row items-center">
             <div className="relative">

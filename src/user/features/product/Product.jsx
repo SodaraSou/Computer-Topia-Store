@@ -6,7 +6,7 @@ import { getProductById } from "../../../services/product.api";
 import { addItemToCart } from "../../../services/order.api";
 import { formatCurrency } from "../../../utils/helpers";
 import { setDropdownVisible, setQuery } from "../home/homeslice";
-import StockImg from "../../assets/img/Computer_Topia_Stock_Img.png";
+import StockImg from "../../assets/img/Computer_Topia_Stock_Img.webp";
 import LaptopDetail from "./components/LaptopDetail";
 import HardwareDetail from "./components/HardwareDetail";
 import Spinner from "../../../ui/Spinner";

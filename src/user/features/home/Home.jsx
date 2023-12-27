@@ -1,14 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLaptop,
-  faMicrochip,
-  faHeadphones,
-  faEthernet,
-} from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import StockImg from "../../assets/img/Computer_Topia_Stock_Img.png";
+import StockImg from "../../assets/img/Computer_Topia_Stock_Img.webp";
 import ProductItem from "../../../ui/ProductItem";
 import Spinner from "../../../ui/Spinner";
 import { setLoading, setListProduct } from "./homeslice";
@@ -16,12 +9,6 @@ import { getAllProduct } from "../../../services/product.api";
 
 function Home() {
   const dispatch = useDispatch();
-  const type = [
-    { id: 1, type: "Laptop", icon: faLaptop },
-    { id: 2, type: "PC-Hardware", icon: faMicrochip },
-    { id: 3, type: "Peripherals", icon: faHeadphones },
-    { id: 4, type: "Accessories", icon: faEthernet },
-  ];
   const brand = [
     { id: 1, brand: "APPLE", img: null },
     { id: 2, brand: "ASUS", img: null },
@@ -48,27 +35,6 @@ function Home() {
   }
   return (
     <section>
-      {/* Top Categories Section */}
-      {/* <section className="px-4 mt-4 md:mt-10 xl:p-0">
-        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
-          Shop Our Top Categories
-        </h1>
-        <div className="grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-4">
-          {type.map((type) => (
-            <Link
-              to={`productList/type/${type.type}`}
-              key={type.id}
-              className="w-full h-[250px] bg-[#EAECF6] rounded-2xl flex flex-col justify-center items-center gap-4"
-            >
-              <FontAwesomeIcon
-                icon={type.icon}
-                className="text-[#5E17EB] w-24 h-24"
-              />
-              <h1 className="text-lg md:text-2xl font-semibold">{type.type}</h1>
-            </Link>
-          ))}
-        </div>
-      </section> */}
       {/* Latest Product */}
       <section className="px-4 mt-4 md:mt-10 xl:p-0">
         <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
