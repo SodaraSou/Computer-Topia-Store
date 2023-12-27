@@ -74,7 +74,7 @@ function Home() {
         <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
           Latest Products
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {productList.slice(0, 8).map((item) => (
             <ProductItem item={item.data} id={item.id} key={item.id} />
           ))}
@@ -107,7 +107,7 @@ function Home() {
         <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
           Popular Products
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {productList.slice(0, 8).map((item) => (
             <ProductItem item={item.data} id={item.id} key={item.id} />
           ))}

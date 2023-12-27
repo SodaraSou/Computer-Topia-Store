@@ -16,8 +16,8 @@ function ProductItem({ item, id }) {
         />
       </div>
       <div className="p-4 md:p-10 flex flex-col gap-2 md:gap-4 text-center">
-        <p>{item.model}</p>
-        <p>{priceToDisplay}</p>
+        <p className="text-sm md:text-base">{item.model}</p>
+        <p className="text-sm md:text-base">{priceToDisplay}</p>
       </div>
     </Link>
   );

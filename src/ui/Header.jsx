@@ -63,7 +63,7 @@ function Header({ totalItem }) {
           .toLocaleLowerCase()
           .includes(newQuery.toLocaleLowerCase());
       });
-      setProducts(queryProduct); 
+      setProducts(queryProduct);
     }
   };
   return (
@@ -90,7 +90,7 @@ function Header({ totalItem }) {
       <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-4 xl:px-0 xl:py-6 gap-4 md:gap-8 bg-white">
         <div className="flex justify-between items-center">
           <Link to="/">
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" className="w-[200px] md:w-full" />
           </Link>
           <Link to="/cart" className="flex flex-row md:hidden items-center">
             <div className="relative">

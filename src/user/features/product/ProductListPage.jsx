@@ -200,7 +200,7 @@ function ProductListPage() {
             <div className="bg-[#5E17EB] text-white p-4">
               <h1 className="text-2xl font-bold">{section.name}</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               <ProductList
                 productList={productList.filter(
                   (product) => product.data.brand === section.name
