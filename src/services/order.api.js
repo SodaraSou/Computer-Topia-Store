@@ -110,19 +110,21 @@ export const removeItemFromCart = async (
 
 export const getListItemFromCart = async (callback) => {
   const userId = auth.currentUser ? auth.currentUser.uid : await getUserId();
-  const userRef = doc(dbFirestore, "cart", userId);
-  const unsubscribe = onSnapshot(
-    userRef,
-    (docSnap) => {
-      if (docSnap.exists()) {
-        callback(docSnap.data());
+  if (userId !== null) {
+    const userRef = doc(dbFirestore, "cart", userId);
+    const unsubscribe = onSnapshot(
+      userRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          callback(docSnap.data());
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
-  return unsubscribe;
+    );
+    return unsubscribe;
+  }
 };
 
 export const checkout = async (checkoutList, checkoutPrice) => {

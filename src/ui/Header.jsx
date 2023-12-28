@@ -2,23 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartPlus,
-  faUser,
-  faMagnifyingGlass,
-  faLaptop,
-  faMicrochip,
-  faHeadphones,
-  faEthernet,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faUser } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faInstagram,
   faTelegram,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { setDropdownVisible, setQuery } from "../features/home/homeslice";
-import Logo from "../assets/img/Logo 240 x 56.png";
+import { setDropdownVisible, setQuery } from "../pages/user/home/homeslice";
+import Logo from "../assets/img/Logo 240 x 56.webp";
 
 function Header({ totalItem }) {
   const dispatch = useDispatch();
@@ -63,7 +55,7 @@ function Header({ totalItem }) {
           .toLocaleLowerCase()
           .includes(newQuery.toLocaleLowerCase());
       });
-      setProducts(queryProduct); 
+      setProducts(queryProduct);
     }
   };
   return (
@@ -78,7 +70,11 @@ function Header({ totalItem }) {
             <FontAwesomeIcon icon={faXTwitter} className="text-[#5E17EB]" />
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/profile" className="flex flex-row items-center gap-2">
+            <Link
+              to="/profile"
+              className="flex flex-row items-center gap-2"
+              aria-label="View your profile"
+            >
               <FontAwesomeIcon icon={faUser} className="text-[#5E17EB]" />
             </Link>
             <span>
@@ -90,9 +86,13 @@ function Header({ totalItem }) {
       <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-4 xl:px-0 xl:py-6 gap-4 md:gap-8 bg-white">
         <div className="flex justify-between items-center">
           <Link to="/">
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" className="w-[200px] md:w-full" />
           </Link>
-          <Link to="/cart" className="flex flex-row md:hidden items-center">
+          <Link
+            to="/cart"
+            className="flex flex-row md:hidden items-center"
+            aria-label="View your Shopping Cart"
+          >
             <div className="relative">
               <FontAwesomeIcon icon={faCartPlus} className="text-[#5E17EB]" />
               {totalItem > 0 && (
@@ -113,7 +113,7 @@ function Header({ totalItem }) {
               placeholder="Search Product"
             />
             {dropdownVisible && (
-              <div className="absolute z-50 top-[50px] w-[347px] bg-white border rounded-xl p-4 flex flex-col">
+              <div className="absolute z-50 top-[50px] w-full md:w-[347px] bg-white border rounded-xl p-4 flex flex-col">
                 {products.slice(0, 4).map((product) => (
                   <Link
                     to={`/product/${product.id}`}
@@ -125,12 +125,6 @@ function Header({ totalItem }) {
                 ))}
               </div>
             )}
-            <button className="svg-size absolute top-[6px] right-4">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="text-[#5E17EB]"
-              />
-            </button>
           </div>
           <Link to="/cart" className="hidden md:flex flex-row items-center">
             <div className="relative">

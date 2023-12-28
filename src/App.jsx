@@ -1,75 +1,109 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./features/home/Home";
-import AppLayout from "./ui/AppLayout";
-import Cart from "./features/cart/Cart";
-import Order from "./features/order/Order";
-import Checkout from "./features/checkout/Checkout";
-import Product from "./features/product/Product";
-import ProductListPage from "./features/product/ProductListPage";
-// import Profile, { loader as profileDataLoader } from "./features/user/Profile";
-import Profile from "./features/user/Profile";
-import ProtectedRoute from "./features/auth/ProtectedRoute";
-import SignIn from "./features/auth/SignIn";
-import SignUp from "./features/auth/SignUp";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { UserProvider } from "./contexts/user/UserContext";
+import { ProductProvider } from "./contexts/product/ProductContext";
+import { OrderProvider } from "./contexts/order/OrderContext";
+import { dbFirestore, auth } from "./firebase.config";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import AdminLayout from "./ui/AdminLayout";
+import UserLayout from "./ui/UserLayout";
+import Home from "./pages/user/home/Home";
+import Cart from "./pages/user/cart/Cart";
+import Checkout from "./pages/user/checkout/Checkout";
+import Product from "./pages/user/product/Product";
+import ProductListPage from "./pages/user/product/ProductListPage";
+import Profile from "./pages/user/user/Profile";
+import ProtectedRoute from "./pages/user/auth/ProtectedRoute";
+import SignIn from "./pages/user/auth/SignIn";
+import SignUp from "./pages/user/auth/SignUp";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+import Order from "./pages/admin/order/Order";
+import ProductAdmin from "./pages/admin/product/ProductAdmin";
+import User from "./pages/admin/user/User";
+import Report from "./pages/admin/report/Report";
+import NotFoundPage from "./ui/NotFoundPage";
+import Spinner from "./ui/Spinner";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      element: <AppLayout />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/cart",
-          element: (
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/order",
-          element: <Order />,
-        },
-        {
-          path: "/checkout",
-          element: (
-            <ProtectedRoute>
-              <Checkout />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/product/:productId",
-          element: <Product />,
-        },
-        {
-          path: "/productList/:type/:productType",
-          element: <ProductListPage />,
-        },
-        {
-          path: "/profile",
-          element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          ),
-          // loader: profileDataLoader,
-        },
-        {
-          path: "/signUp",
-          element: <SignUp />,
-        },
-        {
-          path: "/signIn",
-          element: <SignIn />,
-        },
-      ],
-    },
-  ]);
-  return <RouterProvider router={router} />;
+  const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(dbFirestore, "users", user.uid);
+        const data = await getDoc(userRef);
+        const userData = data.data();
+        setRole(userData.role);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+  const handleUser = () => {
+    setRole(null);
+  };
+  if (loading) {
+    return <Spinner fullScreenSpinner={true} />;
+  }
+  return (
+    <OrderProvider>
+      <ProductProvider>
+        <UserProvider>
+          <Router>
+            <Routes>
+              {role === "admin" ? (
+                <Route element={<AdminLayout handleUser={handleUser} />}>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/admin/order" element={<Order />} />
+                  <Route path="/admin/product" element={<ProductAdmin />} />
+                  <Route path="/admin/user" element={<User />} />
+                  <Route path="/admin/report" element={<Report />} />
+                  <Route path="/*" element={<NotFoundPage />} />
+                </Route>
+              ) : (
+                <Route element={<UserLayout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route
+                    path="/cart"
+                    element={
+                      <ProtectedRoute>
+                        <Cart />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/checkout"
+                    element={
+                      <ProtectedRoute>
+                        <Checkout />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/product/:productId" element={<Product />} />
+                  <Route
+                    path="/productList/:type/:productType"
+                    element={<ProductListPage />}
+                  />
+                  <Route path="/signUp" element={<SignUp />} />
+                  <Route path="/signIn" element={<SignIn />} />
+                  <Route path="/*" element={<NotFoundPage />} />
+                </Route>
+              )}
+            </Routes>
+          </Router>
+        </UserProvider>
+      </ProductProvider>
+    </OrderProvider>
+  );
 }
 
 export default App;
