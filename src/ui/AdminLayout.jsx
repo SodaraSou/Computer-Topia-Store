@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../admin/components/Sidebar";
-import Header from "../admin/components/Header";
-import BottomNavbar from "../admin/components/BottomNavbar";
+import Sidebar from "./Sidebar";
+import Header from "./AdminHeader";
+import BottomNavbar from "./BottomNavbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

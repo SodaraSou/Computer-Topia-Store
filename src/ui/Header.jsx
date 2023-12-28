@@ -2,19 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartPlus,
-  faUser,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faUser } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faInstagram,
   faTelegram,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { setDropdownVisible, setQuery } from "../user/features/home/homeslice";
-import Logo from "../user/assets/img/Logo 240 x 56.webp";
+import { setDropdownVisible, setQuery } from "../pages/user/home/homeslice";
+import Logo from "../assets/img/Logo 240 x 56.webp";
 
 function Header({ totalItem }) {
   const dispatch = useDispatch();
@@ -108,7 +104,7 @@ function Header({ totalItem }) {
           </Link>
         </div>
         <div className="flex items-center gap-4 text-lg">
-          <div className="w-full" ref={searchBoxRef}>
+          <div className="relative w-full" ref={searchBoxRef}>
             <input
               type="text"
               onFocus={handleFocus}
@@ -117,7 +113,7 @@ function Header({ totalItem }) {
               placeholder="Search Product"
             />
             {dropdownVisible && (
-              <div className="absolute z-50 top-[50px] w-[347px] bg-white border rounded-xl p-4 flex flex-col">
+              <div className="absolute z-50 top-[50px] w-full md:w-[347px] bg-white border rounded-xl p-4 flex flex-col">
                 {products.slice(0, 4).map((product) => (
                   <Link
                     to={`/product/${product.id}`}

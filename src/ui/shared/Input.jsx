@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ShowPassword from "../../user/assets/svg/eye-solid.svg";
-import HidePassword from "../../user/assets/svg/eye-slash-solid.svg";
+import ShowPassword from "../../assets/svg/eye-solid.svg";
+import HidePassword from "../../assets/svg/eye-slash-solid.svg";
 
 function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
   const isPasswordInput = type === "password";
@@ -45,3 +45,26 @@ function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
 }
 
 export default Input;
+
+// function Input({ Svg, placeholder, customClass }) {
+//   const defaultClass = "relative flex";
+//   const inputClass = customClass
+//     ? `${defaultClass} ${customClass}`
+//     : defaultClass;
+//   return (
+//     <div className={inputClass}>
+//       <input
+//         type="text"
+//         placeholder={placeholder}
+//         className="w-full rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
+//       />
+//       {Svg !== undefined && (
+//         <button className="svg-size absolute top-[13px] right-3">
+//           <img src={Svg} alt="svg" className="svg-size" />
+//         </button>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Input;
