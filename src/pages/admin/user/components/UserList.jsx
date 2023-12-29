@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { sortOrder } from "../../../../contexts/order/OrderAction";
+import { sortUser } from "../../../../contexts/user/UserAction";
 import Pagination from "../../../../ui/shared/Pagination";
 import DropdownButton from "../../../../ui/shared/DropdownButton";
 
-function OrderList({ orderList, listTitle }) {
-  const dropdownContent = [
-    { id: 1, type: "Highest Price" },
-    { id: 2, type: "Lowest Price" },
-    { id: 3, type: "Pending" },
-    { id: 4, type: "Approved" },
-    { id: 5, type: "Cancelled" },
-    { id: 6, type: "Shipping" },
-    { id: 7, type: "Complete" },
-  ];
+function UserList({ userList }) {
+  const dropdownContent = [{ id: 1, type: "A-Z" }];
   const [selectedType, setSelectedType] = useState(null);
   const [sortedList, setSortedList] = useState(null);
-  const [orders, setOrders] = useState([]);
+  const [users, setUsers] = useState([]);
   const [query, setQuery] = useState("");
   useEffect(() => {
-    setOrders(orderList);
-  }, [orderList]);
+    setUsers(userList);
+  }, [userList]);
   const handleTypeSelect = (type) => {
     setQuery("");
     setSelectedType(type);
-    const filterList = sortOrder(orderList, type);
+    const filterList = sortUser(userList);
     setSortedList(filterList);
   };
   const onChange = (e) => {
@@ -35,12 +27,13 @@ function OrderList({ orderList, listTitle }) {
   };
   const handleQuery = (newQuery) => {
     if (query !== "") {
-      const queryOrder = orderList.filter((order) => {
-        return order.id
+      const queryUser = userList.filter((user) => {
+        console.log(user.data.username);
+        return user.data.username
           .toLocaleLowerCase()
           .includes(newQuery.toLocaleLowerCase());
       });
-      setOrders(queryOrder);
+      setUsers(queryUser);
     }
   };
   return (
@@ -55,7 +48,7 @@ function OrderList({ orderList, listTitle }) {
         <div className="mb-4 md:mb-0">
           <button onClick={() => setSelectedType(null)}>
             <h1 className="text-2xl md:text-4xl font-bold">
-              {selectedType ? selectedType : listTitle}
+              {selectedType ? selectedType : "User List"}
             </h1>
           </button>
         </div>
@@ -65,7 +58,7 @@ function OrderList({ orderList, listTitle }) {
             value={query}
             onChange={onChange}
             className="w-full md:w-[347px] h-[40px] rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
-            placeholder="Search Order By ID"
+            placeholder="Search User"
           />
           <DropdownButton
             dropdownContent={dropdownContent}
@@ -75,19 +68,12 @@ function OrderList({ orderList, listTitle }) {
           </DropdownButton>
         </div>
       </div>
-      <div className="hidden xl:grid grid-cols-8 gap-4 bg-white text-sm">
-        <div className="p-4 font-semibold w-full xl:col-span-2">ORDER ID</div>
-        <div className="p-4 font-semibold w-full xl:col-span-2">ORDER AT</div>
-        <div className="p-4 font-semibold w-full">STATUS</div>
-        <div className="p-4 font-semibold w-full">CHECKOUT</div>
-        <div className="p-4 font-semibold w-full xl:col-span-2">ACTION</div>
-      </div>
       <Pagination
-        listItem={selectedType ? sortedList : orders}
-        listType="Order"
+        listItem={selectedType ? sortedList : users}
+        listType="User"
       />
     </motion.div>
   );
 }
 
-export default OrderList;
+export default UserList;

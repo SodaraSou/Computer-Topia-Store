@@ -25,7 +25,7 @@ function AdminLayout({ handleUser }) {
           isSidebarOpen ? "w-full xl:ml-[230px] " : "flex-grow"
         }`}
       >
-        <Header onClick={toggleSidebar} />
+        <Header onClick={toggleSidebar} handleUser={handleUser} />
         <Outlet />
       </main>
       <BottomNavbar />

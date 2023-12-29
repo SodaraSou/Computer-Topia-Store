@@ -43,8 +43,8 @@ function OrderItem({ order, orderId }) {
   };
   return (
     <>
-      <div className="hidden xl:flex gap-4 items-center text-sm xl:text-base">
-        <div className="p-4 w-1/4 flex justify-center">
+      <div className="hidden xl:grid grid-cols-8 gap-4 items-center text-sm xl:text-base">
+        <div className="p-4 w-full xl:col-span-2">
           <button
             onClick={handleViewOrder}
             className="hover:underline text-blue-500"
@@ -52,20 +52,18 @@ function OrderItem({ order, orderId }) {
             {orderId}
           </button>
         </div>
-        <div className="p-4 w-1/4 flex justify-center">
+        <div className="p-4 w-full xl:col-span-2">
           {formatDate(order.orderAt.toDate())}
         </div>
-        <div className="p-4 w-1/4 flex justify-center">
+        <div className="p-4 w-full">
           <span
             className={`text-white p-2 md:h-10 text-sm md:text-base rounded-xl inline-block ${statusTagColor}`}
           >
             {order.orderStatus}
           </span>
         </div>
-        <div className="p-4 w-1/4 flex justify-center">
-          {formatCurrency(order.checkoutPrice)}
-        </div>
-        <div className="p-4 w-1/4 flex justify-center gap-4">
+        <div className="p-4 w-full">{formatCurrency(order.checkoutPrice)}</div>
+        <div className="p-4 w-full flex gap-4 xl:col-span-2">
           {order.orderStatus === "Pending" && (
             <>
               <Button

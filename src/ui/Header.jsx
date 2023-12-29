@@ -7,7 +7,6 @@ import {
   faFacebook,
   faInstagram,
   faTelegram,
-  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { setDropdownVisible, setQuery } from "../pages/user/home/homeslice";
 import Logo from "../assets/img/Logo 240 x 56.webp";
@@ -67,7 +66,6 @@ function Header({ totalItem }) {
             <FontAwesomeIcon icon={faFacebook} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faInstagram} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faTelegram} className="text-[#5E17EB]" />
-            <FontAwesomeIcon icon={faXTwitter} className="text-[#5E17EB]" />
           </div>
           <div className="flex items-center gap-4">
             <Link

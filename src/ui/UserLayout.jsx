@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-// import { setLoading, setListProduct } from "../user/features/home/homeslice";
-// import { getAllProduct } from "../services/product.api";
 import { getListItemFromCart } from "../services/order.api";
 import {
   getCartListItem,
@@ -19,18 +17,12 @@ function UserLayout() {
   const dispatch = useDispatch();
   const totalItem = useSelector((state) => state.cart.totalCartItem);
   useEffect(() => {
-    // dispatch(setLoading());
-    // const fetchAllProduct = async () => {
-    //   const data = await getAllProduct();
-    //   dispatch(setListProduct(data));
-    // };
     const unsubscribe = getListItemFromCart((data) => {
       dispatch(getCartListItem(data.items));
       dispatch(setTotalCartItem());
     });
     return () => {
       unsubscribe;
-      // fetchAllProduct();
     };
   }, [dispatch, totalItem]);
   return (

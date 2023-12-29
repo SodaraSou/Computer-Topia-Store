@@ -27,7 +27,7 @@ function Sidebar({ handleUser }) {
         <img src={Logo} alt="Logo" className="hidden md:block" />
       </Link>
       <ul className="flex flex-col gap-10 font-semibold text-xl">
-        <li>
+        {/* <li>
           <Link to="/" className="flex items-center gap-4">
             <FontAwesomeIcon
               icon={faGauge}
@@ -35,7 +35,7 @@ function Sidebar({ handleUser }) {
             />
             <span className="hidden md:block">Dashboard</span>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/admin/product" className="flex items-center gap-4">
             <FontAwesomeIcon icon={faBox} className="text-[#5E17EB] w-5 h-5" />
@@ -58,7 +58,7 @@ function Sidebar({ handleUser }) {
           </Link>
         </li>
         <li>
-          <Link to="/admin/report" className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-4">
             <FontAwesomeIcon
               icon={faFilePen}
               className="text-[#5E17EB] w-5 h-5"

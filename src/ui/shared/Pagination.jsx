@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductTile from "../../pages/admin/product/components/ProductTile";
 import OrderItem from "../../pages/admin/order/components/OrderItem";
+import UserCard from "../../pages/admin/user/components/UserCard";
 
 function Pagination({ listItem, listType }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,20 +15,26 @@ function Pagination({ listItem, listType }) {
   };
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div
+        className={`gap-4 ${
+          listType === "User"
+            ? "grid grid-cols-1 xl:grid-cols-2"
+            : "flex flex-col"
+        }`}
+      >
         {currentItems.length > 0 ? (
           currentItems.map((item) =>
             listType === "Product" ? (
               <ProductTile key={item.id} item={item.data} productId={item.id} />
-            ) : (
-              listType === "Order" && (
-                <OrderItem key={item.id} order={item.data} orderId={item.id} />
-              )
-            )
+            ) : listType === "Order" ? (
+              <OrderItem key={item.id} order={item.data} orderId={item.id} />
+            ) : listType === "User" ? (
+              <UserCard key={item.id} user={item.data} userId={item.id} />
+            ) : null
           )
         ) : (
           <h1 className="text-2xl font-semibold flex justify-center items-center p-10">
-            No Product!
+            No {listType}!
           </h1>
         )}
       </div>

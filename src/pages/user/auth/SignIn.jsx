@@ -36,7 +36,7 @@ function SignIn() {
     const googleLoginStatus = await signInWithGoogle();
     setLoading(false);
     if (googleLoginStatus) {
-      navigate("/profile");
+      navigate("/");
     }
   };
   const [forgetPassword, setForgetPassword] = useState(false);

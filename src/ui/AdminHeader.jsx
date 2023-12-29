@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { signOutUser } from "../contexts/user/UserAction";
 import LogoSvg from "../assets/svg/Logo-40x40.svg";
 
-function AdminHeader({ onClick }) {
+function AdminHeader({ onClick, handleUser }) {
   const navigate = useNavigate();
   const logOut = async () => {
     const response = await signOutUser();
+    handleUser();
     if (response) {
-      navigate("/signin");
+      navigate("/");
     }
   };
   return (

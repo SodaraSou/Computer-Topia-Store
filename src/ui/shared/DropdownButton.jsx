@@ -102,7 +102,7 @@ function DropdownButton({ children, dropdownContent, onSelect, openModal }) {
         />
       </button>
       {isOpen && (
-        <div className="p-2 w-[150px] absolute z-10 top-full right-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
+        <div className="p-2 w-full absolute z-10 top-full right-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
           <ul>
             {dropdownContent.map((item) => (
               <li key={item.id}>

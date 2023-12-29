@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import {
   calcTotalStatus,
-  getCompletedOrderList,
   getOrderList,
 } from "../../../contexts/order/OrderAction";
+import { formatCurrency } from "../../../utils/helpers";
 import OrderContext from "../../../contexts/order/OrderContext";
 import OrderList from "./components/OrderList";
 import Spinner from "../../../ui/Spinner";
-import { formatCurrency } from "../../../utils/helpers";
 
 function Order() {
   const { dispatch, loading, orderList, order, orderId, openOrder } =
@@ -23,12 +22,8 @@ function Order() {
       setTotalMoney(totalMoney);
       setTotalOrder(totalOrdered);
     });
-    const unsubscribeOrderHistoryList = getCompletedOrderList((data) => {
-      dispatch({ type: "SET_ORDER_HISTORY_LIST", payload: data });
-    });
     return () => {
       unsubscribeOrderList();
-      unsubscribeOrderHistoryList();
     };
   }, [dispatch]);
   if (loading) {
