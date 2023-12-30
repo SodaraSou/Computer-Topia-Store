@@ -68,14 +68,14 @@ function OrderItem({ order, orderId }) {
             <>
               <Button
                 onClick={handleApproval}
-                customClass="bg-green-500 flex gap-2 justify-center items-center"
+                customClass="bg-green-500 flex gap-2 justify-center items-center text-sm"
               >
                 Approve{" "}
                 <FontAwesomeIcon icon={faCircleCheck} className="w-5 h-5" />
               </Button>
               <Button
                 onClick={handleDenied}
-                customClass="bg-red-500 flex gap-2 justify-center items-center"
+                customClass="bg-red-500 flex gap-2 justify-center items-center text-sm"
               >
                 Cancel{" "}
                 <FontAwesomeIcon icon={faCircleXmark} className="w-5 h-5" />
@@ -85,7 +85,7 @@ function OrderItem({ order, orderId }) {
           {order.orderStatus === "Approved" && (
             <Button
               onClick={handleShipping}
-              customClass="bg-blue-500 flex gap-2 justify-center items-center"
+              customClass="bg-blue-500 flex gap-2 justify-center items-center text-sm"
             >
               Ship <FontAwesomeIcon icon={faTruckFast} className="w-5 h-5" />
             </Button>
@@ -126,12 +126,12 @@ function OrderItem({ order, orderId }) {
         <div className="flex gap-2 justify-end mt-4">
           {order.orderStatus === "Pending" && (
             <>
-              <Button customClass="bg-green-500">Approve</Button>
-              <Button customClass="bg-red-500">Cancel</Button>
+              <Button customClass="bg-green-500 text-sm">Approve</Button>
+              <Button customClass="bg-red-500 text-sm">Cancel</Button>
             </>
           )}
           {order.orderStatus === "Approved" && (
-            <Button customClass="bg-blue-500">Ship</Button>
+            <Button customClass="bg-blue-500 text-sm">Ship</Button>
           )}
         </div>
       </div>

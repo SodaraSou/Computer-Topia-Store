@@ -76,6 +76,7 @@ function ProductList({ title, listProduct }) {
       <Paginaiton
         listItem={selectedType ? sortedList : products}
         listType="Product"
+        query={query}
       />
     </motion.div>
   );

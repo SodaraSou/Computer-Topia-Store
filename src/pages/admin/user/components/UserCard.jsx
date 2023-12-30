@@ -97,7 +97,10 @@ function UserCard({ user, userId }) {
           </div>
         </div>
         <div className="flex justify-end">
-          <Button onClick={() => deleteUser(userId)} customClass="bg-red-500">
+          <Button
+            onClick={() => deleteUser(userId)}
+            customClass="bg-red-500 text-sm md:text-base"
+          >
             Remove
           </Button>
         </div>

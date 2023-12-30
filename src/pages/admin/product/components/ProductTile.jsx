@@ -47,7 +47,7 @@ function ProductTile({ item, productId }) {
               >
                 Edit
               </Button>
-              <Button customClass="bg-red-500" onClick={handleDelete}>
+              <Button customClass="bg-red-500 text-sm md:text-base" onClick={handleDelete}>
                 Delete
               </Button>
             </div>
