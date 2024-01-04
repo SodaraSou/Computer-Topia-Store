@@ -10,7 +10,7 @@ import Spinner from "../../../../ui/Spinner";
 import ProductContext from "../../../../contexts/product/ProductContext";
 
 function LaptopForm({ laptopType, openModal, item, actionType, productId }) {
-  const { dispatch, loading } = useContext(ProductContext);
+  const { productDispatch, loading } = useContext(ProductContext);
   const [inputData, setInputData] = useState({
     brand: item ? item.brand : "",
     type: laptopType,
@@ -65,17 +65,17 @@ function LaptopForm({ laptopType, openModal, item, actionType, productId }) {
   switch (actionType) {
     case "handleAddProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await addProduct(inputData, img);
         openModal(false);
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     case "handleUpdateProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await updateProductById(inputData, img, imgIndex, productId);
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     default:

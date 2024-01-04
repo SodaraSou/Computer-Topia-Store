@@ -11,7 +11,7 @@ import OrderContext from "../../../../contexts/order/OrderContext";
 import Button from "../../../../ui/shared/Button";
 
 function OrderItem({ order, orderId }) {
-  const { dispatch } = useContext(OrderContext);
+  const { orderDispatch } = useContext(OrderContext);
   let statusTagColor = "";
   switch (order.orderStatus) {
     case "Pending":
@@ -37,8 +37,8 @@ function OrderItem({ order, orderId }) {
     changeOrderStatus(orderId, order, "Shipping");
   };
   const handleViewOrder = () => {
-    dispatch({ type: "SET_ORDER", payload: { order, orderId } });
-    dispatch({ type: "SET_MODAL", payload: true });
+    orderDispatch({ type: "SET_ORDER", payload: { order, orderId } });
+    orderDispatch({ type: "SET_MODAL", payload: true });
     window.scrollTo(0, 0);
   };
   return (

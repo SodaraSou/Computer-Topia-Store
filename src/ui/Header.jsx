@@ -11,10 +11,11 @@ import {
 import { setDropdownVisible, setQuery } from "../pages/user/home/homeslice";
 import Logo from "../assets/img/Logo 240 x 56.webp";
 
-function Header({ totalItem }) {
+function Header() {
   const dispatch = useDispatch();
   const searchBoxRef = useRef();
   const productList = useSelector((state) => state.home.listProduct);
+  const totalItem = useSelector((state) => state.cart.totalCartItem);
   const dropdownVisible = useSelector((state) => state.home.dropdownVisible);
   const query = useSelector((state) => state.home.query);
   const [products, setProducts] = useState([]);
@@ -106,21 +107,26 @@ function Header({ totalItem }) {
             <input
               type="text"
               onFocus={handleFocus}
+              value={query}
               onChange={onChange}
               className="w-full md:w-[347px] h-[38px] bg-[#EAECF6] rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
               placeholder="Search Product"
             />
             {dropdownVisible && (
               <div className="absolute z-50 top-[50px] w-full md:w-[347px] bg-white border rounded-xl p-4 flex flex-col">
-                {products.slice(0, 4).map((product) => (
-                  <Link
-                    to={`/product/${product.id}`}
-                    key={product.id}
-                    className="p-4"
-                  >
-                    {product.data.model}
-                  </Link>
-                ))}
+                {products.length !== 0 ? (
+                  products.slice(0, 4).map((product) => (
+                    <Link
+                      to={`/product/${product.id}`}
+                      key={product.id}
+                      className="p-4"
+                    >
+                      {product.data.model}
+                    </Link>
+                  ))
+                ) : (
+                  <p className="text-center">No Product Found</p>
+                )}
               </div>
             )}
           </div>

@@ -9,7 +9,7 @@ import PSU from "../../../../assets/img/psu.webp";
 import CASE from "../../../../assets/img/computer.webp";
 import MONITOR from "../../../../assets/img/television.webp";
 
-function HardwareTypeNavbar() {
+function HardwareTypeSidebar() {
   const hardwareType = [
     {
       id: 1,
@@ -58,7 +58,7 @@ function HardwareTypeNavbar() {
     },
   ];
   return (
-    <ul className="flex justify-between items-center gap-4">
+    <ul className="sticky top-20 left-0 flex flex-col items-start gap-10">
       {hardwareType.map((hardwareType) => (
         <li key={hardwareType.id}>
           <Link
@@ -83,4 +83,4 @@ function HardwareTypeNavbar() {
   );
 }
 
-export default HardwareTypeNavbar;
+export default HardwareTypeSidebar;

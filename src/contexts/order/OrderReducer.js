@@ -28,6 +28,17 @@ const OrderReducer = (state, action) => {
         order: action.payload.order,
         orderId: action.payload.orderId,
       };
+    case "SET_TOTAL":
+      return {
+        ...state,
+        totalOrder: action.payload.totalOrdered,
+        totalRevenue: action.payload.totalRevenue,
+      };
+    case "SET_MONTHLY_ORDER":
+      return {
+        ...state,
+        monthlyOrders: action.payload,
+      };
     default:
       return state;
   }

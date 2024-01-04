@@ -16,7 +16,7 @@ function PCHardwareForm({
   actionType,
   productId,
 }) {
-  const { dispatch, loading } = useContext(ProductContext);
+  const { productDispatch, loading } = useContext(ProductContext);
   const [selectedValue, setSelectedValue] = useState(
     actionType === "handleUpdateProduct" ? item.hardwareType : "CPU"
   );
@@ -331,22 +331,22 @@ function PCHardwareForm({
   switch (actionType) {
     case "handleAddProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await addProduct(productData[selectedValue], img);
         openModal(false);
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     case "handleUpdateProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await updateProductById(
           productData[selectedValue],
           img,
           imgIndex,
           productId
         );
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     default:

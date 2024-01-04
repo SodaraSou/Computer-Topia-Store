@@ -8,9 +8,9 @@ function ProductItem({ item, id }) {
   return (
     <Link
       to={`/product/${id}`}
-      className="w-full bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col"
+      className="w-full bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col card"
     >
-      <div className="">
+      <div className="overflow-hidden">
         <img
           src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}
           alt="stock_img"

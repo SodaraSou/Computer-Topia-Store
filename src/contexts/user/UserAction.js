@@ -6,7 +6,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { ref } from "firebase/storage";
+import { ref, deleteObject } from "firebase/storage";
 import { auth, dbFirestore, storage } from "../../firebase.config";
 import { toast } from "react-toastify";
 
@@ -40,12 +40,14 @@ export const getAllUser = (callback) => {
     userCollRef,
     (docSnap) => {
       const list = [];
-      docSnap.forEach((item) =>
-        list.push({
-          id: item.id,
-          data: item.data(),
-        })
-      );
+      docSnap.forEach((item) => {
+        if (item.data().role !== "admin") {
+          list.push({
+            id: item.id,
+            data: item.data(),
+          });
+        }
+      });
       callback(list);
     },
     (error) => {

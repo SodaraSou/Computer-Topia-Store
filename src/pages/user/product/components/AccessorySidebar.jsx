@@ -1,7 +1,7 @@
 import { Link } from "react-scroll";
 import Router from "../../../../assets/img/wifi-router.png";
 
-function AccessoryNavbar() {
+function AccessorySidebar() {
   const accessoriesType = [
     {
       name: "Router",
@@ -9,7 +9,7 @@ function AccessoryNavbar() {
     },
   ];
   return (
-    <ul className="flex justify-between items-center gap-4">
+    <ul className="sticky top-20 left-0 flex flex-col items-start gap-10">
       {accessoriesType.map((accessoriesType, index) => (
         <li key={index}>
           <Link
@@ -34,4 +34,4 @@ function AccessoryNavbar() {
   );
 }
 
-export default AccessoryNavbar;
+export default AccessorySidebar;

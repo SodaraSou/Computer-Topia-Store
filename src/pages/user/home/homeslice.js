@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   query: "",
   dropdownVisible: false,
+  openMenu: false,
 };
 
 const homeSlice = createSlice({
@@ -25,10 +26,18 @@ const homeSlice = createSlice({
     setQuery: (state, action) => {
       state.query = action.payload;
     },
+    setOpenMenu: (state, action) => {
+      state.openMenu = action.payload;
+    },
   },
 });
 
-export const { setListProduct, setLoading, setDropdownVisible, setQuery } =
-  homeSlice.actions;
+export const {
+  setListProduct,
+  setLoading,
+  setDropdownVisible,
+  setQuery,
+  setOpenMenu,
+} = homeSlice.actions;
 
 export default homeSlice.reducer;

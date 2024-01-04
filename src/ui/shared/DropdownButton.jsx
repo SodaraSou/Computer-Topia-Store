@@ -91,7 +91,7 @@ function DropdownButton({ children, dropdownContent, onSelect, openModal }) {
     <div className="relative inline-block" ref={buttonRef}>
       <button
         onClick={toggleDropdown}
-        className="p-2 md:h-10 md:w-32 text-sm md:text-base bg-[#5E17EB] text-white font-semibold flex justify-center items-center gap-2 rounded-xl"
+        className="p-2 md:h-10 text-sm md:text-base bg-[#5E17EB] text-white font-semibold flex justify-center items-center gap-2 rounded-xl"
       >
         {children}
         <FontAwesomeIcon
@@ -102,7 +102,7 @@ function DropdownButton({ children, dropdownContent, onSelect, openModal }) {
         />
       </button>
       {isOpen && (
-        <div className="p-2 w-full absolute z-10 top-full right-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
+        <div className="p-2 w-[150px] absolute z-10 top-full right-0 mt-2 bg-[#EAECF6]  border border-gray-300 rounded-lg shadow-lg">
           <ul>
             {dropdownContent.map((item) => (
               <li key={item.id}>

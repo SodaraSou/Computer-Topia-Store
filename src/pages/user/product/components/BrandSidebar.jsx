@@ -9,7 +9,7 @@ import DELL from "../../../../assets/img/DELL.webp";
 import GIGABYTE from "../../../../assets/img/GIGABYTE.webp";
 import APPLE from "../../../../assets/img/APPLE.webp";
 
-function BrandNavbar() {
+function BrandSidebar() {
   const brand = [
     {
       id: 0,
@@ -58,7 +58,7 @@ function BrandNavbar() {
     },
   ];
   return (
-    <ul className="flex justify-between items-center gap-4">
+    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 ">
       {brand.map((brand) => (
         <li key={brand.id}>
           <Link
@@ -69,7 +69,7 @@ function BrandNavbar() {
             offset={-90}
             duration={500}
           >
-            <img src={brand.img} alt="hardware_type" />
+            <img src={brand.img} alt="hardware_type" className="w-full" />
           </Link>
         </li>
       ))}
@@ -77,4 +77,4 @@ function BrandNavbar() {
   );
 }
 
-export default BrandNavbar;
+export default BrandSidebar;

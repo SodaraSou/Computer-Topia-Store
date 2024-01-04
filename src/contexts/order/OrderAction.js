@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { dbFirestore } from "../../firebase.config";
 import { toast } from "react-toastify";
+import { formatDate } from "../../utils/helpers";
 
 export const getOrderList = (callback) => {
   const orderRef = collection(dbFirestore, "order");
@@ -68,11 +69,120 @@ export const changeOrderStatus = async (orderId, order, orderStatus) => {
 };
 
 export const calcTotalStatus = (orderList) => {
-  const totalOrdered = orderList.length;
-  const totalMoney = orderList.reduce((sum, order) => {
+  const today = new Date();
+  const formatToday = formatDate(new Date());
+
+  const currentDay = today.getDay();
+  const daysSinceMonday = currentDay === 0 ? 6 : currentDay - 1;
+  const oneWeekAgoMonday = formatDate(
+    new Date(today.getTime() - daysSinceMonday * 24 * 60 * 60 * 1000)
+  );
+
+  const weeklyOrders = orderList.filter((order) => {
+    const orderData = formatDate(order.data.orderAt.toDate());
+    return orderData >= oneWeekAgoMonday && orderData <= formatToday;
+  });
+
+  const totalOrdered = weeklyOrders.length;
+  const totalRevenue = weeklyOrders.reduce((sum, order) => {
     return (sum += order.data.checkoutPrice);
   }, 0);
-  return { totalMoney, totalOrdered };
+
+  return { totalRevenue, totalOrdered };
+};
+
+// export const calcTotalOrderMonthly = (orderList) => {
+//   const monthlyOrders = {};
+//   orderList.forEach((order) => {
+//     const orderDate = new Date(order.data.orderAt.toDate());
+//     const year = orderDate.getFullYear();
+//     const month = orderDate.getMonth() + 1;
+//     const monthKey = `${year}-${month < 10 ? "0" : ""}${month}`;
+//     if (!monthlyOrders[monthKey]) {
+//       monthlyOrders[monthKey] = 0;
+//     }
+//     monthlyOrders[monthKey]++;
+//   });
+
+//   return monthlyOrders;
+// };
+
+// export const calcTotalOrderMonthly = (orderList) => {
+//   const monthlyOrders = {};
+
+//   // Filter orderList to consider only orders from the year 2024
+//   const orders2024 = orderList.filter((order) => {
+//     const orderDate = new Date(order.data.orderAt.toDate());
+//     return orderDate.getFullYear() === 2024;
+//   });
+
+//   orders2024.forEach((order) => {
+//     const orderDate = new Date(order.data.orderAt.toDate());
+//     const year = orderDate.getFullYear();
+//     const month = orderDate.getMonth() + 1;
+//     const monthKey = `${year}-${month < 10 ? "0" : ""}${month}`;
+
+//     // Initialize the month if it doesn't exist in the object
+//     if (!monthlyOrders[monthKey]) {
+//       monthlyOrders[monthKey] = 0;
+//     }
+//     monthlyOrders[monthKey]++;
+//   });
+
+//   // Fill in missing months with zero values for the year 2024
+//   for (let i = 1; i <= 12; i++) {
+//     const monthKey = `2024-${i < 10 ? "0" : ""}${i}`;
+//     if (!monthlyOrders[monthKey]) {
+//       monthlyOrders[monthKey] = 0;
+//     }
+//   }
+
+//   return monthlyOrders;
+// };
+
+export const calcTotalOrderMonthly = (orderList) => {
+  const monthlyOrders = {
+    January: 0,
+    February: 0,
+    March: 0,
+    April: 0,
+    May: 0,
+    June: 0,
+    July: 0,
+    August: 0,
+    September: 0,
+    October: 0,
+    November: 0,
+    December: 0,
+  };
+
+  const orders2024 = orderList.filter((order) => {
+    const orderDate = new Date(order.data.orderAt.toDate());
+    return orderDate.getFullYear() === 2024;
+  });
+
+  orders2024.forEach((order) => {
+    const orderDate = new Date(order.data.orderAt.toDate());
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const monthName = monthNames[orderDate.getMonth()];
+    monthlyOrders[monthName]++;
+  });
+
+  console.log(monthlyOrders);
+  return monthlyOrders;
 };
 
 export const sortOrder = (orderList, type) => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import ProductTile from "../../pages/admin/product/components/ProductTile";
 import OrderItem from "../../pages/admin/order/components/OrderItem";
+import NewOrderItem from "../../pages/admin/Dashboard/components/NewOrderItem";
 import UserCard from "../../pages/admin/user/components/UserCard";
 
 function Pagination({ listItem, listType, query }) {
@@ -54,6 +55,8 @@ function Pagination({ listItem, listType, query }) {
               <OrderItem key={item.id} order={item.data} orderId={item.id} />
             ) : listType === "User" ? (
               <UserCard key={item.id} user={item.data} userId={item.id} />
+            ) : listType === "NewOrder" ? (
+              <NewOrderItem key={item.id} order={item.data} orderId={item.id} />
             ) : null
           )
         ) : (
@@ -94,7 +97,7 @@ function Pagination({ listItem, listType, query }) {
           variant="text"
           className="flex items-center gap-2"
           onClick={next}
-          disabled={active === 5}
+          disabled={active === totalPages || totalPages === 0}
           style={{
             backgroundColor: "transparent",
             color: "#5E17EB",

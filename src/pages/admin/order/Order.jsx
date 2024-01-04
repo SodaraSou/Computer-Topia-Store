@@ -1,34 +1,30 @@
-import { useContext, useEffect, useState } from "react";
-import {
-  calcTotalStatus,
-  getOrderList,
-} from "../../../contexts/order/OrderAction";
+import { useContext, useEffect } from "react";
+// import {
+//   calcTotalStatus,
+//   getOrderList,
+// } from "../../../contexts/order/OrderAction";
 import { formatCurrency } from "../../../utils/helpers";
 import OrderContext from "../../../contexts/order/OrderContext";
 import OrderList from "./components/OrderList";
-import Spinner from "../../../ui/Spinner";
+// import Spinner from "../../../ui/Spinner";
 
 function Order() {
-  const { dispatch, loading, orderList, order, orderId, openOrder } =
-    useContext(OrderContext);
-  const [totalMoney, setTotalMoney] = useState();
-  const [totalOrder, setTotalOrder] = useState();
-  useEffect(() => {
-    dispatch({ type: "SET_LOADING" });
-    dispatch({ type: "SET_MODAL", payload: false });
-    const unsubscribeOrderList = getOrderList((data) => {
-      dispatch({ type: "SET_ORDER_LIST", payload: data });
-      const { totalMoney, totalOrdered } = calcTotalStatus(data);
-      setTotalMoney(totalMoney);
-      setTotalOrder(totalOrdered);
-    });
-    return () => {
-      unsubscribeOrderList();
-    };
-  }, [dispatch]);
-  if (loading) {
-    return <Spinner fullScreenSpinner={true} />;
-  }
+  const { orderList, order, orderId, openOrder } = useContext(OrderContext);
+  // useEffect(() => {
+  //   orderDispatch({ type: "SET_LOADING" });
+  //   orderDispatch({ type: "SET_MODAL", payload: false });
+  //   const unsubscribeOrderList = getOrderList((data) => {
+  //     orderDispatch({ type: "SET_ORDER_LIST", payload: data });
+  //     const { totalMoney, totalOrdered } = calcTotalStatus(data);
+  //     orderDispatch({ type: "SET_TOTAL_ORDER", payload: totalOrdered });
+  //   });
+  //   return () => {
+  //     unsubscribeOrderList();
+  //   };
+  // }, [orderDispatch]);
+  // if (loading) {
+  //   return <Spinner fullScreenSpinner={true} />;
+  // }
   return (
     <section className="p-4 md:p-10">
       <div className="flex justify-between mb-4 md:mb-10">

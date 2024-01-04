@@ -6,7 +6,7 @@ import Headphone from "../../../../assets/img/headphones.webp";
 import Microphone from "../../../../assets/img/mic.webp";
 import Webcam from "../../../../assets/img/web-camera.png";
 
-function PeripheralNavbar() {
+function PeripheralSidebar() {
   const peripheralType = [
     {
       name: "Headphone",
@@ -34,7 +34,7 @@ function PeripheralNavbar() {
     },
   ];
   return (
-    <ul className="flex justify-between items-center gap-4">
+    <ul className="sticky top-20 left-0 flex flex-col items-start gap-10">
       {peripheralType.map((peripheralType, index) => (
         <li key={index}>
           <Link
@@ -59,4 +59,4 @@ function PeripheralNavbar() {
   );
 }
 
-export default PeripheralNavbar;
+export default PeripheralSidebar;

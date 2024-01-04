@@ -17,11 +17,10 @@ import Profile from "./pages/user/user/Profile";
 import ProtectedRoute from "./pages/user/auth/ProtectedRoute";
 import SignIn from "./pages/user/auth/SignIn";
 import SignUp from "./pages/user/auth/SignUp";
-import Dashboard from "./pages/admin/dashboard/Dashboard";
 import Order from "./pages/admin/order/Order";
 import ProductAdmin from "./pages/admin/product/ProductAdmin";
 import User from "./pages/admin/user/User";
-import Report from "./pages/admin/report/Report";
+import Dashboard from "./pages/admin/Dashboard/Dashboard";
 import NotFoundPage from "./ui/NotFoundPage";
 import Spinner from "./ui/Spinner";
 
@@ -54,11 +53,10 @@ function App() {
             <Routes>
               {role === "admin" ? (
                 <Route element={<AdminLayout handleUser={handleUser} />}>
+                  <Route path="/order" element={<Order />} />
+                  <Route path="/product" element={<ProductAdmin />} />
+                  <Route path="/user" element={<User />} />
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/admin/order" element={<Order />} />
-                  <Route path="/admin/product" element={<ProductAdmin />} />
-                  <Route path="/admin/user" element={<User />} />
-                  <Route path="/admin/report" element={<Report />} />
                   <Route path="/*" element={<NotFoundPage />} />
                 </Route>
               ) : (

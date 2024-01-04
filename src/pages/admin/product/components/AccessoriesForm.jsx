@@ -16,7 +16,7 @@ function AccessoriesForm({
   productId,
   item,
 }) {
-  const { dispatch, loading } = useContext(ProductContext);
+  const { productDispatch, loading } = useContext(ProductContext);
   const [productData, setProductData] = useState({
     model: item ? item.model : "",
     brand: item ? item.brand : "",
@@ -62,17 +62,17 @@ function AccessoriesForm({
   switch (actionType) {
     case "handleAddProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await addProduct(productData, img);
         openModal(false);
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     case "handleUpdateProduct":
       onClick = async () => {
-        dispatch({ type: "SET_LOADING" });
+        productDispatch({ type: "SET_LOADING" });
         await updateProductById(productData, img, imgIndex, productId);
-        dispatch({ type: "SET_LOADING_FALSE" });
+        productDispatch({ type: "SET_LOADING_FALSE" });
       };
       break;
     default:
