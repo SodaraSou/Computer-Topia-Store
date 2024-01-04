@@ -2,24 +2,20 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCartPlus,
-  faUser,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faUser } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faInstagram,
   faTelegram,
-  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { setDropdownVisible, setQuery } from "../user/features/home/homeslice";
-import Logo from "../user/assets/img/Logo 240 x 56.webp";
+import { setDropdownVisible, setQuery } from "../pages/user/home/homeslice";
+import Logo from "../assets/img/Logo 240 x 56.webp";
 
-function Header({ totalItem }) {
+function Header() {
   const dispatch = useDispatch();
   const searchBoxRef = useRef();
   const productList = useSelector((state) => state.home.listProduct);
+  const totalItem = useSelector((state) => state.cart.totalCartItem);
   const dropdownVisible = useSelector((state) => state.home.dropdownVisible);
   const query = useSelector((state) => state.home.query);
   const [products, setProducts] = useState([]);
@@ -71,7 +67,6 @@ function Header({ totalItem }) {
             <FontAwesomeIcon icon={faFacebook} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faInstagram} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faTelegram} className="text-[#5E17EB]" />
-            <FontAwesomeIcon icon={faXTwitter} className="text-[#5E17EB]" />
           </div>
           <div className="flex items-center gap-4">
             <Link
@@ -108,25 +103,30 @@ function Header({ totalItem }) {
           </Link>
         </div>
         <div className="flex items-center gap-4 text-lg">
-          <div className="w-full" ref={searchBoxRef}>
+          <div className="relative w-full" ref={searchBoxRef}>
             <input
               type="text"
               onFocus={handleFocus}
+              value={query}
               onChange={onChange}
               className="w-full md:w-[347px] h-[38px] bg-[#EAECF6] rounded-xl px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
               placeholder="Search Product"
             />
             {dropdownVisible && (
-              <div className="absolute z-50 top-[50px] w-[347px] bg-white border rounded-xl p-4 flex flex-col">
-                {products.slice(0, 4).map((product) => (
-                  <Link
-                    to={`/product/${product.id}`}
-                    key={product.id}
-                    className="p-4"
-                  >
-                    {product.data.model}
-                  </Link>
-                ))}
+              <div className="absolute z-50 top-[50px] w-full md:w-[347px] bg-white border rounded-xl p-4 flex flex-col">
+                {products.length !== 0 ? (
+                  products.slice(0, 4).map((product) => (
+                    <Link
+                      to={`/product/${product.id}`}
+                      key={product.id}
+                      className="p-4"
+                    >
+                      {product.data.model}
+                    </Link>
+                  ))
+                ) : (
+                  <p className="text-center">No Product Found</p>
+                )}
               </div>
             )}
           </div>

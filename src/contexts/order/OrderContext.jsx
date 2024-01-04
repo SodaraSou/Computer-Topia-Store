@@ -11,11 +11,15 @@ export const OrderProvider = ({ children }) => {
     orderId: "",
     loading: false,
     openOrder: false,
+    totalOrder: 0,
+    totalRevenue: 0,
+    totalIncome: 0,
+    monthlyOrders: {},
   };
-  const [state, dispatch] = useReducer(OrderReducer, initialState);
+  const [state, orderDispatch] = useReducer(OrderReducer, initialState);
 
   return (
-    <OrderContext.Provider value={{ ...state, dispatch }}>
+    <OrderContext.Provider value={{ ...state, orderDispatch }}>
       {children}
     </OrderContext.Provider>
   );

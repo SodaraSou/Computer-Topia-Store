@@ -5,22 +5,30 @@ import {
   query,
   where,
   getDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { dbFirestore } from "../firebase.config";
-// import { toast } from "react-toastify";
 
-export const getAllProduct = async () => {
+export const getAllProduct = (callback) => {
   try {
     const docRef = collection(dbFirestore, "product");
-    const docSnap = await getDocs(docRef);
-    const list = [];
-    docSnap.forEach((item) =>
-      list.push({
-        id: item.id,
-        data: item.data(),
-      })
+    const unsubscribe = onSnapshot(
+      docRef,
+      (docSnap) => {
+        const list = [];
+        docSnap.forEach((item) =>
+          list.push({
+            id: item.id,
+            data: item.data(),
+          })
+        );
+        callback(list);
+      },
+      (error) => {
+        console.log(error);
+      }
     );
-    return list;
+    return unsubscribe;
   } catch (error) {
     console.log(error);
   }

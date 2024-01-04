@@ -9,10 +9,10 @@ export const ProductProvider = ({ children }) => {
     listProduct: [],
     product: {},
   };
-  const [state, dispatch] = useReducer(ProductReducer, initialState);
+  const [state, productDispatch] = useReducer(ProductReducer, initialState);
 
   return (
-    <ProductContext.Provider value={{ ...state, dispatch }}>
+    <ProductContext.Provider value={{ ...state, productDispatch }}>
       {children}
     </ProductContext.Provider>
   );

@@ -1,31 +1,28 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./user/features/home/Home";
-import Cart from "./user/features/cart/Cart";
-import Checkout from "./user/features/checkout/Checkout";
-import Product from "./user/features/product/Product";
-import ProductListPage from "./user/features/product/ProductListPage";
-import Profile from "./user/features/user/Profile";
-import ProtectedRoute from "./user/features/auth/ProtectedRoute";
-import SignIn from "./user/features/auth/SignIn";
-import SignUp from "./user/features/auth/SignUp";
 import { UserProvider } from "./contexts/user/UserContext";
 import { ProductProvider } from "./contexts/product/ProductContext";
 import { OrderProvider } from "./contexts/order/OrderContext";
-
-import Order from "./admin/pages/order/Order";
-import Dashboard from "./admin/pages/dashboard/Dashboard";
-import AdminLayout from "./ui/AdminLayout";
-import UserLayout from "./ui/UserLayout";
-import { dbFirestore } from "./firebase.config";
+import { dbFirestore, auth } from "./firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import Spinner from "./ui/Spinner";
-import { auth } from "./firebase.config";
-import ProductAdmin from "./admin/pages/product/ProductAdmin";
-import User from "./admin/pages/user/User";
-import Report from "./admin/pages/report/Report";
+import AdminLayout from "./ui/AdminLayout";
+import UserLayout from "./ui/UserLayout";
+import Home from "./pages/user/home/Home";
+import Cart from "./pages/user/cart/Cart";
+import Checkout from "./pages/user/checkout/Checkout";
+import Product from "./pages/user/product/Product";
+import ProductListPage from "./pages/user/product/ProductListPage";
+import Profile from "./pages/user/user/Profile";
+import ProtectedRoute from "./pages/user/auth/ProtectedRoute";
+import SignIn from "./pages/user/auth/SignIn";
+import SignUp from "./pages/user/auth/SignUp";
+import Order from "./pages/admin/order/Order";
+import ProductAdmin from "./pages/admin/product/ProductAdmin";
+import User from "./pages/admin/user/User";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
 import NotFoundPage from "./ui/NotFoundPage";
+import Spinner from "./ui/Spinner";
 
 function App() {
   const [role, setRole] = useState(null);
@@ -56,11 +53,10 @@ function App() {
             <Routes>
               {role === "admin" ? (
                 <Route element={<AdminLayout handleUser={handleUser} />}>
+                  <Route path="/order" element={<Order />} />
+                  <Route path="/product" element={<ProductAdmin />} />
+                  <Route path="/user" element={<User />} />
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/admin/order" element={<Order />} />
-                  <Route path="/admin/product" element={<ProductAdmin />} />
-                  <Route path="/admin/user" element={<User />} />
-                  <Route path="/admin/report" element={<Report />} />
                   <Route path="/*" element={<NotFoundPage />} />
                 </Route>
               ) : (

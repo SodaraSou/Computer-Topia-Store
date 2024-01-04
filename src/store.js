@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./user/features/user/userSlice";
-import cartReducer from "./user/features/cart/cartSlice";
-import homeReducer from "./user/features/home/homeslice";
-import productReducer from "./user/features/product/productSlice";
-import checkoutReducer from "./user/features/checkout/checkoutSlice";
+import userReducer from "./pages/user/user/userSlice";
+import cartReducer from "./pages/user/cart/cartSlice";
+import homeReducer from "./pages/user/home/homeslice";
+import productReducer from "./pages/user/product/productSlice";
+import checkoutReducer from "./pages/user/checkout/checkoutSlice";
 
 const store = configureStore({
   reducer: {
