@@ -19,7 +19,7 @@ import SignIn from "./pages/user/auth/SignIn";
 import SignUp from "./pages/user/auth/SignUp";
 import Order from "./pages/admin/order/Order";
 import ProductAdmin from "./pages/admin/product/ProductAdmin";
-import Dashboard from "./pages/admin/Dashboard/Dashboard";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
 import NotFoundPage from "./ui/NotFoundPage";
 import Spinner from "./ui/Spinner";
 
