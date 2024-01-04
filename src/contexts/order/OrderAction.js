@@ -70,25 +70,24 @@ export const changeOrderStatus = async (orderId, order, orderStatus) => {
 
 export const calcTotalStatus = (orderList) => {
   const today = new Date();
-  const formatToday = formatDate(new Date());
-
   const currentDay = today.getDay();
   const daysSinceMonday = currentDay === 0 ? 6 : currentDay - 1;
   const oneWeekAgoMonday = formatDate(
     new Date(today.getTime() - daysSinceMonday * 24 * 60 * 60 * 1000)
   );
-
   const weeklyOrders = orderList.filter((order) => {
-    const orderData = formatDate(order.data.orderAt.toDate());
-    return orderData >= oneWeekAgoMonday && orderData <= formatToday;
+    const orderDate = formatDate(order.data.orderAt.toDate());
+    return orderDate >= oneWeekAgoMonday;
   });
-
   const totalOrdered = weeklyOrders.length;
   const totalRevenue = weeklyOrders.reduce((sum, order) => {
     return (sum += order.data.checkoutPrice);
   }, 0);
-
-  return { totalRevenue, totalOrdered };
+  const totalIncome = weeklyOrders.reduce((sum, order) => {
+    return (sum += order.data.totalIncome);
+  }, 0);
+  console.log(totalIncome);
+  return { totalRevenue, totalOrdered, totalIncome };
 };
 
 // export const calcTotalOrderMonthly = (orderList) => {
@@ -180,8 +179,6 @@ export const calcTotalOrderMonthly = (orderList) => {
     const monthName = monthNames[orderDate.getMonth()];
     monthlyOrders[monthName]++;
   });
-
-  console.log(monthlyOrders);
   return monthlyOrders;
 };
 

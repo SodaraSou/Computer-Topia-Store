@@ -24,6 +24,7 @@ export const addItemToCart = async (
   productId,
   productImg,
   model,
+  buyInPrice,
   price,
   quantity
 ) => {
@@ -34,30 +35,35 @@ export const addItemToCart = async (
       const cartSnapshot = await getDoc(userRef);
       const currentCartData = cartSnapshot.exists()
         ? cartSnapshot.data()
-        : { items: [], totalPrice: 0 };
+        : { items: [], totalPrice: 0, totalIncome: 0 };
       let isItemInCart = false;
       const updatedItems = currentCartData.items.map((item) => {
         if (item.productId === productId) {
           isItemInCart = true;
           const updatedQuantity = item.quantity + quantity;
           const updatedSubTotal = price * updatedQuantity;
+          const updateTest = buyInPrice * updatedQuantity;
           return {
             ...item,
             quantity: updatedQuantity,
             subTotal: updatedSubTotal,
+            test: updateTest,
           };
         }
         return item;
       });
       if (!isItemInCart) {
         const subTotal = price * quantity;
+        const subBuyInTotal = buyInPrice * quantity;
         updatedItems.push({
           productId,
           productImg,
           model,
+          buyInPrice,
           price,
           quantity,
           subTotal,
+          subBuyInTotal,
         });
       }
       const stock = await checkStock(productId);
@@ -71,7 +77,10 @@ export const addItemToCart = async (
         (total, item) => total + item.subTotal,
         0
       );
-      await setDoc(userRef, { items: updatedItems, totalPrice });
+      await setDoc(userRef, {
+        items: updatedItems,
+        totalPrice,
+      });
       toast.success("Add to Cart Success!");
     } else {
       toast.error("Sign In Required!");
@@ -130,10 +139,16 @@ export const getListItemFromCart = async (callback) => {
 export const checkout = async (checkoutList, checkoutPrice) => {
   try {
     const orderRef = collection(dbFirestore, "order");
+    const totalIncome = checkoutList.reduce(
+      (total, item) => total + (item.subTotal - item.subBuyInTotal),
+      0
+    );
+    console.log(totalIncome);
     await addDoc(orderRef, {
       userId: auth.currentUser.uid,
       items: checkoutList,
       checkoutPrice,
+      totalIncome,
       orderStatus: "Pending",
       orderAt: serverTimestamp(),
     });

@@ -13,6 +13,7 @@ export const OrderProvider = ({ children }) => {
     openOrder: false,
     totalOrder: 0,
     totalRevenue: 0,
+    totalIncome: 0,
     monthlyOrders: {},
   };
   const [state, orderDispatch] = useReducer(OrderReducer, initialState);

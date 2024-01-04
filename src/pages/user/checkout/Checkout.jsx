@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { getListItemFromCart, checkout } from "../../../services/order.api";
+import { getListItemFromCart } from "../../../services/order.api";
 import {
   setCheckoutList,
   setTotalCheckoutPrice,

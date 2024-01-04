@@ -26,10 +26,10 @@ function AdminLayout({ handleUser }) {
     setLoading(true);
     const unsubscribeOrderList = getOrderList((data) => {
       orderDispatch({ type: "SET_ORDER_LIST", payload: data });
-      const { totalRevenue, totalOrdered } = calcTotalStatus(data);
+      const { totalRevenue, totalOrdered, totalIncome } = calcTotalStatus(data);
       orderDispatch({
         type: "SET_TOTAL",
-        payload: { totalRevenue, totalOrdered },
+        payload: { totalRevenue, totalOrdered, totalIncome },
       });
       const monthlyOrders = calcTotalOrderMonthly(data);
       orderDispatch({ type: "SET_MONTHLY_ORDER", payload: monthlyOrders });

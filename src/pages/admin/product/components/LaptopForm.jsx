@@ -31,6 +31,7 @@ function LaptopForm({ laptopType, openModal, item, actionType, productId }) {
     weight: item ? item.weight : "",
     color: item ? item.color : [],
     stock: item ? item.stock : 0,
+    buyInPrice: item ? item.buyInPrice : 0,
     price: item ? item.price : 0,
     offer: item ? item.offer : 0,
     warranty: item ? item.warranty : "",
@@ -235,6 +236,13 @@ function LaptopForm({ laptopType, openModal, item, actionType, productId }) {
                   onChange={onChange}
                   id="stock"
                   value={inputData.stock}
+                />
+                <InputGroup
+                  type="text"
+                  title="Buy In Price"
+                  onChange={onChange}
+                  id="buyInPrice"
+                  value={inputData.buyInPrice}
                 />
                 <InputGroup
                   type="text"

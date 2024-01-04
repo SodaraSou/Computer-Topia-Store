@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../../utils/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,14 +13,23 @@ import ProductContext from "../../../contexts/product/ProductContext";
 import UserContext from "../../../contexts/user/UserContext";
 import LineChart from "../../../ui/LineChart";
 import Pagination from "../../../ui/shared/Pagination";
+import Spinner from "../../../ui/Spinner";
 
 function Dashboard() {
-  const { totalOrder, totalRevenue, monthlyOrders, orderList } =
+  const { totalOrder, totalRevenue, monthlyOrders, orderList, totalIncome } =
     useContext(OrderContext);
   const { listProduct } = useContext(ProductContext);
   // const { userList } = useContext(UserContext);
   const categories = Object.keys(monthlyOrders);
   const dataPoints = Object.values(monthlyOrders);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setLoading(false);
+  }, []);
+  if (loading) {
+    return <Spinner fullScreenSpinner={true} />;
+  }
   return (
     <section className="p-4 md:p-10">
       <div className="flex justify-between mb-4 md:mb-10">
@@ -56,7 +65,7 @@ function Dashboard() {
           />
           <div>
             <h1 className="text-2xl md:text-4xl font-bold">
-              {formatCurrency(totalRevenue)}
+              {formatCurrency(totalIncome)}
             </h1>
             <p className="text-sm md:text-base">Total Income Weekly</p>
           </div>

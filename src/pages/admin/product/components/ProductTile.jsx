@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { removeProductById } from "../../../../contexts/product/ProductAction";
 import StockImg from "../../../../assets/img/Computer_Topia_Stock_Img.png";
 import Button from "../../../../ui/shared/Button";
 import FormModal from "./FormModal";
+import ProductContext from "../../../../contexts/product/ProductContext";
 
 function ProductTile({ item, productId }) {
+  const { productDispatch } = useContext(ProductContext);
   const [openModal, setOpenModal] = useState(false);
   const handleModal = (state) => {
     setOpenModal(state);
   };
   const handleDelete = async () => {
+    productDispatch({ type: "SET_LOADING" });
     const response = await removeProductById(productId);
     if (response) {
       setOpenModal(false);
+      productDispatch({ type: "SET_LOADING_FALSE" });
     }
   };
   return (
@@ -47,7 +51,10 @@ function ProductTile({ item, productId }) {
               >
                 Edit
               </Button>
-              <Button customClass="bg-red-500 text-sm md:text-base" onClick={handleDelete}>
+              <Button
+                customClass="bg-red-500 text-sm md:text-base"
+                onClick={handleDelete}
+              >
                 Delete
               </Button>
             </div>

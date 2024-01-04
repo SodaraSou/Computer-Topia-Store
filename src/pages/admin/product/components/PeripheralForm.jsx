@@ -29,6 +29,7 @@ function PeripheralForm({
     description3: item ? item.description3 : "",
     description4: item ? item.description4 : "",
     stock: item ? item.stock : 0,
+    buyInPrice: item ? item.buyInPrice : 0,
     price: item ? item.price : 0,
     offer: item ? item.offer : 0,
     warranty: item ? item.warranty : "",
@@ -153,6 +154,13 @@ function PeripheralForm({
                   onChange={onChange}
                   id="stock"
                   value={productData.stock}
+                />
+                <InputGroup
+                  type="text"
+                  title="Buy In Price"
+                  onChange={onChange}
+                  id="buyInPrice"
+                  value={productData.buyInPrice}
                 />
                 <InputGroup
                   type="text"

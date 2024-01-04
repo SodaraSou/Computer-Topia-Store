@@ -23,6 +23,7 @@ export const addProduct = async (inputData, imgUrls) => {
     const docRef = await addDoc(productsRef, {
       ...inputData,
       stock: parseFloat(inputData.stock),
+      buyInPrice: parseFloat(inputData.buyInPrice),
       price: parseFloat(inputData.price),
       offer: parseFloat(inputData.offer),
       productImgs,
@@ -123,6 +124,7 @@ export const updateProductById = async (
     await updateDoc(productsRef, {
       ...updatedData,
       stock: parseFloat(updatedData.stock),
+      buyInPrice: parseFloat(updatedData.buyInPrice),
       price: parseFloat(updatedData.price),
       offer: parseFloat(updatedData.offer),
       productImgs: existingProductImgs,

@@ -39,11 +39,12 @@ function Product() {
     setQuantity(quantityReturn);
   };
   const addToCart = async () => {
-    const { model, price, productImgs } = product;
+    const { model, price, productImgs, buyInPrice } = product;
     const reponse = await addItemToCart(
       productId,
       productImgs[0],
       model,
+      buyInPrice,
       price,
       quantity
     );

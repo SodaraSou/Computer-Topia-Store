@@ -33,6 +33,7 @@ const OrderReducer = (state, action) => {
         ...state,
         totalOrder: action.payload.totalOrdered,
         totalRevenue: action.payload.totalRevenue,
+        totalIncome: action.payload.totalIncome,
       };
     case "SET_MONTHLY_ORDER":
       return {
