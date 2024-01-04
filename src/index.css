@@ -108,7 +108,7 @@ html {
   bottom: 0;
 }
 .embla__button {
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   background-color: transparent;
   touch-action: manipulation;
   display: inline-flex;
