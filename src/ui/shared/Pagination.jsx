@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import ProductTile from "../../pages/admin/product/components/ProductTile";
 import OrderItem from "../../pages/admin/order/components/OrderItem";
-import NewOrderItem from "../../pages/admin/Dashboard/components/NewOrderItem";
+import NewOrderItem from "../../pages/admin/dashboard/components/NewOrderItem";
 import UserCard from "../../pages/admin/user/components/UserCard";
 
 function Pagination({ listItem, listType, query }) {
