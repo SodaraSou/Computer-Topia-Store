@@ -16,8 +16,10 @@ import ScrollUpButton from "../../../ui/ScrollUpButton";
 // import Spinner from "../../../ui/Spinner";
 
 function Home() {
-  const dispatch = useDispatch();
-  const OPTIONS = { slidesToScroll: "auto", containScroll: "trimSnaps" };
+  const OPTIONS = {
+    slidesToScroll: "auto",
+    containScroll: "trimSnaps",
+  };
   const [emblaRef1, emblaApi1] = useEmblaCarousel(OPTIONS);
   const [emblaRef2, emblaApi2] = useEmblaCarousel(OPTIONS);
   const [emblaRef3, emblaApi3] = useEmblaCarousel(OPTIONS);
@@ -68,43 +70,33 @@ function Home() {
     { id: 8, brand: "DELL", img: null },
   ];
   const productList = useSelector((state) => state.home.listProduct);
-  // const loading = useSelector((state) => state.home.loading);
-  // useEffect(() => {
-  //   dispatch(setLoading());
-  //   const fetchAllProduct = async () => {
-  //     const data = await getAllProduct();
-  //     dispatch(setListProduct(data));
-  //   };
-  //   fetchAllProduct();
-  // }, [dispatch]);
-
-  // if (loading) {
-  //   return <Spinner fullScreenSpinner={true} />;
-  // }
   return (
     <>
-      <section>
-        <Carousel
-          className="md:h-[300px] xl:h-[400px]"
-          autoplay={true}
-          loop={true}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-            alt="image 3"
-            className="h-full w-full object-cover"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-            alt="image 3"
-            className="h-full w-full object-cover"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-            alt="image 3"
-            className="h-full w-full object-cover"
-          />
-        </Carousel>
+      <Carousel
+        className="md:h-[300px] xl:h-[400px]"
+        autoplay={true}
+        loop={true}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          alt="image 1"
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          alt="image 2"
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          alt="image 3"
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </Carousel>
+      <section className="max-w-7xl mx-auto ">
         {/* Latest Product */}
         <section className="px-4 mt-4 md:my-10">
           <div className="flex justify-between mb-4 md:mb-10">

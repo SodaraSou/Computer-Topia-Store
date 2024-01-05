@@ -35,7 +35,7 @@ function UserLayout() {
     <>
       <Header />
       <Navbar />
-      <main className="max-w-7xl mx-auto min-h-screen">
+      <main className="min-h-screen">
         <Outlet />
       </main>
       <Footer />

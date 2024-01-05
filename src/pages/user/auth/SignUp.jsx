@@ -40,7 +40,7 @@ function SignUp() {
     return <Navigate to="/" />;
   }
   return (
-    <section className="max-w-7xl flex flex-col justify-center p-4">
+    <section className="max-w-7xl mx-auto flex flex-col justify-center p-4">
       <div className="max-w-[1000px] flex justify-center h-auto bg-[#EAECF6] rounded-2xl my-10 mx-auto">
         <div className="hidden w-full md:w-1/2 md:flex items-center justify-center p-10">
           <img src={AuthPageImg} alt="AuthPageImg" />
