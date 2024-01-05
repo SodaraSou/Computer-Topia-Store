@@ -50,7 +50,7 @@ function Checkout() {
     return <Spinner fullScreenSpinner={true} />;
   }
   return (
-    <section className="p-4 xl:py-10 xl:px-0">
+    <section className="p-4 xl:py-10 xl:px-0 max-w-7xl mx-auto">
       <div className="w-full flex flex-col lg:flex-row gap-4 md:gap-10">
         <div className="w-full lg:w-4/6 flex flex-col gap-4 md:gap-10">
           {/* Review item section */}

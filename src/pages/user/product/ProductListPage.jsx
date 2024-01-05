@@ -155,7 +155,7 @@ function ProductListPage() {
   }
   return (
     <>
-      <section className="p-4 md:py-10">
+      <section className="p-4 md:py-10 max-w-7xl mx-auto">
         {/* <div className="flex justify-between items-center mb-4 md:mb-10">
         <h1 className="text-4xl font-bold">{productType}</h1>
         <div>
