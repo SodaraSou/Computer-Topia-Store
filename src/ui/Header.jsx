@@ -61,7 +61,7 @@ function Header() {
   return (
     <header className="flex flex-col">
       <div className="bg-[#EAECF6]">
-        <div className="max-w-7xl mx-auto p-2 xl:py-2 xl:px-0 flex justify-between">
+        <div className="max-w-7xl mx-auto p-2 flex justify-between">
           <div className="flex items-center gap-2">
             <span>Follow</span>
             <FontAwesomeIcon icon={faFacebook} className="text-[#5E17EB]" />
@@ -82,7 +82,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-4 xl:px-0 xl:py-6 gap-4 md:gap-8 bg-white">
+      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-4 gap-4 md:gap-8 bg-white">
         <div className="flex justify-between items-center">
           <Link to="/">
             <img src={Logo} alt="Logo" className="w-[200px] md:w-full" />

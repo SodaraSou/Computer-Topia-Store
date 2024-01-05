@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { signOutUser } from "../contexts/user/UserAction";
-import LogoSvg from "../assets/svg/Logo-40x40.svg";
+import LogoSvg from "../assets/img/Logo 240 X 56.webp";
 
 function AdminHeader({ onClick, handleUser }) {
   const navigate = useNavigate();
@@ -20,7 +20,11 @@ function AdminHeader({ onClick, handleUser }) {
         <FontAwesomeIcon icon={faBars} className="text-[#5E17EB]" />
       </button>
       <Link to="/">
-        <img src={LogoSvg} alt="Logo" className="block xl:hidden w-5 h-5" />
+        <img
+          src={LogoSvg}
+          alt="Logo"
+          className="block xl:hidden w-[200px] md:w-full"
+        />
       </Link>
       <button onClick={logOut} className="block xl:hidden">
         <FontAwesomeIcon icon={faRightFromBracket} className="text-[#5E17EB]" />
