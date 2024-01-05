@@ -73,25 +73,19 @@ function Home() {
   return (
     <>
       <Carousel
-        className="md:h-[300px] xl:h-[400px]"
+        className="md:h-[300px] xl:h-[400px] 2xl:h-[500px]"
         autoplay={true}
         loop={true}
       >
         <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          src="https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FRog_banner.webp?alt=media&token=7bc2e04b-1475-4ec9-8887-e5a4bee76a52"
           alt="image 1"
           className="h-full w-full object-cover"
           loading="lazy"
         />
         <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
+          src="https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2Frog_gpu_banner.webp?alt=media&token=2fb0275f-37a5-492f-8539-5cc308f610af"
           alt="image 2"
-          className="h-full w-full object-cover"
-          loading="lazy"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-          alt="image 3"
           className="h-full w-full object-cover"
           loading="lazy"
         />
