@@ -39,6 +39,45 @@ function Pagination({ listItem, listType, query }) {
     setCurrentPage(currentPage - 1);
   };
 
+  const renderPageButtons = () => {
+    const pagesToShow = 3; // Number of page buttons to show
+
+    let startPage = 1;
+    let endPage = totalPages;
+
+    if (totalPages > pagesToShow) {
+      if (currentPage <= Math.floor(pagesToShow / 2) + 1) {
+        startPage = 1;
+        endPage = pagesToShow;
+      } else if (currentPage + Math.floor(pagesToShow / 2) >= totalPages) {
+        startPage = totalPages - (pagesToShow - 1);
+        endPage = totalPages;
+      } else {
+        startPage = currentPage - Math.floor(pagesToShow / 2);
+        endPage = currentPage + Math.floor(pagesToShow / 2);
+      }
+    }
+
+    const pageButtons = [];
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageButtons.push(
+        <IconButton
+          key={i}
+          {...getItemProps(i)}
+          style={{
+            backgroundColor: active === i ? "#5E17EB" : "transparent",
+            color: active === i ? "#FFFFFF" : "#5E17EB",
+          }}
+        >
+          {i}
+        </IconButton>
+      );
+    }
+
+    return pageButtons;
+  };
+
   return (
     <>
       <div
@@ -79,7 +118,7 @@ function Pagination({ listItem, listType, query }) {
         >
           Previous
         </Button>
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           {Array.from({ length: Math.min(3, totalPages) }).map((_, index) => (
             <IconButton
               key={index}
@@ -93,7 +132,8 @@ function Pagination({ listItem, listType, query }) {
               {index + 1}
             </IconButton>
           ))}
-        </div>
+        </div> */}
+        <div className="flex items-center gap-2">{renderPageButtons()}</div>
         <Button
           variant="text"
           className="flex items-center gap-2"
