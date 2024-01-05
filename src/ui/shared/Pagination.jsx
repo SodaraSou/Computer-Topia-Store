@@ -26,7 +26,7 @@ function Pagination({ listItem, listType, query }) {
   });
 
   const next = () => {
-    if (active === 5) return;
+    if (active === totalPages) return;
 
     setActive(active + 1);
     setCurrentPage(currentPage + 1);
@@ -38,6 +38,7 @@ function Pagination({ listItem, listType, query }) {
     setActive(active - 1);
     setCurrentPage(currentPage - 1);
   };
+
   return (
     <>
       <div
