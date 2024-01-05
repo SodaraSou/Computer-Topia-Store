@@ -14,7 +14,15 @@ export const OrderProvider = ({ children }) => {
     totalOrder: 0,
     totalRevenue: 0,
     totalIncome: 0,
+    dailyOrders: {},
     monthlyOrders: {},
+    weeklyOrders: {},
+    weeklyIncomes: {},
+    weeklyRevenues: {},
+    monthlyIncomes: {},
+    monthlyRevenues: {},
+    dailyRevenues: {},
+    dailyIncomes: {},
   };
   const [state, orderDispatch] = useReducer(OrderReducer, initialState);
 

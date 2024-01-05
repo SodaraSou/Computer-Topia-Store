@@ -79,7 +79,7 @@ function Pagination({ listItem, listType, query }) {
           Previous
         </Button>
         <div className="flex items-center gap-2">
-          {Array.from({ length: totalPages }).map((_, index) => (
+          {Array.from({ length: Math.min(3, totalPages) }).map((_, index) => (
             <IconButton
               key={index}
               {...getItemProps(index + 1)}

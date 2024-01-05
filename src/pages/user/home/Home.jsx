@@ -106,7 +106,7 @@ function Home() {
           />
         </Carousel>
         {/* Latest Product */}
-        <section className="px-4 mt-4 md:my-10 xl:p-0">
+        <section className="px-4 mt-4 md:my-10">
           <div className="flex justify-between mb-4 md:mb-10">
             <h1 className="text-2xl md:text-4xl font-bold">Latest Products</h1>
             <div className="flex xl:hidden gap-4">
@@ -144,7 +144,7 @@ function Home() {
           </div>
         </section>
         {/* By Brand Section */}
-        <section className="px-4 mt-4 md:mt-10 xl:p-0">
+        <section className="px-4 mt-4 md:mt-10">
           <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
             Choose by Brand
           </h1>
@@ -166,7 +166,7 @@ function Home() {
           </div>
         </section>
         {/* Popular Product */}
-        <section className="px-4 mt-4 md:my-10 xl:p-0">
+        <section className="px-4 mt-4 md:my-10">
           <div className="flex justify-between mb-4 md:mb-10">
             <h1 className="text-2xl md:text-4xl font-bold">Popular Products</h1>
             <div className="flex xl:hidden gap-4">

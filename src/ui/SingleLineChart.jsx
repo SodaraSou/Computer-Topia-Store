@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
 
-class LineChart extends Component {
+class SingleLineChart extends Component {
   constructor(props) {
     super(props);
 
@@ -11,19 +11,19 @@ class LineChart extends Component {
           id: "basic-bar",
           background: "#FFFFFF",
         },
-        xaxis: {
-          categories: props.categories,
-        },
         grid: {
           row: {
             colors: ["#f3f3f3", "transparent"],
             opacity: 0.5,
           },
         },
+        xaxis: {
+          categories: props.categories,
+        },
         yaxis: {
           labels: {
             formatter: function (val) {
-              return val;
+              return Math.round(val);
             },
           },
         },
@@ -36,15 +36,11 @@ class LineChart extends Component {
             size: 7,
           },
         },
-        colors: ["#f97316", "#22c55e"],
+        colors: ["#3b82f6"],
       },
       series: [
         {
-          name: "Total Revenues",
-          data: props.secondData,
-        },
-        {
-          name: "Total Incomes",
+          name: "Total Orders",
           data: props.data,
         },
       ],
@@ -69,4 +65,4 @@ class LineChart extends Component {
   }
 }
 
-export default LineChart;
+export default SingleLineChart;

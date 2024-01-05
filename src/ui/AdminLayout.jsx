@@ -12,6 +12,14 @@ import {
   getOrderList,
   calcTotalStatus,
   calcTotalOrderMonthly,
+  calcTotalOrderWeeklyInMonth,
+  calcTotalIncomeWeekly,
+  calcTotalRevenueWeekly,
+  calcTotalOrderDailyInMonth,
+  calcTotalRevenueMonthly,
+  calcTotalIncomeMonthly,
+  calcTotalRevenueDaily,
+  calcTotalIncomeDaily,
 } from "../contexts/order/OrderAction";
 import { getAllProduct } from "../contexts/product/ProductAction";
 import { getAllUser } from "../contexts/user/UserAction";
@@ -31,8 +39,29 @@ function AdminLayout({ handleUser }) {
         type: "SET_TOTAL",
         payload: { totalRevenue, totalOrdered, totalIncome },
       });
+      const dailyOrders = calcTotalOrderDailyInMonth(data);
       const monthlyOrders = calcTotalOrderMonthly(data);
-      orderDispatch({ type: "SET_MONTHLY_ORDER", payload: monthlyOrders });
+      const weeklyOrders = calcTotalOrderWeeklyInMonth(data);
+      const weeklyRevenues = calcTotalRevenueWeekly(data);
+      const weeklyIncomes = calcTotalIncomeWeekly(data);
+      const monthlyRevenues = calcTotalRevenueMonthly(data);
+      const monthlyIncomes = calcTotalIncomeMonthly(data);
+      const dailyRevenues = calcTotalRevenueDaily(data);
+      const dailyIncomes = calcTotalIncomeDaily(data);
+      orderDispatch({
+        type: "SET_ORDER_TOTAL",
+        payload: {
+          monthlyOrders,
+          weeklyOrders,
+          weeklyRevenues,
+          weeklyIncomes,
+          dailyOrders,
+          monthlyRevenues,
+          monthlyIncomes,
+          dailyRevenues,
+          dailyIncomes,
+        },
+      });
       setLoading(false);
     });
     const unsubscribeProductList = getAllProduct((data) => {

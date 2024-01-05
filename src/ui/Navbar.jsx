@@ -20,7 +20,7 @@ function Navbar() {
   return (
     <nav className="bg-[#5E17EB] text-white sticky top-0 z-40">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="hidden lg:flex w-full justify-between items-center p-4 xl:py-4 xl:px-0 ">
+        <div className="hidden lg:flex w-full justify-between items-center p-4">
           <div>|</div>
           <div>
             <Link

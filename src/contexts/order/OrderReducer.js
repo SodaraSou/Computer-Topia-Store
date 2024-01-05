@@ -35,10 +35,18 @@ const OrderReducer = (state, action) => {
         totalRevenue: action.payload.totalRevenue,
         totalIncome: action.payload.totalIncome,
       };
-    case "SET_MONTHLY_ORDER":
+    case "SET_ORDER_TOTAL":
       return {
         ...state,
-        monthlyOrders: action.payload,
+        dailyOrders: action.payload.dailyOrders,
+        monthlyOrders: action.payload.monthlyOrders,
+        weeklyOrders: action.payload.weeklyOrders,
+        weeklyIncomes: action.payload.weeklyIncomes,
+        weeklyRevenues: action.payload.weeklyRevenues,
+        monthlyIncomes: action.payload.monthlyIncomes,
+        monthlyRevenues: action.payload.monthlyRevenues,
+        dailyRevenues: action.payload.dailyRevenues,
+        dailyIncomes: action.payload.dailyIncomes,
       };
     default:
       return state;
