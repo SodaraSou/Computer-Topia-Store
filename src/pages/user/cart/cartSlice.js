@@ -28,6 +28,9 @@ const cartSlice = createSlice({
       );
       state.totalCartItem = sum;
     },
+    setCartWhenLogOut: (state) => {
+      state.totalCartItem = 0;
+    },
   },
 });
 
@@ -36,6 +39,7 @@ export const {
   setCartTotalPrice,
   setTotalCartItem,
   setLoading,
+  setCartWhenLogOut,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

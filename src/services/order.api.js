@@ -36,6 +36,24 @@ export const addItemToCart = async (
       const currentCartData = cartSnapshot.exists()
         ? cartSnapshot.data()
         : { items: [], totalPrice: 0, totalIncome: 0 };
+
+      let totalQuantityInCart = 0;
+
+      currentCartData.items.forEach((item) => {
+        if (item.productId === productId) {
+          totalQuantityInCart += item.quantity;
+        }
+      });
+
+      totalQuantityInCart += quantity;
+
+      const stock = await checkStock(productId);
+
+      if (totalQuantityInCart > stock) {
+        toast.error("Exceeds Available Stock!");
+        return;
+      }
+
       let isItemInCart = false;
       const updatedItems = currentCartData.items.map((item) => {
         if (item.productId === productId) {
@@ -66,13 +84,13 @@ export const addItemToCart = async (
           subBuyInTotal,
         });
       }
-      const stock = await checkStock(productId);
-      for (const item of updatedItems) {
-        if (stock < item.quantity) {
-          toast.error("Exceeds Available Stock!");
-          return;
-        }
-      }
+      // const stock = await checkStock(productId);
+      // for (const item of updatedItems) {
+      //   if (stock < item.quantity) {
+      //     toast.error("Exceeds Available Stock!");
+      //     return;
+      //   }
+      // }
       const totalPrice = updatedItems.reduce(
         (total, item) => total + item.subTotal,
         0

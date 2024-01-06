@@ -7,6 +7,7 @@ import {
   getUserOrderList,
 } from "../../../services/user.api";
 import { setProfile, setOrderList, setLoading } from "./userSlice";
+import { setCartWhenLogOut } from "../cart/cartSlice";
 import EditSvg from "../../../assets/svg/pen-to-square-solid.svg";
 import ProfileSection from "./components/ProfileSection";
 import Address from "./components/Address";
@@ -15,7 +16,7 @@ import OrderSection from "./components/OrderSection";
 import OrderHistory from "./components/OrderHistory";
 import Spinner from "../../../ui/Spinner";
 
-function Profile() {
+function Profile({ setMainLoading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userProfile = useSelector((state) => state.user.userProfile);
@@ -35,9 +36,12 @@ function Profile() {
     };
   }, [dispatch]);
   const logOut = () => {
+    dispatch(setCartWhenLogOut());
+    setMainLoading(true);
     const response = signOutUser();
+    setMainLoading(false);
     if (response) {
-      navigate("/signin");
+      navigate("/authentication");
     }
   };
   if (loading) {
