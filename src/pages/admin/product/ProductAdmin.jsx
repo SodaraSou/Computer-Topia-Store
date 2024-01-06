@@ -1,8 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-// import {
-//   calculateNumberOfProduct,
-//   getAllProduct,
-// } from "../../../contexts/product/ProductAction";
 import ProductContext from "../../../contexts/product/ProductContext";
 import ProductList from "./components/ProductList";
 import DropdownButton from "../../../ui/shared/DropdownButton";
@@ -11,51 +7,6 @@ import FormModal from "./components/FormModal";
 
 function ProductAdmin() {
   const { listProduct, loading } = useContext(ProductContext);
-  // const [chartData, setChartData] = useState({
-  //   labels: ["Laptop", "PC-Hardware", "Peripherals", "Accessories"],
-  //   datasets: [
-  //     {
-  //       label: "Number Of Products",
-  //       data: [0, 0, 0, 0],
-  //       backgroundColor: [
-  //         "rgba(255, 99, 132, 0.6)",
-  //         "rgba(54, 162, 235, 0.6)",
-  //         "rgba(255, 206, 86, 0.6)",
-  //         "rgba(75, 192, 192, 0.6)",
-  //       ],
-  //       borderColor: [
-  //         "rgba(255, 99, 132, 1)",
-  //         "rgba(54, 162, 235, 1)",
-  //         "rgba(255, 206, 86, 1)",
-  //         "rgba(75, 192, 192, 1)",
-  //       ],
-  //       borderWidth: 4,
-  //     },
-  //   ],
-  // });
-  // useEffect(() => {
-  //   productDispatch({ type: "SET_LOADING" });
-  //   const unsubscribe = getAllProduct((data) => {
-  //     productDispatch({ type: "SET_LIST_PRODUCT", payload: data });
-  //     productDispatch({ type: "SET_LOADING_FALSE" });
-  //     const totalProduct = calculateNumberOfProduct(data);
-  //     setChartData((prevChartData) => ({
-  //       ...prevChartData,
-  //       datasets: [
-  //         {
-  //           ...prevChartData.datasets[0],
-  //           data: [
-  //             totalProduct.Laptop,
-  //             totalProduct["PC-Hardware"],
-  //             totalProduct.Peripherals,
-  //             totalProduct.Accessories,
-  //           ],
-  //         },
-  //       ],
-  //     }));
-  //   });
-  //   return () => unsubscribe();
-  // }, [productDispatch]);
   const type = [
     { id: 1, type: "Laptop" },
     { id: 2, type: "PC-Hardware" },

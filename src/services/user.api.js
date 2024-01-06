@@ -72,7 +72,7 @@ export const createAccount = async (inputData) => {
         toast.error("Email already exist!");
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Error!");
     }
   } else {
     toast.error("Password not match!");
@@ -100,7 +100,7 @@ export const signInUser = async (inputData) => {
   const { email, password } = inputData;
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    toast.success("Success");
+    toast.success("Login Successfully!");
     return true;
   } catch (error) {
     toast.error("Error");
@@ -131,7 +131,7 @@ export const signInWithGoogle = async () => {
       district: "",
       province: "",
     });
-    toast.success("Success");
+    toast.success("Login Successfully!");
   }
   return true;
 };
@@ -139,6 +139,7 @@ export const signInWithGoogle = async () => {
 export const signOutUser = () => {
   try {
     signOut(auth);
+    toast.success("Log Out Successfully!");
     return true;
   } catch (error) {
     console.log(error);

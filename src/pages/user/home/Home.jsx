@@ -76,18 +76,17 @@ function Home() {
         className="md:h-[300px] xl:h-[400px] 2xl:h-[500px]"
         autoplay={true}
         loop={true}
+        navigation={() => null}
       >
         <img
           src="https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FRog_banner.webp?alt=media&token=7bc2e04b-1475-4ec9-8887-e5a4bee76a52"
           alt="image 1"
           className="h-full w-full object-cover"
-          loading="lazy"
         />
         <img
           src="https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2Frog_gpu_banner.webp?alt=media&token=2fb0275f-37a5-492f-8539-5cc308f610af"
           alt="image 2"
           className="h-full w-full object-cover"
-          loading="lazy"
         />
       </Carousel>
       <section className="max-w-7xl mx-auto ">

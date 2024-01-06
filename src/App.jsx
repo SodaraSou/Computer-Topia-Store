@@ -6,23 +6,6 @@ import { OrderProvider } from "./contexts/order/OrderContext";
 import { dbFirestore, auth } from "./firebase.config";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-// import AdminLayout from "./ui/AdminLayout";
-// import UserLayout from "./ui/UserLayout";
-// import Home from "./pages/user/home/Home";
-// import Cart from "./pages/user/cart/Cart";
-// import Checkout from "./pages/user/checkout/Checkout";
-// import Product from "./pages/user/product/Product";
-// import ProductListPage from "./pages/user/product/ProductListPage";
-// import Profile from "./pages/user/user/Profile";
-// import ProtectedRoute from "./pages/user/auth/ProtectedRoute";
-// import SignIn from "./pages/user/auth/SignIn";
-// import SignUp from "./pages/user/auth/SignUp";
-// import Order from "./pages/admin/order/Order";
-// import ProductAdmin from "./pages/admin/product/ProductAdmin";
-// import User from "./pages/admin/user/User";
-// import Dashboard from "./pages/admin/dashboard/Dashboard";
-// import NotFoundPage from "./ui/NotFoundPage";
-// import Spinner from "./ui/Spinner";
 import AdminLayout from "./ui/AdminLayout";
 import UserLayout from "./ui/UserLayout";
 import Spinner from "./ui/Spinner";
@@ -36,8 +19,7 @@ const ProductListPage = lazy(() =>
 );
 const Profile = lazy(() => import("./pages/user/user/Profile"));
 const ProtectedRoute = lazy(() => import("./pages/user/auth/ProtectedRoute"));
-const SignIn = lazy(() => import("./pages/user/auth/SignIn"));
-const SignUp = lazy(() => import("./pages/user/auth/SignUp"));
+const Authentication = lazy(() => import("./pages/user/auth/Authentication"));
 const Order = lazy(() => import("./pages/admin/order/Order"));
 const ProductAdmin = lazy(() => import("./pages/admin/product/ProductAdmin"));
 const User = lazy(() => import("./pages/admin/user/User"));
@@ -46,8 +28,9 @@ const NotFoundPage = lazy(() => import("./ui/NotFoundPage"));
 
 function App() {
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userRef = doc(dbFirestore, "users", user.uid);
@@ -103,7 +86,7 @@ function App() {
                       path="/profile"
                       element={
                         <ProtectedRoute>
-                          <Profile />
+                          <Profile setMainLoading={setLoading} />
                         </ProtectedRoute>
                       }
                     />
@@ -112,8 +95,10 @@ function App() {
                       path="/productList/:type/:productType"
                       element={<ProductListPage />}
                     />
-                    <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/signIn" element={<SignIn />} />
+                    <Route
+                      path="/authentication"
+                      element={<Authentication setLoading={setLoading} />}
+                    />
                     <Route path="/*" element={<NotFoundPage />} />
                   </Route>
                 )}

@@ -130,7 +130,11 @@ function Header() {
               </div>
             )}
           </div>
-          <Link to="/cart" className="hidden md:flex flex-row items-center">
+          <Link
+            to="/cart"
+            className="hidden md:flex flex-row items-center"
+            aria-label="View your profile"
+          >
             <div className="relative">
               <FontAwesomeIcon icon={faCartPlus} className="text-[#5E17EB]" />
               {totalItem > 0 && (

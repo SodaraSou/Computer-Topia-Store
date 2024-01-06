@@ -16,7 +16,7 @@ function ProtectedRoute({ children }) {
   if (userState === null) {
     return null;
   }
-  return userState ? children : <Navigate to="/signIn" />;
+  return userState ? children : <Navigate to="/authentication" />;
 }
 
 export default ProtectedRoute;
