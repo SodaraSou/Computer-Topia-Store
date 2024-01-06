@@ -49,7 +49,7 @@ function Product() {
       quantity
     );
     if (reponse) {
-      navigate("/signIn");
+      navigate("/authentication");
     }
   };
   if (loading) {
