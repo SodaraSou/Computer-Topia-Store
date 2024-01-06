@@ -130,6 +130,24 @@ function PCHardwareForm({
       offer: item ? item.offer : 0,
       warranty: item ? item.warranty : "",
     },
+    Cooler: {
+      model: item ? item.model : "",
+      brand: item ? item.brand : "",
+      year: item ? item.year : "",
+      productImgs: item ? item.productImgs : [],
+      type: PCHardwareType,
+      hardwareType: "Cooler",
+      coolerType: item ? item.coolerType : "",
+      blockCompatibility: item ? item.blockCompatibility : "",
+      fanSize: item ? item.fanSize : "",
+      fanNoise: item ? item.fanNoise : "",
+      fanConnector: item ? item.fanConnector : "",
+      stock: item ? item.stock : 0,
+      buyInPrice: item ? item.buyInPrice : 0,
+      price: item ? item.price : 0,
+      offer: item ? item.offer : 0,
+      warranty: item ? item.warranty : "",
+    },
     PSU: {
       model: item ? item.model : "",
       brand: item ? item.brand : "",
@@ -300,6 +318,22 @@ function PCHardwareForm({
           />
         ));
       break;
+    case "Cooler":
+      hardwareFields = Object.keys(initialProductState.Cooler)
+        .filter(
+          (key) =>
+            key !== "type" && key !== "hardwareType" && key !== "productImgs"
+        )
+        .map((key) => (
+          <InputGroup
+            key={key}
+            title={key}
+            id={key}
+            onChange={onChange}
+            value={productData.Cooler[key]}
+          />
+        ));
+      break;
     case "PSU":
       hardwareFields = Object.keys(initialProductState.PSU)
         .filter(
@@ -415,6 +449,7 @@ function PCHardwareForm({
                     <option value="Motherboard">Mother Board</option>
                     <option value="SSD">SSD</option>
                     <option value="HDD">Hard Drive</option>
+                    <option value="Cooler">Cooler</option>
                     <option value="PSU">Power Supply</option>
                     <option value="Case">PC Case</option>
                   </select>

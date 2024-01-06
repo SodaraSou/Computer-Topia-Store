@@ -25,6 +25,8 @@ function ProductListPage() {
   const filter = [
     { id: 1, type: "Highest Price" },
     { id: 2, type: "Lowest Price" },
+    { id: 3, type: "Offer" },
+    { id: 4, type: "A-Z" },
   ];
   let section = [];
   switch (productType) {
@@ -156,14 +158,17 @@ function ProductListPage() {
   return (
     <>
       <section className="p-4 md:py-10 max-w-7xl mx-auto">
-        {/* <div className="flex justify-between items-center mb-4 md:mb-10">
-        <h1 className="text-4xl font-bold">{productType}</h1>
-        <div>
-          <DropdownButton dropdownContent={filter} onSelect={handleTypeSelect}>
-            Sort by: {selectedType}
-          </DropdownButton>
+        <div className="flex justify-between items-center mb-4 md:mb-10">
+          <h1 className="text-2xl md:text-4xl font-bold">{productType}</h1>
+          <div>
+            <DropdownButton
+              dropdownContent={filter}
+              onSelect={handleTypeSelect}
+            >
+              Sort by: {selectedType}
+            </DropdownButton>
+          </div>
         </div>
-      </div> */}
         <div className="flex flex-col md:flex-row gap-4 md:gap-10">
           <div>
             {productType === "Laptop" && <BrandSidebar />}
@@ -178,28 +183,55 @@ function ProductListPage() {
                   <h1 className="text-2xl font-bold">{section.name}</h1>
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  <ProductList
-                    productList={productList.filter(
-                      (product) => product.data.brand === section.name
-                    )}
-                  />
+                  {productType === "Laptop" && (
+                    <ProductList
+                      productList={productList.filter(
+                        (product) => product.data.brand === section.name
+                      )}
+                    />
+                  )}
+                  {productType === "PC-Hardware" && (
+                    <ProductList
+                      productList={productList.filter(
+                        (product) =>
+                          product.data.hardwareType === "HDD" ||
+                          product.data.hardwareType === "SSD"
+                      )}
+                    />
+                  )}
+                  {productType === "Peripherals" && (
+                    <ProductList
+                      productList={productList.filter(
+                        (product) =>
+                          product.data.PeripheralsType === section.name
+                      )}
+                    />
+                  )}
+                  {productType === "Accessories" && (
+                    <ProductList
+                      productList={productList.filter(
+                        (product) =>
+                          product.data.accessoriesType === section.name
+                      )}
+                    />
+                  )}
                 </div>
               </Element>
             ))}
             {type === "brand" && (
               <div>
                 <div className="flex justify-between items-center mb-4 md:mb-10">
-                  <h1 className="text-2xl md:text-4xl font-bold">
+                  {/* <h1 className="text-2xl md:text-4xl font-bold">
                     {productType}
-                  </h1>
-                  <div>
+                  </h1> */}
+                  {/* <div>
                     <DropdownButton
                       dropdownContent={filter}
                       onSelect={handleTypeSelect}
                     >
                       Sort by: {selectedType}
                     </DropdownButton>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   <ProductList productList={productList} />

@@ -12,7 +12,8 @@ function ProductItem({ item, id }) {
     >
       <div className="overflow-hidden">
         <img
-          src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}
+          // item.productImgs.length > 0 ? item.productImgs[0] :
+          src={StockImg}
           alt="stock_img"
           className="w-full object-cover"
         />

@@ -1,5 +1,5 @@
-import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Carousel } from "@material-tailwind/react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -60,14 +60,46 @@ function Home() {
     }
   }, [emblaApi3]);
   const brand = [
-    { id: 1, brand: "APPLE", img: null },
-    { id: 2, brand: "ASUS", img: null },
-    { id: 3, brand: "TUF-GAMING", img: null },
-    { id: 4, brand: "ASUS ROG", img: null },
-    { id: 5, brand: "LENOVO", img: null },
-    { id: 6, brand: "GIGABYTE", img: null },
-    { id: 7, brand: "MICROSOFT", img: null },
-    { id: 8, brand: "DELL", img: null },
+    {
+      id: 1,
+      brand: "APPLE",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FAPPLE.webp?alt=media&token=ff9ae895-bdda-457e-9a19-8993dcecc34c",
+    },
+    {
+      id: 2,
+      brand: "ASUS",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FASUS.png?alt=media&token=4212ea6e-6a12-48ed-83da-d85192b58f0a",
+    },
+    {
+      id: 3,
+      brand: "TUF-GAMING",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FTUFGAMING.png?alt=media&token=09fde5d4-2a1e-4e5f-8ad8-5827bb719490",
+    },
+    {
+      id: 4,
+      brand: "ASUS ROG",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FROG.png?alt=media&token=fdddbe7c-7f3b-4655-bfbb-6e2f8aafe87d",
+    },
+    {
+      id: 5,
+      brand: "LENOVO",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FLENOVO.png?alt=media&token=78bcaa61-33d0-4f76-9036-c7a0f8ebc741",
+    },
+    {
+      id: 6,
+      brand: "GIGABYTE",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FGIGABYTE.webp?alt=media&token=b4b781a8-6dca-4411-893e-e1890612dea3",
+    },
+    {
+      id: 7,
+      brand: "MICROSOFT",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FMICROSOFT.png?alt=media&token=61d269dd-159e-4153-8e69-c1c8f8d39161",
+    },
+    {
+      id: 8,
+      brand: "DELL",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FDELL.png?alt=media&token=1de666d5-0476-49ed-9537-24eb9795ea17",
+    },
   ];
   const productList = useSelector((state) => state.home.listProduct);
   return (
@@ -109,7 +141,7 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="hidden xl:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="hidden xl:grid xl:grid-cols-4 gap-4">
             {productList.slice(0, 8).map((item) => (
               <ProductItem item={item.data} id={item.id} key={item.id} />
             ))}
@@ -130,24 +162,62 @@ function Home() {
         </section>
         {/* By Brand Section */}
         <section className="px-4 mt-4 md:mt-10">
-          <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
-            Choose by Brand
-          </h1>
-          <div className="grid grid-cols-1 grid-rows-8 md:grid-cols-2 md:grid-rows-4 xl:grid-cols-4 xl:grid-rows-2 gap-4">
+          <div className="flex justify-between mb-4 md:mb-10">
+            <h1 className="text-2xl md:text-4xl font-bold">Choose by Brand</h1>
+            <div className="flex xl:hidden gap-4">
+              <button onClick={scrollPrev3}>
+                <FontAwesomeIcon
+                  icon={faChevronLeft}
+                  className="text-[#5E17EB] w-5 h-5"
+                />
+              </button>
+              <button onClick={scrollNext3}>
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className="text-[#5E17EB] w-5 h-5"
+                />
+              </button>
+            </div>
+          </div>
+          <div className="grid grid-cols-8 gap-4">
             {brand.map((brand) => (
               <Link
                 to={`productList/brand/${brand.brand}`}
                 key={brand.id}
-                className="w-full bg-[#EAECF6] rounded-2xl p-4 flex items-center gap-4"
+                className="w-full bg-[#EAECF6] p-4 hidden xl:flex flex-col items-center justify-center gap-4"
               >
                 <img
                   src={brand.img ? brand.img : StockImg}
                   alt="avatar"
-                  className="w-[100px] h-[100px] bg-white rounded-full"
+                  className="w-[100px] h-[100px] object-cover xl:object-contain bg-white rounded-full"
                 />
-                <h1 className="text-2xl font-semibold">{brand.brand}</h1>
+                <h1 className=" font-semibold">{brand.brand}</h1>
               </Link>
             ))}
+          </div>
+          <div className="block xl:hidden">
+            <div className="embla">
+              <div className="embla__viewport" ref={emblaRef3}>
+                <div className="embla__container">
+                  {brand.map((brand, index) => (
+                    <div className="embla__slide__multiple" key={index}>
+                      <Link
+                        to={`productList/brand/${brand.brand}`}
+                        key={brand.id}
+                        className="w-full bg-[#EAECF6] p-4 flex flex-col items-center justify-center gap-4"
+                      >
+                        <img
+                          src={brand.img ? brand.img : StockImg}
+                          alt="avatar"
+                          className="w-full"
+                        />
+                        <h1 className=" font-semibold">{brand.brand}</h1>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         {/* Popular Product */}
