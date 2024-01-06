@@ -79,7 +79,10 @@ function ProductListPage() {
           name: "RAM",
         },
         {
-          name: "Storage",
+          name: "HDD",
+        },
+        {
+          name: "SSD",
         },
         {
           name: "PSU",
@@ -193,9 +196,7 @@ function ProductListPage() {
                   {productType === "PC-Hardware" && (
                     <ProductList
                       productList={productList.filter(
-                        (product) =>
-                          product.data.hardwareType === "HDD" ||
-                          product.data.hardwareType === "SSD"
+                        (product) => product.data.hardwareType === section.name
                       )}
                     />
                   )}
