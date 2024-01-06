@@ -32,6 +32,7 @@ function ProductTile({ item, productId }) {
       )}
       <div className="w-full bg-white p-4 flex gap-4 items-center">
         <img
+          // item.productImgs.length > 0 ? item.productImgs[0] :
           src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}
           alt="stock_img"
           className="h-20 w-20"

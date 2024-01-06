@@ -78,6 +78,14 @@ function HardwareDetail({ productDetails }) {
               {productDetails.warranty}
             </td>
           </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
         </>
       );
       break;
@@ -132,6 +140,14 @@ function HardwareDetail({ productDetails }) {
               {productDetails.warranty}
             </td>
           </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
         </>
       );
       break;
@@ -176,6 +192,14 @@ function HardwareDetail({ productDetails }) {
             </td>
             <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
               {productDetails.warranty}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
             </td>
           </tr>
         </>
@@ -240,6 +264,14 @@ function HardwareDetail({ productDetails }) {
               {productDetails.warranty}
             </td>
           </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
         </>
       );
       break;
@@ -294,6 +326,14 @@ function HardwareDetail({ productDetails }) {
               {productDetails.warranty}
             </td>
           </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
         </>
       );
       break;
@@ -340,6 +380,76 @@ function HardwareDetail({ productDetails }) {
               {productDetails.warranty}
             </td>
           </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
+        </>
+      );
+      break;
+    case "Cooler":
+      detailsField = (
+        <>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Cooler Type
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.coolerType}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Block Compatibility
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.blockCompatibility}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Fan Size
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.fanSize}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Fan Noise
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.fanNoise}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Fan Connector
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.fanConnector}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Warranty
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.warranty}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
         </>
       );
       break;
@@ -384,6 +494,14 @@ function HardwareDetail({ productDetails }) {
             </td>
             <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
               {productDetails.warranty}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
             </td>
           </tr>
         </>
@@ -446,6 +564,14 @@ function HardwareDetail({ productDetails }) {
             </td>
             <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
               {productDetails.warranty}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
             </td>
           </tr>
         </>

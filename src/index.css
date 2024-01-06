@@ -49,6 +49,28 @@ html {
   }
 }
 
+:root {
+  --slide-size-multiple: 50%;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --slide-size-multiple: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --slide-size-multiple: 33.33%;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --slide-size-multiple: 25%;
+  }
+}
+
 .embla {
   --slide-spacing: 1rem;
   --slide-size: 50%;
@@ -65,6 +87,12 @@ html {
 }
 .embla__slide {
   flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+}
+.embla__slide__multiple {
+  flex: 0 0 var(--slide-size-multiple);
   min-width: 0;
   padding-left: var(--slide-spacing);
   position: relative;
