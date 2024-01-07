@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   product: {},
   productList: [],
+  isEmpty: false,
 };
 
 const productSlice = createSlice({
@@ -21,6 +22,9 @@ const productSlice = createSlice({
       state.productList = aciton.payload;
       state.loading = false;
     },
+    setIsEmpty: (state) => {
+      state.isEmpty = false;
+    },
     sortByPrice: {
       prepare(productList, sort) {
         return {
@@ -28,12 +32,8 @@ const productSlice = createSlice({
         };
       },
       reducer(state, action) {
-        // const sortedList = [...action.payload.productList].sort((a, b) =>
-        //   action.payload.sort === "Lowest Price"
-        //     ? a.data.price - b.data.price
-        //     : b.data.price - a.data.price
-        // );
-        let sortedList = [...action.payload.productList];
+        const originalList = [...action.payload.productList];
+        let sortedList = [...originalList];
 
         switch (action.payload.sort) {
           case "Lowest Price":
@@ -42,9 +42,8 @@ const productSlice = createSlice({
           case "Highest Price":
             sortedList = sortedList.sort((a, b) => b.data.price - a.data.price);
             break;
-          case "A-Z":
+          case "Name A-Z":
             sortedList = sortedList.sort((a, b) =>
-              // a.data.model.localeCompare(b.data.model)
               a.data.model
                 .toLowerCase()
                 .localeCompare(b.data.model.toLowerCase())
@@ -57,13 +56,19 @@ const productSlice = createSlice({
             sortedList = [...action.payload.productList];
             break;
         }
-        state.productList = sortedList;
+        state.productList = sortedList.length === 0 ? originalList : sortedList;
+        state.isEmpty = sortedList.length === 0 && true;
       },
     },
   },
 });
 
-export const { setProduct, setLoading, setProductList, sortByPrice } =
-  productSlice.actions;
+export const {
+  setProduct,
+  setLoading,
+  setProductList,
+  sortByPrice,
+  setIsEmpty,
+} = productSlice.actions;
 
 export default productSlice.reducer;

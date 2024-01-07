@@ -58,7 +58,7 @@ function HardwareTypeSidebar() {
     },
   ];
   return (
-    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10">
+    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 mr-4 md:mr-10">
       {hardwareType.map((hardwareType) => (
         <li key={hardwareType.id}>
           <Link

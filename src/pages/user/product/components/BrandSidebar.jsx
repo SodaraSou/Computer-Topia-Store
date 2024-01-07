@@ -58,7 +58,7 @@ function BrandSidebar() {
     },
   ];
   return (
-    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 ">
+    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 mr-4 md:mr-10">
       {brand.map((brand) => (
         <li key={brand.id}>
           <Link
