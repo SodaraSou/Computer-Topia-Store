@@ -75,7 +75,7 @@ function OrderList({ orderList, listTitle }) {
           </DropdownButton>
         </div>
       </div>
-      <div className="hidden xl:grid grid-cols-8 gap-4 bg-white text-sm">
+      <div className="hidden xl:grid grid-cols-8 gap-4 bg-[#5E17EB] text-sm text-white">
         <div className="p-4 font-semibold w-full xl:col-span-2">ORDER ID</div>
         <div className="p-4 font-semibold w-full xl:col-span-2">ORDER AT</div>
         <div className="p-4 font-semibold w-full">STATUS</div>

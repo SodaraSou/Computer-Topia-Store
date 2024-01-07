@@ -30,7 +30,7 @@ function ProductTile({ item, productId }) {
           productId={productId}
         />
       )}
-      <div className="w-full bg-white p-4 flex gap-4 items-center">
+      <div className="w-full border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 flex gap-4 items-center">
         <img
           // item.productImgs.length > 0 ? item.productImgs[0] :
           src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}

@@ -56,6 +56,20 @@ export const getCompletedOrderList = (callback) => {
   return unsubscribe;
 };
 
+export const updateDelivery = async (delivery, orderId) => {
+  try {
+    const orderRef = doc(dbFirestore, "order", orderId);
+    await updateDoc(orderRef, {
+      deliveryBy: delivery.deliveryBy,
+      trackingCode: delivery.trackingCode,
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something Went Wrong!");
+  }
+};
+
 export const changeOrderStatus = async (orderId, order, orderStatus) => {
   const orderRef = doc(dbFirestore, "order", orderId);
   // const cancelOrderRef = collection(dbFirestore, "cancelOrder");

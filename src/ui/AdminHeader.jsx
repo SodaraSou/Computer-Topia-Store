@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { signOutUser } from "../contexts/user/UserAction";
+import { signOutUser } from "../services/user.api";
 import Logo from "../assets/img/Logo 240 x 56.png";
 
 function AdminHeader({ onClick, handleUser }) {
   const navigate = useNavigate();
-  const logOut = async () => {
-    const response = await signOutUser();
+  const logOut = () => {
+    const response = signOutUser();
     handleUser();
     if (response) {
       navigate("/");
@@ -26,8 +26,11 @@ function AdminHeader({ onClick, handleUser }) {
           className="block xl:hidden w-[200px] md:w-full"
         />
       </Link>
-      <button onClick={logOut} className="block xl:hidden">
-        <FontAwesomeIcon icon={faRightFromBracket} className="text-[#5E17EB]" />
+      <button
+        onClick={logOut}
+        className="block xl:hidden bg-red-500 px-3 py-2 rounded-xl"
+      >
+        <FontAwesomeIcon icon={faRightFromBracket} className="text-white" />
       </button>
     </header>
   );

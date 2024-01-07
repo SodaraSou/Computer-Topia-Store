@@ -5,7 +5,7 @@ import Pagination from "../../../../ui/shared/Pagination";
 import DropdownButton from "../../../../ui/shared/DropdownButton";
 
 function UserList({ userList }) {
-  const dropdownContent = [{ id: 1, type: "A-Z" }];
+  const dropdownContent = [{ id: 1, type: "Name A-Z" }];
   const [selectedType, setSelectedType] = useState(null);
   const [sortedList, setSortedList] = useState(null);
   const [users, setUsers] = useState([]);

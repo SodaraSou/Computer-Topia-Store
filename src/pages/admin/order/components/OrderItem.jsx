@@ -10,7 +10,7 @@ import { changeOrderStatus } from "../../../../contexts/order/OrderAction";
 import OrderContext from "../../../../contexts/order/OrderContext";
 import Button from "../../../../ui/shared/Button";
 
-function OrderItem({ order, orderId }) {
+function OrderItem({ order, orderId, index }) {
   const { orderDispatch } = useContext(OrderContext);
   let statusTagColor = "";
   switch (order.orderStatus) {
@@ -43,7 +43,11 @@ function OrderItem({ order, orderId }) {
   };
   return (
     <>
-      <div className="hidden xl:grid grid-cols-8 gap-4 items-center text-sm xl:text-base">
+      <div
+        className={`${
+          index % 2 === 0 ? "bg-white" : "bg-gray-200"
+        } hidden xl:grid grid-cols-8 gap-4 items-center text-sm xl:text-base`}
+      >
         <div className="p-4 w-full xl:col-span-2">
           <button
             onClick={handleViewOrder}
@@ -92,7 +96,7 @@ function OrderItem({ order, orderId }) {
           )}
         </div>
       </div>
-      <div className="block xl:hidden p-4 bg-white">
+      <div className="block xl:hidden p-4 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-between items-center">
           <span>
             Order ID:{" "}

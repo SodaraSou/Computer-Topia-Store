@@ -67,7 +67,7 @@ function Modal({ children, handleModal }) {
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         ref={modalRef}
-        className="p-4 md:p-10 bg-white max-h-[80vh] overflow-y-auto"
+        className="p-4 md:p-10 bg-[#EAECF6] max-h-[80vh] overflow-y-auto"
       >
         {children}
       </motion.div>

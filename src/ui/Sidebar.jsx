@@ -57,28 +57,15 @@ function Sidebar({ handleUser }) {
             <span className="hidden md:block">User</span>
           </Link>
         </li>
-        {/* <li>
-          <Link to="/" className="flex items-center gap-4">
-            <FontAwesomeIcon
-              icon={faFilePen}
-              className="text-[#5E17EB] w-5 h-5"
-            />
-            <span className="hidden md:block">Report</span>
-          </Link>
-        </li> */}
         <li>
           <button onClick={logOut} className="w-full">
-            <div className="hidden md:flex justify-center items-center bg-[#5E17EB] p-2 h-10 gap-2 rounded-xl">
+            <div className="hidden md:flex justify-center items-center bg-red-500 p-2 h-10 gap-2 rounded-xl">
               <FontAwesomeIcon
                 icon={faRightFromBracket}
                 className="text-white w-5 h-5"
               />
               <span className="text-white text-base">Log Out</span>
             </div>
-            <FontAwesomeIcon
-              icon={faRightFromBracket}
-              className="block md:hidden text-[#5E17EB] w-5 h-5"
-            />
           </button>
         </li>
       </ul>

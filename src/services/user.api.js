@@ -37,6 +37,10 @@ export const getUserId = () => {
 
 export const createAccount = async (inputData) => {
   const { username, email, password, confirmPassword } = inputData;
+  if (password.length <= 6) {
+    toast.error("Password to be more than 6 characters!");
+    return false;
+  }
   if (password === confirmPassword) {
     try {
       const docRef = collection(dbFirestore, "users");
@@ -66,13 +70,13 @@ export const createAccount = async (inputData) => {
           district: "",
           province: "",
         });
-        toast.success("Success");
+        toast.success("Successfully Registered!");
         return true;
       } else {
         toast.error("Email already exist!");
       }
     } catch (error) {
-      toast.error("Error!");
+      toast.error("Something Went Wrong!");
     }
   } else {
     toast.error("Password not match!");
@@ -87,14 +91,40 @@ export const resetPassword = async (email) => {
   if (querySnapshot.size !== 0) {
     try {
       await sendPasswordResetEmail(auth, email);
-      toast.success("Success");
+      toast.success("Successfully Sent!");
     } catch (error) {
-      toast.error("Error!");
+      toast.error("Something Went Wrong!");
     }
   } else {
     toast.error("Email not exist!");
   }
 };
+
+// export const resetPassword = async (email) => {
+//   const docRef = collection(dbFirestore, "users");
+//   const q = query(docRef, where("email", "==", email));
+//   const querySnapshot = await getDocs(q);
+
+//   if (querySnapshot.size !== 0) {
+//     const user = auth.currentUser;
+//     if (user && user.email === email && user.emailVerified) {
+//       try {
+//         await sendPasswordResetEmail(auth, email);
+//         toast.success("Password reset email sent successfully!");
+//       } catch (error) {
+//         toast.error(
+//           "Something went wrong while sending the password reset email."
+//         );
+//       }
+//     } else {
+//       toast.error(
+//         "Please ensure your email is verified and matches the logged-in user."
+//       );
+//     }
+//   } else {
+//     toast.error("Email does not exist in our records.");
+//   }
+// };
 
 export const signInUser = async (inputData) => {
   const { email, password } = inputData;

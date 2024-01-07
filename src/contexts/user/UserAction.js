@@ -4,35 +4,18 @@ import {
   doc,
   getDoc,
   onSnapshot,
+  setDoc,
+  getDocs,
+  where,
+  query,
 } from "firebase/firestore";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { ref, deleteObject } from "firebase/storage";
 import { auth, dbFirestore, storage } from "../../firebase.config";
 import { toast } from "react-toastify";
-
-export const signInUser = async (inputData) => {
-  const { email, password } = inputData;
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    const userRef = doc(dbFirestore, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(userRef);
-    const userData = docSnap.data();
-    if (userData.role === "admin") {
-      return true;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const signOutUser = async () => {
-  try {
-    await signOut(auth);
-    return true;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const getAllUser = (callback) => {
   const userCollRef = collection(dbFirestore, "users");
@@ -41,12 +24,12 @@ export const getAllUser = (callback) => {
     (docSnap) => {
       const list = [];
       docSnap.forEach((item) => {
-        if (item.data().role !== "admin") {
-          list.push({
-            id: item.id,
-            data: item.data(),
-          });
-        }
+        // if (item.data().role !== "admin") {
+        list.push({
+          id: item.id,
+          data: item.data(),
+        });
+        // }
       });
       callback(list);
     },
@@ -92,4 +75,46 @@ export const sortUser = (orderList) => {
     return sortedList;
   }
   return null;
+};
+
+export const createAdminAcc = async (inputData) => {
+  const { username, email, password, confirmPassword } = inputData;
+  if (password.length <= 6) {
+    toast.error("Password to be more than 6 characters!");
+    return false;
+  }
+  if (password === confirmPassword) {
+    try {
+      const docRef = collection(dbFirestore, "users");
+      const q = query(docRef, where("email", "==", email));
+      const queryDocSnap = await getDocs(q);
+      if (queryDocSnap.size === 0) {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        await setDoc(doc(dbFirestore, "users", user.uid), {
+          username,
+          email,
+          profileImg: "",
+          role: "admin",
+        });
+        // await sendEmailVerification(user);
+        // toast.success(
+        //   "Successfully Registered! Please check your email for verification."
+        // );
+        toast.success("Successfully Registered!");
+        return true;
+      } else {
+        toast.error("Email already exist!");
+      }
+    } catch (error) {
+      toast.error("Something Went Wrong!");
+    }
+  } else {
+    toast.error("Password not match!");
+    return false;
+  }
 };

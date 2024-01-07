@@ -40,7 +40,7 @@ function Pagination({ listItem, listType, query }) {
   };
 
   const renderPageButtons = () => {
-    const pagesToShow = 3; // Number of page buttons to show
+    const pagesToShow = 3;
 
     let startPage = 1;
     let endPage = totalPages;
@@ -85,14 +85,19 @@ function Pagination({ listItem, listType, query }) {
           listType === "User"
             ? "grid grid-cols-1 xl:grid-cols-2"
             : "flex flex-col"
-        }`}
+        } ${listType === "Order" && "xl:gap-0"}`}
       >
         {currentItems.length > 0 ? (
-          currentItems.map((item) =>
+          currentItems.map((item, index) =>
             listType === "Product" ? (
               <ProductTile key={item.id} item={item.data} productId={item.id} />
             ) : listType === "Order" ? (
-              <OrderItem key={item.id} order={item.data} orderId={item.id} />
+              <OrderItem
+                key={item.id}
+                order={item.data}
+                orderId={item.id}
+                index={index}
+              />
             ) : listType === "User" ? (
               <UserCard key={item.id} user={item.data} userId={item.id} />
             ) : listType === "NewOrder" || listType === "Shipping" ? (
@@ -118,21 +123,6 @@ function Pagination({ listItem, listType, query }) {
         >
           Previous
         </Button>
-        {/* <div className="flex items-center gap-2">
-          {Array.from({ length: Math.min(3, totalPages) }).map((_, index) => (
-            <IconButton
-              key={index}
-              {...getItemProps(index + 1)}
-              style={{
-                backgroundColor:
-                  active === index + 1 ? "#5E17EB" : "transparent",
-                color: active === index + 1 ? "#FFFFFF" : "#5E17EB",
-              }}
-            >
-              {index + 1}
-            </IconButton>
-          ))}
-        </div> */}
         <div className="flex items-center gap-2">{renderPageButtons()}</div>
         <Button
           variant="text"
