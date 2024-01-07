@@ -95,7 +95,7 @@ function Pagination({ listItem, listType, query }) {
               <OrderItem key={item.id} order={item.data} orderId={item.id} />
             ) : listType === "User" ? (
               <UserCard key={item.id} user={item.data} userId={item.id} />
-            ) : listType === "NewOrder" ? (
+            ) : listType === "NewOrder" || listType === "Shipping" ? (
               <NewOrderItem key={item.id} order={item.data} orderId={item.id} />
             ) : null
           )

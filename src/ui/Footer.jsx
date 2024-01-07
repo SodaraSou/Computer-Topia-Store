@@ -42,7 +42,7 @@ function Footer() {
             Contact Us
           </h2>
           <ul className="flex flex-col gap-2 text-sm">
-            <li>E-mail: mengsrun@computertopia.store</li>
+            <li>E-mail: mengsrun@gmail.store</li>
             <li>Telegram: 012 354 987</li>
             <li>Tel: 012 354 987</li>
           </ul>

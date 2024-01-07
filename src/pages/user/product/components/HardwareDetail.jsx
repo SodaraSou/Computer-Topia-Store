@@ -577,6 +577,84 @@ function HardwareDetail({ productDetails }) {
         </>
       );
       break;
+    case "Monitor":
+      detailsField = (
+        <>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Screen Size
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.screenSize}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Display Type
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.displayType}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Adaptive Sync Technology
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.adaptiveSyncTechnology}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Resolution
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.resolution}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Aspect Ratio
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.aspectRatio}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Refresh Rate
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.refreshRate}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Video Port
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.videoPort}
+            </td>
+          </tr>
+          <tr className="bg-white">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Year
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.year}
+            </td>
+          </tr>
+          <tr className="bg-[#EAECF6]">
+            <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+              Warranty
+            </td>
+            <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+              {productDetails.warranty}
+            </td>
+          </tr>
+        </>
+      );
+      break;
     default:
       break;
   }

@@ -33,14 +33,14 @@ function AppLayout() {
     };
     getUserRole();
   }, [userId]);
-  useEffect(() => {
-    // Redirect based on user role when user data changes
-    if (user.role === "user" || user.role === null) {
-      navigate("/user"); // Redirect to the user section
-    } else if (user?.role === "admin") {
-      navigate("/admin"); // Redirect to the admin section
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   // Redirect based on user role when user data changes
+  //   if (user.role === "user" || user.role === null) {
+  //     navigate("/user"); // Redirect to the user section
+  //   } else if (user?.role === "admin") {
+  //     navigate("/admin"); // Redirect to the admin section
+  //   }
+  // }, [user, navigate]);
   return user.role === "user" || "" ? <UserLayout /> : <AdminLayout />;
 }
 

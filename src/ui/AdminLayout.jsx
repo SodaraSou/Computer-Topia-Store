@@ -30,61 +30,61 @@ function AdminLayout({ handleUser }) {
   const { productDispatch } = useContext(ProductContext);
   const { userDispatch } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const unsubscribeOrderList = getOrderList((data) => {
-  //     orderDispatch({ type: "SET_ORDER_LIST", payload: data });
-  //     const { totalRevenue, totalOrdered, totalIncome } = calcTotalStatus(data);
-  //     orderDispatch({
-  //       type: "SET_TOTAL",
-  //       payload: { totalRevenue, totalOrdered, totalIncome },
-  //     });
-  //     const dailyOrders = calcTotalOrderDailyInMonth(data);
-  //     const monthlyOrders = calcTotalOrderMonthly(data);
-  //     const weeklyOrders = calcTotalOrderWeeklyInMonth(data);
-  //     const weeklyRevenues = calcTotalRevenueWeekly(data);
-  //     const weeklyIncomes = calcTotalIncomeWeekly(data);
-  //     const monthlyRevenues = calcTotalRevenueMonthly(data);
-  //     const monthlyIncomes = calcTotalIncomeMonthly(data);
-  //     const dailyRevenues = calcTotalRevenueDaily(data);
-  //     const dailyIncomes = calcTotalIncomeDaily(data);
-  //     orderDispatch({
-  //       type: "SET_ORDER_TOTAL",
-  //       payload: {
-  //         monthlyOrders,
-  //         weeklyOrders,
-  //         weeklyRevenues,
-  //         weeklyIncomes,
-  //         dailyOrders,
-  //         monthlyRevenues,
-  //         monthlyIncomes,
-  //         dailyRevenues,
-  //         dailyIncomes,
-  //       },
-  //     });
-  //     setLoading(false);
-  //   });
-  //   const unsubscribeProductList = getAllProduct((data) => {
-  //     productDispatch({ type: "SET_LIST_PRODUCT", payload: data });
-  //   });
-  //   const unsubscribeUserList = getAllUser((data) => {
-  //     userDispatch({ type: "SET_USER_LIST", payload: data });
-  //   });
-  //   return () => {
-  //     unsubscribeOrderList();
-  //     unsubscribeProductList();
-  //     unsubscribeUserList();
-  //   };
-  // }, [orderDispatch, productDispatch, userDispatch]);
+  useEffect(() => {
+    setLoading(true);
+    const unsubscribeOrderList = getOrderList((data) => {
+      orderDispatch({ type: "SET_ORDER_LIST", payload: data });
+      const { totalRevenue, totalOrdered, totalIncome } = calcTotalStatus(data);
+      orderDispatch({
+        type: "SET_TOTAL",
+        payload: { totalRevenue, totalOrdered, totalIncome },
+      });
+      const dailyOrders = calcTotalOrderDailyInMonth(data);
+      const monthlyOrders = calcTotalOrderMonthly(data);
+      const weeklyOrders = calcTotalOrderWeeklyInMonth(data);
+      const weeklyRevenues = calcTotalRevenueWeekly(data);
+      const weeklyIncomes = calcTotalIncomeWeekly(data);
+      const monthlyRevenues = calcTotalRevenueMonthly(data);
+      const monthlyIncomes = calcTotalIncomeMonthly(data);
+      const dailyRevenues = calcTotalRevenueDaily(data);
+      const dailyIncomes = calcTotalIncomeDaily(data);
+      orderDispatch({
+        type: "SET_ORDER_TOTAL",
+        payload: {
+          monthlyOrders,
+          weeklyOrders,
+          weeklyRevenues,
+          weeklyIncomes,
+          dailyOrders,
+          monthlyRevenues,
+          monthlyIncomes,
+          dailyRevenues,
+          dailyIncomes,
+        },
+      });
+      setLoading(false);
+    });
+    const unsubscribeProductList = getAllProduct((data) => {
+      productDispatch({ type: "SET_LIST_PRODUCT", payload: data });
+    });
+    const unsubscribeUserList = getAllUser((data) => {
+      userDispatch({ type: "SET_USER_LIST", payload: data });
+    });
+    return () => {
+      unsubscribeOrderList();
+      unsubscribeProductList();
+      unsubscribeUserList();
+    };
+  }, [orderDispatch, productDispatch, userDispatch]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // if (loading) {
-  //   return <Spinner fullScreenSpinner={true} />;
-  // }
+  if (loading) {
+    return <Spinner fullScreenSpinner={true} />;
+  }
 
   return (
     <div className="flex flex-col md:flex-row">

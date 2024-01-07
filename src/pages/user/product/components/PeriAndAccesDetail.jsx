@@ -32,7 +32,7 @@ function PeriAndAccesDetail({ productDetails }) {
         </tr>
         <tr className="bg-white">
           <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
-            N/A
+            Details
           </td>
           <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
             {productDetails.description1}
@@ -40,7 +40,7 @@ function PeriAndAccesDetail({ productDetails }) {
         </tr>
         <tr className="bg-[#EAECF6]">
           <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
-            N/A
+            {/* N/A */}
           </td>
           <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
             {productDetails.description2}
@@ -48,7 +48,7 @@ function PeriAndAccesDetail({ productDetails }) {
         </tr>
         <tr className="bg-white">
           <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
-            N/A
+            {/* N/A */}
           </td>
           <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
             {productDetails.description3}
@@ -56,7 +56,7 @@ function PeriAndAccesDetail({ productDetails }) {
         </tr>
         <tr className="bg-[#EAECF6]">
           <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
-            N/A
+            {/* N/A */}
           </td>
           <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
             {productDetails.description4}
@@ -68,6 +68,14 @@ function PeriAndAccesDetail({ productDetails }) {
           </td>
           <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
             {productDetails.warranty}
+          </td>
+        </tr>
+        <tr className="bg-[#EAECF6]">
+          <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+            Year
+          </td>
+          <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+            {productDetails.year}
           </td>
         </tr>
       </tbody>
