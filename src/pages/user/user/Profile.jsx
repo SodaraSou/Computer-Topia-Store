@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,10 +10,10 @@ import { setProfile, setOrderList, setLoading } from "./userSlice";
 import { setCartWhenLogOut } from "../cart/cartSlice";
 import EditSvg from "../../../assets/svg/pen-to-square-solid.svg";
 import ProfileSection from "./components/ProfileSection";
-import Address from "./components/Address";
-import Payment from "./components/Payment";
 import OrderSection from "./components/OrderSection";
 import OrderHistory from "./components/OrderHistory";
+import Address from "./components/Address";
+import Payment from "./components/Payment";
 import Spinner from "../../../ui/Spinner";
 
 function Profile({ setMainLoading }) {
@@ -22,6 +22,10 @@ function Profile({ setMainLoading }) {
   const userProfile = useSelector((state) => state.user.userProfile);
   const userOrderList = useSelector((state) => state.user.userOrderList);
   const loading = useSelector((state) => state.user.loading);
+  const [section, setSection] = useState("Profile");
+  const selectSection = (selectedSection) => {
+    setSection(selectedSection);
+  };
   useEffect(() => {
     dispatch(setLoading());
     const unsubscribeGetUser = getUser((data) => {
@@ -47,20 +51,66 @@ function Profile({ setMainLoading }) {
   if (loading) {
     return <Spinner fullScreenSpinner={true} />;
   }
-  return (
-    <section className="p-4 xl:py-10 xl:px-0">
-      <div className="w-full md:max-w-[1000px] mx-auto flex flex-col gap-4 md:gap-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
+  let selectedComponent;
+  switch (section) {
+    case "Profile":
+      selectedComponent = (
+        <ProfileSection
+          editSvg={EditSvg}
+          logOut={logOut}
+          userProfile={userProfile}
+        />
+      );
+      break;
+    case "Order":
+      selectedComponent = (
+        <OrderSection orderList={userOrderList} loading={loading} />
+      );
+      break;
+    case "Order History":
+      selectedComponent = <OrderHistory orderList={userOrderList} />;
+      break;
+    default:
+      selectedComponent = (
+        <>
           <ProfileSection
             editSvg={EditSvg}
             logOut={logOut}
             userProfile={userProfile}
           />
-          <OrderSection orderList={userOrderList} loading={loading} />
-          <Address editSvg={EditSvg} userProfile={userProfile} />
-          <Payment editSvg={EditSvg} userProfile={userProfile} />
-          <OrderHistory orderList={userOrderList} />
+        </>
+      );
+  }
+  return (
+    <section className="p-4 md:py-10 max-w-7xl mx-auto">
+      <div className="w-full hidden lg:flex flex-col lg:flex-row gap-4 md:gap-10">
+        <ul className="w-full lg:w-1/5 flex flex-col gap-4 font-semibold">
+          <li className="text-xl">
+            <button onClick={() => selectSection("Profile")}>Profile</button>
+          </li>
+          <li className="text-xl">
+            <button onClick={() => selectSection("Order")}>Order</button>
+          </li>
+          <li className="text-xl">
+            <button onClick={() => selectSection("Order History")}>
+              Order History
+            </button>
+          </li>
+        </ul>
+        <div className="w-full lg:w-4/5 flex flex-col gap-4">
+          {selectedComponent}
         </div>
+      </div>
+      <div className="flex flex-col lg:hidden gap-4">
+        <ProfileSection
+          editSvg={EditSvg}
+          logOut={logOut}
+          userProfile={userProfile}
+        />
+        <Address editSvg={EditSvg} userProfile={userProfile} />
+        <Payment editSvg={EditSvg} userProfile={userProfile} />
+        <OrderSection orderList={userOrderList} loading={loading} />
+        <OrderHistory orderList={userOrderList} />
       </div>
     </section>
   );

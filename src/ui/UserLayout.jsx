@@ -39,8 +39,19 @@ function UserLayout() {
         <Outlet />
       </main>
       <Footer />
-      <ToastContainer />
       <ScrollToTop />
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

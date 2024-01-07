@@ -196,15 +196,6 @@ export const recieveProduct = async (
       orderStatus: "Complete",
       orderAt: orderAt,
     });
-    // const orderHistoryRef = doc(dbFirestore, "orderHistory", orderId);
-    // await setDoc(orderHistoryRef, {
-    //   userId: auth.currentUser.uid,
-    //   items: productList,
-    //   checkoutPrice,
-    //   orderStatus: "Complete",
-    //   orderAt: orderAt,
-    // });
-    // await deleteDoc(doc(dbFirestore, "order", orderId));
     toast.success("Order Complete!");
   } catch (error) {
     console.log(error);

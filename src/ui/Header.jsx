@@ -61,25 +61,23 @@ function Header() {
   return (
     <header className="flex flex-col">
       <div className="bg-[#EAECF6]">
-        <div className="max-w-7xl mx-auto p-2 flex justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between">
           <div className="flex items-center gap-2">
             <span>Follow</span>
             <FontAwesomeIcon icon={faFacebook} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faInstagram} className="text-[#5E17EB]" />
             <FontAwesomeIcon icon={faTelegram} className="text-[#5E17EB]" />
           </div>
-          <div className="flex items-center gap-4">
-            <Link
-              to="/profile"
-              className="flex flex-row items-center gap-2"
-              aria-label="View your profile"
-            >
-              <FontAwesomeIcon icon={faUser} className="text-[#5E17EB]" />
-            </Link>
-            <span>
-              <button>EN</button> | <button>KH</button>
-            </span>
-          </div>
+          {/* <div className="flex items-center gap-4"> */}
+          <Link
+            to="/profile"
+            className="flex flex-row items-center gap-2"
+            aria-label="View your profile"
+          >
+            <FontAwesomeIcon icon={faUser} className="text-[#5E17EB]" />
+            Account
+          </Link>
+          {/* </div> */}
         </div>
       </div>
       <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-4 gap-4 md:gap-8 bg-white">

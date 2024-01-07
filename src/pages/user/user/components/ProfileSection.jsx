@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { updateUserProfile } from "../../../../services/user.api";
+import {
+  resetPassword,
+  updateUserProfile,
+} from "../../../../services/user.api";
 import SaveSvg from "../../../../assets/svg/floppy-disk-solid.svg";
 import Button from "../../../../ui/shared/Button";
 import ProfileAvatar from "../../../../ui/ProfileAvatar";
-import Spinner from "../../../../ui/Spinner";
+import Input from "../../../../ui/shared/Input";
+import Address from "./Address";
+import Payment from "./Payment";
 
 function ProfileSection({ editSvg, logOut, userProfile, loading }) {
   const [inputData, setInputData] = useState({
@@ -31,21 +36,16 @@ function ProfileSection({ editSvg, logOut, userProfile, loading }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full border border-[#D9D9D9] rounded-xl p-4 md:p-10">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
-        <Button onClick={logOut} customClass="bg-red-500">
-          Log Out
-        </Button>
-      </div>
-      <div className="h-[1px] w-full bg-[#D9D9D9] my-4"></div>
-      {loading ? (
-        <div className="w-full p-10 flex justify-center items-center">
-          <Spinner />
+    <section className="flex flex-col gap-4 md:gap-10">
+      <div className="w-full border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
+        <div className="flex justify-between items-center mb-4 md:mb-10">
+          <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
+          <Button onClick={logOut} customClass="bg-red-500">
+            Log Out
+          </Button>
         </div>
-      ) : (
-        <div className="flex flex-col items-center md:flex-row gap-10">
-          <div className="w-full md:w-1/2 flex flex-col gap-4 justify-center items-center">
+        <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-10">
+          <div className="flex flex-col gap-4 justify-center items-center">
             <ProfileAvatar
               disabled={editMode}
               onChange={onImgUrlChange}
@@ -68,62 +68,58 @@ function ProfileSection({ editSvg, logOut, userProfile, loading }) {
               )}
             </button>
           </div>
-          <div className="w-full md:w-1/2 flex flex-col gap-4">
-            <div className="w-full flex flex-col gap-2">
-              <label
-                htmlFor="username"
-                className="text-md md:text-lg font-semibold"
-              >
-                Username
-              </label>
-              <input
-                type="text"
-                placeholder=""
-                id="username"
-                className="outline-none text-lg"
-                disabled={editMode}
-                onChange={onChange}
-                value={username}
-              />
-            </div>
-            <div className="w-full flex flex-col gap-2">
-              <label
-                htmlFor="email"
-                className="text-md md:text-lg font-semibold"
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                placeholder=""
-                id="email"
-                className="outline-none text-lg"
-                disabled={true}
-                onChange={onChange}
-                value={email}
-              />
-            </div>
-            <div className="w-full flex flex-col gap-2">
-              <label
-                htmlFor="phoneNumber"
-                className="text-md md:text-lg font-semibold"
-              >
-                Phone
-              </label>
-              <input
-                type="text"
-                placeholder=""
-                id="phoneNumber"
-                className="outline-none text-lg"
-                disabled={editMode}
-                onChange={onChange}
-                value={phoneNumber}
-              />
-            </div>
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Input
+              title="Username"
+              type="text"
+              placeholder=""
+              id="username"
+              className="outline-none text-lg"
+              disabled={editMode}
+              onChange={onChange}
+              value={username}
+            />
+            <Input
+              title="Email"
+              type="text"
+              placeholder=""
+              id="email"
+              className="outline-none text-lg"
+              disabled={true}
+              onChange={onChange}
+              value={email}
+            />
+            <Input
+              title="Phone Number"
+              type="text"
+              placeholder=""
+              id="phoneNumber"
+              className="outline-none text-lg"
+              disabled={editMode}
+              onChange={onChange}
+              value={phoneNumber}
+            />
           </div>
         </div>
-      )}
-    </div>
+      </div>
+      <Address editSvg={editSvg} userProfile={userProfile} />
+      <Payment editSvg={editSvg} userProfile={userProfile} />
+      <div className="w-full flex flex-col md:flex-row gap-4 md:gap-10 border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
+        <div className="w-full md:w-1/2 flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Reset Password</h2>
+          <Button
+            onClick={() => resetPassword(email)}
+            customClass="bg-blue-500 md:w-44"
+          >
+            Reset
+          </Button>
+        </div>
+        <div className="w-full md:w-1/2 flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Delete Account</h2>
+          <Button customClass="bg-red-500 md:w-44">Delete</Button>
+        </div>
+      </div>
+    </section>
   );
 }
 

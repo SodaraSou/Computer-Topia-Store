@@ -2,7 +2,16 @@ import { useState } from "react";
 import ShowPassword from "../../assets/svg/eye-solid.svg";
 import HidePassword from "../../assets/svg/eye-slash-solid.svg";
 
-function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
+function Input({
+  title,
+  type,
+  placeholder,
+  id,
+  onChange,
+  value,
+  isRequired,
+  disabled,
+}) {
   const isPasswordInput = type === "password";
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,6 +34,7 @@ function Input({ title, type, placeholder, id, onChange, value, isRequired }) {
           value={value}
           required={isRequired}
           className="rounded-xl w-full px-4 py-2 border focus:outline-none focus:ring focus:border-[#5E17EB]"
+          disabled={disabled}
         />
         {isPasswordInput && (
           <button

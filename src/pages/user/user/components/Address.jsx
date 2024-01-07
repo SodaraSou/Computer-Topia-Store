@@ -26,7 +26,7 @@ function Address({ editSvg, userProfile }) {
     setEditMode(!editMode);
   };
   return (
-    <div className="w-full border border-[#D9D9D9] rounded-xl p-4 md:p-10">
+    <div className="w-full border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-bold">Address</h1>
         <button onClick={onSubmit}>
