@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import EmptyCart from "../../../assets/img/Empty_Cart.png";
 import {
   getCartListItem,
   setCartTotalPrice,
@@ -72,10 +71,7 @@ function Cart() {
           </div>
         ) : (
           <div className="w-full flex flex-col justify-center items-center gap-4 p-10">
-            <FontAwesomeIcon
-              icon={faCartShopping}
-              className="text-[#5E17EB] w-10 h-10"
-            />
+            <img src={EmptyCart} alt="" className="w-[200px]" />
             <p className="text-xl md:text-2xl font-semibold">
               No Items In Cart
             </p>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -13,11 +13,12 @@ import { setProfile } from "../user/userSlice";
 import CheckoutItem from "./components/CheckoutItem";
 import CheckoutSidebar from "./components/CheckoutSidebar";
 import Spinner from "../../../ui/Spinner";
+import { Navigate } from "react-router-dom";
 
 function Checkout() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const userProfile = useSelector((state) => state.user.userProfile);
+  const totalItem = useSelector((state) => state.cart.totalCartItem);
   const checkoutList = useSelector((state) => state.checkout.checkoutList);
   const checkoutPrice = useSelector(
     (state) => state.checkout.totalCheckoutPrice
@@ -37,15 +38,9 @@ function Checkout() {
       unsubscribeGetUser;
     };
   }, [dispatch]);
-  // const [fullLoading, setFullLoading] = useState(false);
-  // const handleCheckout = async () => {
-  //   setFullLoading(true);
-  //   const response = await checkout(checkoutList, checkoutPrice);
-  //   setFullLoading(false);
-  //   if (response) {
-  //     navigate("/");
-  //   }
-  // };
+  if (totalItem === 0) {
+    return <Navigate to="/" />;
+  }
   if (loading) {
     return <Spinner fullScreenSpinner={true} />;
   }

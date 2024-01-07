@@ -1,5 +1,7 @@
 import { Link } from "react-scroll";
 import Router from "../../../../assets/img/wifi-router.png";
+import Cable from "../../../../assets/img/usb-c-cable.webp";
+import Adaptor from "../../../../assets/img/magsafe.webp";
 
 function AccessorySidebar() {
   const accessoriesType = [
@@ -7,9 +9,17 @@ function AccessorySidebar() {
       name: "Router",
       img: Router,
     },
+    {
+      name: "Cable",
+      img: Cable,
+    },
+    {
+      name: "Adaptor",
+      img: Adaptor,
+    },
   ];
   return (
-    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10">
+    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 mr-4 md:mr-10">
       {accessoriesType.map((accessoriesType, index) => (
         <li key={index}>
           <Link

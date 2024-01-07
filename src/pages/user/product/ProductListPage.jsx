@@ -6,7 +6,12 @@ import {
   getProductByType,
   getProductByBrand,
 } from "../../../services/product.api";
-import { setLoading, setProductList, sortByPrice } from "./productSlice";
+import {
+  setLoading,
+  setProductList,
+  sortByPrice,
+  setIsEmpty,
+} from "./productSlice";
 import { setOpenMenu } from "../home/homeslice";
 import BrandSidebar from "./components/BrandSidebar";
 import ProductList from "../../../ui/ProductList";
@@ -21,12 +26,13 @@ function ProductListPage() {
   const { type, productType } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.product.productList);
+  const isEmpty = useSelector((state) => state.product.isEmpty);
   const loading = useSelector((state) => state.product.loading);
   const filter = [
     { id: 1, type: "Highest Price" },
     { id: 2, type: "Lowest Price" },
-    { id: 3, type: "Offer" },
-    { id: 4, type: "A-Z" },
+    { id: 3, type: "Name A-Z" },
+    { id: 4, type: "Offer" },
   ];
   let section = [];
   switch (productType) {
@@ -122,6 +128,12 @@ function ProductListPage() {
         {
           name: "Router",
         },
+        {
+          name: "Cable",
+        },
+        {
+          name: "Adaptor",
+        },
       ];
     default:
       break;
@@ -129,6 +141,7 @@ function ProductListPage() {
   const [selectedType, setSelectedType] = useState(null);
   useEffect(() => {
     setSelectedType(null);
+    dispatch(setIsEmpty());
   }, [type, productType]);
 
   useEffect(() => {
@@ -172,7 +185,7 @@ function ProductListPage() {
             </DropdownButton>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-4 md:gap-10">
+        <div className="flex flex-col md:flex-row">
           <div>
             {productType === "Laptop" && <BrandSidebar />}
             {productType === "PC-Hardware" && <HardwareTypeSidebar />}
@@ -185,59 +198,154 @@ function ProductListPage() {
                 <div className="bg-[#5E17EB] text-white p-4 mb-4 md:mb-10">
                   <h1 className="text-2xl font-bold">{section.name}</h1>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div>
                   {productType === "Laptop" && (
-                    <ProductList
-                      productList={productList.filter(
-                        (product) => product.data.brand === section.name
+                    <>
+                      {isEmpty ? (
+                        <div className="flex justify-center">
+                          <p className="text-lg md:text-2xl">No Product</p>
+                        </div>
+                      ) : (
+                        <>
+                          {productList.filter(
+                            (product) => product.data.brand === section.name
+                          ).length === 0 ? (
+                            <div className="flex justify-center">
+                              <p className="text-lg md:text-2xl">No Product</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {" "}
+                              <ProductList
+                                productList={productList.filter(
+                                  (product) =>
+                                    product.data.brand === section.name
+                                )}
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
-                    />
+                    </>
                   )}
                   {productType === "PC-Hardware" && (
-                    <ProductList
-                      productList={productList.filter(
-                        (product) => product.data.hardwareType === section.name
+                    <>
+                      {isEmpty ? (
+                        <div className="flex justify-center">
+                          <p className="text-lg md:text-2xl">No Product</p>
+                        </div>
+                      ) : (
+                        <>
+                          {productList.filter(
+                            (product) =>
+                              product.data.hardwareType === section.name
+                          ).length === 0 ? (
+                            <div className="flex justify-center">
+                              <p className="text-lg md:text-2xl">No Product</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {" "}
+                              <ProductList
+                                productList={productList.filter(
+                                  (product) =>
+                                    product.data.hardwareType === section.name
+                                )}
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
-                    />
+                    </>
                   )}
                   {productType === "Peripherals" && (
-                    <ProductList
-                      productList={productList.filter(
-                        (product) =>
-                          product.data.PeripheralsType === section.name
+                    <>
+                      {isEmpty ? (
+                        <div className="flex justify-center">
+                          <p className="text-lg md:text-2xl">No Product</p>
+                        </div>
+                      ) : (
+                        <>
+                          {productList.filter(
+                            (product) =>
+                              product.data.peripheralType === section.name
+                          ).length === 0 ? (
+                            <div className="flex justify-center">
+                              <p className="text-lg md:text-2xl">No Product</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {" "}
+                              <ProductList
+                                productList={productList.filter(
+                                  (product) =>
+                                    product.data.peripheralType ===
+                                    section.name
+                                )}
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
-                    />
+                    </>
                   )}
                   {productType === "Accessories" && (
-                    <ProductList
-                      productList={productList.filter(
-                        (product) =>
-                          product.data.accessoriesType === section.name
+                    <>
+                      {isEmpty ? (
+                        <div className="flex justify-center">
+                          <p className="text-lg md:text-2xl">No Product</p>
+                        </div>
+                      ) : (
+                        <>
+                          {productList.filter(
+                            (product) =>
+                              product.data.accessoriesType === section.name
+                          ).length === 0 ? (
+                            <div className="flex justify-center">
+                              <p className="text-lg md:text-2xl">No Product</p>
+                            </div>
+                          ) : (
+                            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                              {" "}
+                              <ProductList
+                                productList={productList.filter(
+                                  (product) =>
+                                    product.data.accessoriesType ===
+                                    section.name
+                                )}
+                              />
+                            </div>
+                          )}
+                        </>
                       )}
-                    />
+                    </>
                   )}
                 </div>
               </Element>
             ))}
             {type === "brand" && (
-              <div>
-                <div className="flex justify-between items-center mb-4 md:mb-10">
-                  {/* <h1 className="text-2xl md:text-4xl font-bold">
-                    {productType}
-                  </h1> */}
-                  {/* <div>
-                    <DropdownButton
-                      dropdownContent={filter}
-                      onSelect={handleTypeSelect}
-                    >
-                      Sort by: {selectedType}
-                    </DropdownButton>
-                  </div> */}
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  <ProductList productList={productList} />
-                </div>
-              </div>
+              <>
+                {isEmpty ? (
+                  <div className="flex justify-center">
+                    <p className="text-2xl md:text-4xl font-semibold">
+                      No Product
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    {productList.length === 0 ? (
+                      <div className="flex justify-center">
+                        <p className="text-lg md:text-2xl">No Product</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {" "}
+                        <ProductList productList={productList} />
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             )}
           </div>
         </div>
