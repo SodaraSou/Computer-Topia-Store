@@ -84,13 +84,6 @@ export const addItemToCart = async (
           subBuyInTotal,
         });
       }
-      // const stock = await checkStock(productId);
-      // for (const item of updatedItems) {
-      //   if (stock < item.quantity) {
-      //     toast.error("Exceeds Available Stock!");
-      //     return;
-      //   }
-      // }
       const totalPrice = updatedItems.reduce(
         (total, item) => total + item.subTotal,
         0
@@ -154,14 +147,19 @@ export const getListItemFromCart = async (callback) => {
   }
 };
 
-export const checkout = async (checkoutList, checkoutPrice) => {
+export const checkout = async (
+  checkoutList,
+  checkoutPrice,
+  address,
+  username,
+  phoneNumber
+) => {
   try {
     const orderRef = collection(dbFirestore, "order");
     const totalIncome = checkoutList.reduce(
       (total, item) => total + (item.subTotal - item.subBuyInTotal),
       0
     );
-    console.log(totalIncome);
     await addDoc(orderRef, {
       userId: auth.currentUser.uid,
       items: checkoutList,
@@ -169,6 +167,11 @@ export const checkout = async (checkoutList, checkoutPrice) => {
       totalIncome,
       orderStatus: "Pending",
       orderAt: serverTimestamp(),
+      deliveryBy: "",
+      trackingCode: "",
+      ...address,
+      username,
+      phoneNumber,
     });
     const orderRefToRemove = doc(dbFirestore, "cart", auth.currentUser.uid);
     await setDoc(orderRefToRemove, { items: [], totalPrice: 0 });
@@ -204,15 +207,6 @@ export const recieveProduct = async (
       orderStatus: "Complete",
       orderAt: orderAt,
     });
-    const orderHistoryRef = doc(dbFirestore, "orderHistory", orderId);
-    await setDoc(orderHistoryRef, {
-      userId: auth.currentUser.uid,
-      items: productList,
-      checkoutPrice,
-      orderStatus: "Complete",
-      orderAt: orderAt,
-    });
-    // await deleteDoc(doc(dbFirestore, "order", orderId));
     toast.success("Order Complete!");
   } catch (error) {
     console.log(error);

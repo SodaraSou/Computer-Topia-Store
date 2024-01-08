@@ -92,6 +92,14 @@ function LaptopDetail({ productDetails }) {
             {productDetails.warranty}
           </td>
         </tr>
+        <tr className="bg-white">
+          <td className="md:text-lg w-1/6 py-2 px-4 text-sm font-semibold">
+            Year
+          </td>
+          <td className="md:text-lg w-5/6 py-2 px-4 text-sm">
+            {productDetails.year}
+          </td>
+        </tr>
       </tbody>
     </table>
   );

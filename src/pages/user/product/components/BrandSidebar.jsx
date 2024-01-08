@@ -7,9 +7,9 @@ import MICROSOFT from "../../../../assets/img/MICROSOFT.webp";
 import LENOVO from "../../../../assets/img/LENOVO.webp";
 import DELL from "../../../../assets/img/DELL.webp";
 import GIGABYTE from "../../../../assets/img/GIGABYTE.webp";
-import APPLE from "../../../../assets/img/APPLE.webp";
+import APPLE from "../../../../assets/img/APPLE.png";
 
-function BrandSidebar() {
+function BrandSidebar({ toggleMenu }) {
   const brand = [
     {
       id: 0,
@@ -58,22 +58,25 @@ function BrandSidebar() {
     },
   ];
   return (
-    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 mr-4 md:mr-10">
-      {brand.map((brand) => (
-        <li key={brand.id}>
-          <Link
-            activeClass="active"
-            to={brand.brand}
-            spy={true}
-            smooth={true}
-            offset={-90}
-            duration={500}
-          >
-            <img src={brand.img} alt="hardware_type" className="w-full" />
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="sticky top-20 left-0 flex flex-col items-start gap-4 lg:mr-10">
+        {brand.map((brand) => (
+          <li key={brand.id}>
+            <Link
+              onClick={toggleMenu}
+              activeClass="active"
+              to={brand.brand}
+              spy={true}
+              smooth={true}
+              offset={-90}
+              duration={500}
+            >
+              <img src={brand.img} alt="hardware_type" className="w-full" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 

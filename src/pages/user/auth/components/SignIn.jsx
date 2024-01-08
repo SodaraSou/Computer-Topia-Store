@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInUser, signInWithGoogle } from "../../../../services/user.api";
-import UserContext from "../../../../contexts/user/UserContext";
+import { signInUser } from "../../../../services/user.api";
 import GoogleSvg from "../../../../assets/svg/google.svg";
 import Input from "../../../../ui/shared/Input";
 import Button from "../../../../ui/shared/Button";
@@ -27,14 +26,14 @@ function SignIn({ setAuthOption, setLoading }) {
       navigate("/");
     }
   };
-  const googleAuth = async () => {
-    setLoading(true);
-    const googleLoginStatus = await signInWithGoogle();
-    setLoading(false);
-    if (googleLoginStatus) {
-      navigate("/");
-    }
-  };
+  // const googleAuth = async () => {
+  //   setLoading(true);
+  //   const googleLoginStatus = await signInWithGoogle();
+  //   setLoading(false);
+  //   if (googleLoginStatus) {
+  //     navigate("/");
+  //   }
+  // };
   return (
     <div className="w-full md:w-1/2 p-10">
       <h1 className="text-4xl font-bold mb-10">Login</h1>
@@ -79,7 +78,7 @@ function SignIn({ setAuthOption, setLoading }) {
           </button>
         </p>
       </div>
-      <div className="relative flex items-center justify-center py-2">
+      {/* <div className="relative flex items-center justify-center py-2">
         <div className="h-[1px] bg-black flex-grow"></div>
         <p className="absolute text-lg bg-[#EAECF6] px-3">or sign in with</p>
       </div>
@@ -88,7 +87,7 @@ function SignIn({ setAuthOption, setLoading }) {
           {" "}
           <img src={GoogleSvg} alt="Facebook Logo" className="w-7 h-7" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

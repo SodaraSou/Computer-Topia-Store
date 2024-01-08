@@ -184,6 +184,26 @@ function PCHardwareForm({
       offer: item ? item.offer : 0,
       warranty: item ? item.warranty : "",
     },
+    Monitor: {
+      model: item ? item.model : "",
+      brand: item ? item.brand : "",
+      year: item ? item.year : "",
+      productImgs: item ? item.productImgs : [],
+      type: PCHardwareType,
+      hardwareType: "Monitor",
+      screenSize: item ? item.screenSize : "",
+      displayType: item ? item.displayType : "",
+      adaptiveSyncTechnology: item ? item.adaptiveSyncTechnology : "",
+      resolution: item ? item.resolution : "",
+      aspectRatio: item ? item.aspectRatio : "",
+      refreshRate: item ? item.refreshRate : "",
+      videoPort: item ? item.videoPort : "",
+      stock: item ? item.stock : 0,
+      buyInPrice: item ? item.buyInPrice : 0,
+      price: item ? item.price : 0,
+      offer: item ? item.offer : 0,
+      warranty: item ? item.warranty : "",
+    },
   };
   const handleOption = (e) => {
     setSelectedValue(e.target.value);
@@ -366,6 +386,22 @@ function PCHardwareForm({
           />
         ));
       break;
+    case "Monitor":
+      hardwareFields = Object.keys(initialProductState.Monitor)
+        .filter(
+          (key) =>
+            key !== "type" && key !== "hardwareType" && key !== "productImgs"
+        )
+        .map((key) => (
+          <InputGroup
+            key={key}
+            title={key}
+            id={key}
+            onChange={onChange}
+            value={productData.Monitor[key]}
+          />
+        ));
+      break;
     default:
       hardwareFields = null;
   }
@@ -452,6 +488,7 @@ function PCHardwareForm({
                     <option value="Cooler">Cooler</option>
                     <option value="PSU">Power Supply</option>
                     <option value="Case">PC Case</option>
+                    <option value="Monitor">Monitor</option>
                   </select>
                 </div>
                 <InputGroup

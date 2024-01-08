@@ -208,6 +208,23 @@ function Dashboard() {
               listType="NewOrder"
             />
           </div>
+          <div className="p-4 md:p-10 w-full bg-[#EAECF6]">
+            <div className="flex justify-between items-center mb-4 md:mb-10">
+              <h1 className="text-2xl md:text-4xl font-bold">Shipping Order</h1>
+              <Link
+                to="/order"
+                className="rounded-xl bg-[#5E17EB] text-white px-4 md:px-2 py-2 md:h-10 md:w-28 font-semibold text-center"
+              >
+                View Order
+              </Link>
+            </div>
+            <Pagination
+              listItem={orderList.filter(
+                (order) => order.data.orderStatus === "Shipping"
+              )}
+              listType="Shipping"
+            />
+          </div>
         </div>
       </motion.div>
     </section>

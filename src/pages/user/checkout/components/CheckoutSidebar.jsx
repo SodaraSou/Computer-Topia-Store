@@ -75,7 +75,13 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
     await updateUserPayment(newPayment);
     await updateUserAddress(address);
     await updatePhoneNumber(phoneNumber);
-    const response = await checkout(checkoutList, checkoutPrice);
+    const response = await checkout(
+      checkoutList,
+      checkoutPrice,
+      address,
+      cardName,
+      phoneNumber
+    );
     if (response) {
       navigate("/");
     }

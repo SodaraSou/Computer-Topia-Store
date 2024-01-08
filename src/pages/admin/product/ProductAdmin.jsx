@@ -33,7 +33,7 @@ function ProductAdmin() {
           actionType="handleAddProduct"
         />
       )}
-      <div className="flex justify-between mb-10">
+      <div className="flex justify-between">
         <button onClick={() => setSelectedType(null)}>
           <h1 className="text-2xl md:text-4xl font-bold">Product</h1>
         </button>
@@ -45,7 +45,7 @@ function ProductAdmin() {
           Add Item
         </DropdownButton>
       </div>
-      <div className="mt-10">
+      <div className="mt-4 md:mt-10">
         <ProductList title="Product List" listProduct={listProduct} />
       </div>
     </section>

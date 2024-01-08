@@ -12,7 +12,6 @@ function ProductItem({ item, id }) {
     >
       <div className="overflow-hidden">
         <img
-          // item.productImgs.length > 0 ? item.productImgs[0] :
           src={item.productImgs.length > 0 ? item.productImgs[0] : StockImg}
           alt="stock_img"
           className="w-full object-cover"
@@ -20,7 +19,16 @@ function ProductItem({ item, id }) {
       </div>
       <div className="p-4 md:p-10 flex flex-col gap-2 md:gap-4 text-center">
         <p className="text-sm md:text-base">{item.model}</p>
-        <p className="text-sm md:text-base">{priceToDisplay}</p>
+        {item.offer === 0 ? (
+          <p className="text-sm md:text-base">{priceToDisplay}</p>
+        ) : (
+          <div className="flex justify-center gap-4">
+            <s className="text-sm md:text-base">
+              {priceToDisplay}
+            </s>
+            <p className="text-sm md:text-base text-red-500">{formatCurrency(item.offer)}</p>
+          </div>
+        )}
       </div>
     </Link>
   );

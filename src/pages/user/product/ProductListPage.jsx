@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Element } from "react-scroll";
+import { Carousel } from "@material-tailwind/react";
 import {
   getProductByType,
   getProductByBrand,
@@ -11,8 +12,11 @@ import {
   setProductList,
   sortByPrice,
   setIsEmpty,
+  setOpenMenuProduct,
 } from "./productSlice";
 import { setOpenMenu } from "../home/homeslice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import BrandSidebar from "./components/BrandSidebar";
 import ProductList from "../../../ui/ProductList";
 import DropdownButton from "../../../ui/shared/DropdownButton";
@@ -132,7 +136,7 @@ function ProductListPage() {
           name: "Cable",
         },
         {
-          name: "Adaptor",
+          name: "Adapter",
         },
       ];
     default:
@@ -147,6 +151,7 @@ function ProductListPage() {
   useEffect(() => {
     dispatch(setLoading());
     dispatch(setOpenMenu(false));
+    dispatch(setOpenMenuProduct(false));
     const fetchAllProduct = async () => {
       switch (type) {
         case "type":
@@ -168,29 +173,64 @@ function ProductListPage() {
   const handleTypeSelect = (typeSelected) => {
     setSelectedType(typeSelected);
   };
+  const openMenu = useSelector((state) => state.product.openMenuProduct);
+  const toggleMenu = () => {
+    dispatch(setOpenMenuProduct(!openMenu));
+  };
   if (loading) {
     return <Spinner fullScreenSpinner={true} />;
   }
   return (
     <>
       <section className="p-4 md:py-10 max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-4 md:mb-10">
-          <h1 className="text-2xl md:text-4xl font-bold">{productType}</h1>
-          <div>
-            <DropdownButton
-              dropdownContent={filter}
-              onSelect={handleTypeSelect}
-            >
-              Sort by: {selectedType}
-            </DropdownButton>
+        <div className="w-full">
+          <div className="flex justify-between items-center mb-4 md:mb-10">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl md:text-4xl font-bold">{productType}</h1>
+              <button className="lg:hidden" onClick={toggleMenu}>
+                <FontAwesomeIcon icon={faBars} />
+              </button>
+            </div>
+            <div>
+              <DropdownButton
+                dropdownContent={filter}
+                onSelect={handleTypeSelect}
+              >
+                Sort by: {selectedType}
+              </DropdownButton>
+            </div>
           </div>
+          {openMenu && (
+            <div className="absolute bg-white top-34 z-100 lg:hidden">
+              {productType === "Laptop" && (
+                <div className="p-4">
+                  <BrandSidebar toggleMenu={toggleMenu} />
+                </div>
+              )}
+              {productType === "PC-Hardware" && (
+                <div className="p-4">
+                  <HardwareTypeSidebar toggleMenu={toggleMenu} />
+                </div>
+              )}
+              {productType === "Peripherals" && (
+                <div className="p-4">
+                  <PeripheralSidebar toggleMenu={toggleMenu} />
+                </div>
+              )}
+              {productType === "Accessories" && (
+                <div className="p-4">
+                  <AccessorySidebar toggleMenu={toggleMenu} />
+                </div>
+              )}
+            </div>
+          )}
         </div>
-        <div className="flex flex-col md:flex-row">
-          <div>
+        <div className="flex flex-col lg:flex-row">
+          <div className="hidden lg:block">
             {productType === "Laptop" && <BrandSidebar />}
             {productType === "PC-Hardware" && <HardwareTypeSidebar />}
             {productType === "Peripherals" && <PeripheralSidebar />}
-            {productType === "Accessories" && <AccessorySidebar />}{" "}
+            {productType === "Accessories" && <AccessorySidebar />}
           </div>
           <div className="flex flex-col gap-4 md:gap-10 w-full">
             {section.map((section, index) => (
@@ -279,8 +319,7 @@ function ProductListPage() {
                               <ProductList
                                 productList={productList.filter(
                                   (product) =>
-                                    product.data.peripheralType ===
-                                    section.name
+                                    product.data.peripheralType === section.name
                                 )}
                               />
                             </div>

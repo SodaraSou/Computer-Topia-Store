@@ -5,10 +5,11 @@ import {
   orderBy,
   onSnapshot,
   updateDoc,
+  addDoc,
+  getDoc,
 } from "firebase/firestore";
 import { dbFirestore } from "../../firebase.config";
 import { toast } from "react-toastify";
-import { formatDate } from "../../utils/helpers";
 
 export const getOrderList = (callback) => {
   const orderRef = collection(dbFirestore, "order");
@@ -55,9 +56,39 @@ export const getCompletedOrderList = (callback) => {
   return unsubscribe;
 };
 
+export const updateDelivery = async (delivery, orderId) => {
+  try {
+    const orderRef = doc(dbFirestore, "order", orderId);
+    await updateDoc(orderRef, {
+      deliveryBy: delivery.deliveryBy,
+      trackingCode: delivery.trackingCode,
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    toast.error("Something Went Wrong!");
+  }
+};
+
 export const changeOrderStatus = async (orderId, order, orderStatus) => {
   const orderRef = doc(dbFirestore, "order", orderId);
+  // const cancelOrderRef = collection(dbFirestore, "cancelOrder");
   try {
+    const items = order.items;
+
+    items.forEach(async (item) => {
+      const { productId, quantity } = item;
+      const productRef = doc(dbFirestore, "product", productId);
+      const productSnapshot = await getDoc(productRef);
+      const productData = productSnapshot.data();
+      const newStock = productData.stock + quantity;
+      await updateDoc(productRef, { stock: newStock });
+    });
+    // await addDoc(cancelOrderRef, {
+    //   ...order,
+    //   orderStatus,
+    // });
+    // await deleteDoc(orderRef);
     await updateDoc(orderRef, {
       ...order,
       orderStatus,
@@ -78,7 +109,11 @@ export const calcTotalStatus = (orderList) => {
 
   const monthlyOrders = orderList.filter((order) => {
     const orderDate = order.data.orderAt.toDate();
-    return orderDate >= firstDayOfMonth && orderDate <= lastDayOfMonth;
+    return (
+      orderDate >= firstDayOfMonth &&
+      orderDate <= lastDayOfMonth &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
 
   const totalOrdered = monthlyOrders.length;
@@ -113,7 +148,9 @@ export const calcTotalOrderMonthly = (orderList) => {
   };
   const orders2024 = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year;
+    return (
+      orderDate.getFullYear() === year && order.data.orderStatus !== "Cancelled"
+    );
   });
   orders2024.forEach((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
@@ -146,7 +183,11 @@ export const calcTotalOrderWeeklyInMonth = (orderList) => {
   };
   const ordersInMonth = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   ordersInMonth.forEach((order) => {
@@ -170,7 +211,11 @@ export const calcTotalOrderDailyInMonth = (orderList) => {
 
   const filteredOrders = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
 
   filteredOrders.forEach((order) => {
@@ -191,7 +236,11 @@ export const calcTotalRevenueDaily = (orderList) => {
 
   const filteredOrders = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
 
   filteredOrders.forEach((order) => {
@@ -200,7 +249,6 @@ export const calcTotalRevenueDaily = (orderList) => {
     const orderRevenue = order.data.checkoutPrice;
     revenueDaily[`${dayOfMonth}`] += orderRevenue;
   });
-  console.log(revenueDaily);
   return revenueDaily;
 };
 
@@ -213,7 +261,11 @@ export const calcTotalRevenueWeekly = (orderList) => {
   };
   const ordersInMonth = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   ordersInMonth.forEach((order) => {
@@ -244,7 +296,9 @@ export const calcTotalRevenueMonthly = (orderList) => {
   };
   const ordersInYear = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year;
+    return (
+      orderDate.getFullYear() === year && order.data.orderStatus !== "Cancelled"
+    );
   });
   ordersInYear.forEach((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
@@ -266,7 +320,6 @@ export const calcTotalRevenueMonthly = (orderList) => {
     const orderRevenue = order.data.checkoutPrice;
     weeklyRevenue[monthName] += orderRevenue;
   });
-  console.log(weeklyRevenue);
   return weeklyRevenue;
 };
 
@@ -280,7 +333,11 @@ export const calcTotalIncomeDaily = (orderList) => {
 
   const filteredOrders = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
 
   filteredOrders.forEach((order) => {
@@ -289,7 +346,6 @@ export const calcTotalIncomeDaily = (orderList) => {
     const orderIncome = order.data.totalIncome;
     incomeDaily[`${dayOfMonth}`] += orderIncome;
   });
-  console.log(incomeDaily);
   return incomeDaily;
 };
 
@@ -302,7 +358,11 @@ export const calcTotalIncomeWeekly = (orderList) => {
   };
   const ordersInMonth = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year && orderDate.getMonth() === month;
+    return (
+      orderDate.getFullYear() === year &&
+      orderDate.getMonth() === month &&
+      order.data.orderStatus !== "Cancelled"
+    );
   });
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   ordersInMonth.forEach((order) => {
@@ -333,7 +393,9 @@ export const calcTotalIncomeMonthly = (orderList) => {
   };
   const ordersInYear = orderList.filter((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
-    return orderDate.getFullYear() === year;
+    return (
+      orderDate.getFullYear() === year && order.data.orderStatus !== "Cancelled"
+    );
   });
   ordersInYear.forEach((order) => {
     const orderDate = new Date(order.data.orderAt.toDate());
@@ -355,7 +417,6 @@ export const calcTotalIncomeMonthly = (orderList) => {
     const orderRevenue = order.data.totalIncome;
     weeklyRevenue[monthName] += orderRevenue;
   });
-  console.log(weeklyRevenue);
   return weeklyRevenue;
 };
 
