@@ -104,7 +104,7 @@ function ProfileSection({ editSvg, logOut, userProfile, loading }) {
       </div>
       <Address editSvg={editSvg} userProfile={userProfile} />
       <Payment editSvg={editSvg} userProfile={userProfile} />
-      <div className="w-full flex flex-col md:flex-row gap-4 md:gap-10 border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
+      {/* <div className="w-full flex flex-col md:flex-row gap-4 md:gap-10 border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
         <div className="w-full md:w-1/2 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Reset Password</h2>
           <Button
@@ -118,7 +118,7 @@ function ProfileSection({ editSvg, logOut, userProfile, loading }) {
           <h2 className="text-2xl font-bold">Delete Account</h2>
           <Button customClass="bg-red-500 md:w-44">Delete</Button>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

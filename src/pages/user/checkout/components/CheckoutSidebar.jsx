@@ -96,7 +96,7 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
       <div className="flex flex-col gap-4">
         <h1 className="text-lg font-semibold">Payment Details</h1>
         <div className="flex flex-col gap-4">
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <input
               id="default-radio-2"
               type="radio"
@@ -125,69 +125,67 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
             <label forhtml="default-radio-2" className="ml-2 text-sm">
               Credit Card
             </label>
-          </div>
+          </div> */}
         </div>
       </div>
-      {paymentMethod === "QR_Code" && (
+      {/* {paymentMethod === "QR_Code" && (
         <>
           <div className="h-[1px] bg-[#D9D9D9]"></div>
           <h2 className="text-lg font-semibold">QR Code</h2>
           <img src={QrCode} alt="qr_code" />
         </>
-      )}
-      {paymentMethod === "Credit" && (
-        <>
-          <div className="h-[1px] bg-[#D9D9D9]"></div>
-          <h2 className="text-lg font-semibold">Credit Card</h2>
+      )} */}
+      <>
+        {/* <div className="h-[1px] bg-[#D9D9D9]"></div> */}
+        {/* <h2 className="text-lg font-semibold">Credit Card</h2> */}
+        <div className="flex gap-4">
+          <div className="w-[60px] h-auto">
+            <img src={VisaABA} alt="credit_card" />
+          </div>
+          <div className="w-[60px] h-auto">
+            <img src={VisaAceleda} alt="credit_card" />
+          </div>
+          <div className="w-[60px] h-auto">
+            <img src={VisaPrince} alt="credit_card" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <Input
+            title="Card Holder Name"
+            type="text"
+            id="cardName"
+            value={cardName}
+            onChange={onChangePayment}
+            isRequired={true}
+          />
+          <Input
+            title="Card Number"
+            type="text"
+            id="cardNumber"
+            value={cardNumber}
+            onChange={onChangePayment}
+            isRequired={true}
+          />
           <div className="flex gap-4">
-            <div className="w-[60px] h-auto">
-              <img src={VisaABA} alt="credit_card" />
-            </div>
-            <div className="w-[60px] h-auto">
-              <img src={VisaAceleda} alt="credit_card" />
-            </div>
-            <div className="w-[60px] h-auto">
-              <img src={VisaPrince} alt="credit_card" />
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
             <Input
-              title="Card Holder Name"
+              title="Expiry"
               type="text"
-              id="cardName"
-              value={cardName}
+              id="cardExpDate"
+              value={cardExpDate}
               onChange={onChangePayment}
               isRequired={true}
             />
             <Input
-              title="Card Number"
+              title="CVV"
               type="text"
-              id="cardNumber"
-              value={cardNumber}
+              id="cvv"
+              value={cvv}
               onChange={onChangePayment}
               isRequired={true}
             />
-            <div className="flex gap-4">
-              <Input
-                title="Expiry"
-                type="text"
-                id="cardExpDate"
-                value={cardExpDate}
-                onChange={onChangePayment}
-                isRequired={true}
-              />
-              <Input
-                title="CVV"
-                type="text"
-                id="cvv"
-                value={cvv}
-                onChange={onChangePayment}
-                isRequired={true}
-              />
-            </div>
           </div>
-        </>
-      )}
+        </div>
+      </>
       <div className="h-[1px] bg-[#D9D9D9]"></div>
       <h2 className="text-lg font-semibold">Delivery Information</h2>
       <div className="grid grid-cols-2 gap-4">

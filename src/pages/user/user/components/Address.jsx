@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { updateUserAddress } from "../../../../services/user.api";
 import SaveSvg from "../../../../assets/svg/floppy-disk-solid.svg";
+import { toast } from "react-toastify";
 
 function Address({ editSvg, userProfile }) {
   const [inputData, setInputData] = useState({
@@ -21,7 +22,10 @@ function Address({ editSvg, userProfile }) {
   const [editMode, setEditMode] = useState(true);
   const onSubmit = async () => {
     if (!editMode) {
-      await updateUserAddress(inputData);
+      const response = await updateUserAddress(inputData);
+      if (response) {
+        toast.success("Successfully Updated!");
+      }
     }
     setEditMode(!editMode);
   };
