@@ -1,7 +1,7 @@
 import { Link } from "react-scroll";
 import Router from "../../../../assets/img/wifi-router.png";
 import Cable from "../../../../assets/img/usb-c-cable.webp";
-import Adaptor from "../../../../assets/img/magsafe.webp";
+import Adapter from "../../../../assets/img/magsafe.webp";
 
 function AccessorySidebar({ toggleMenu }) {
   const accessoriesType = [
@@ -14,8 +14,8 @@ function AccessorySidebar({ toggleMenu }) {
       img: Cable,
     },
     {
-      name: "Adaptor",
-      img: Adaptor,
+      name: "Adapter",
+      img: Adapter,
     },
   ];
   return (

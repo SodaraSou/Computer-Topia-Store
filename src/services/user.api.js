@@ -267,12 +267,12 @@ export const getUser = (callback) => {
 export const getUserOrderList = (callback) => {
   try {
     const docRef = collection(dbFirestore, "order");
-    const q = query(
-      docRef,
-      where("userId", "==", auth.currentUser.uid),
-      orderBy("orderAt", "desc")
-    );
-    // const q = query(docRef, where("userId", "==", auth.currentUser.uid));
+    // const q = query(
+    //   docRef,
+    //   where("userId", "==", auth.currentUser.uid),
+    //   orderBy("orderAt", "desc")
+    // );
+    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
     const unsubscirbe = onSnapshot(q, (orderSnap) => {
       const list = [];
       orderSnap.forEach((order) => {
