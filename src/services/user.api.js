@@ -202,7 +202,8 @@ export const updateUserProfile = async (username, phoneNumber, img) => {
         });
       }
     }
-    toast.success("Update Success!");
+    // toast.success("Update Success!");
+    return true;
   } catch (error) {
     toast.error("Update Error!");
   }
@@ -220,7 +221,8 @@ export const updateUserAddress = async (inputData) => {
       district,
       province,
     });
-    toast.success("Update Success!");
+    // toast.success("Update Success!");
+    return true;
   } catch (error) {
     toast.error("Update Error!");
   }
@@ -235,7 +237,8 @@ export const updateUserPayment = async (inputData) => {
       cardNumber,
       cardExpDate,
     });
-    toast.success("Update Success!");
+    // toast.success("Update Success!");
+    return true;
   } catch (error) {
     toast.success("Update Error!");
   }

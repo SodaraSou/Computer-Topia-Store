@@ -105,6 +105,59 @@ function Order() {
                   {order.orderStatus}
                 </span>
               </h2>
+              <div>
+                <h1 className="text-xl font-bold">User Address</h1>
+                <div className="h-[1px] bg-[#D9D9D9] my-4"></div>
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="House No"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.houseNo}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Street No"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.streetNo}
+                  />
+                </div>
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="Village"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.village}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Commune"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.commune}
+                  />
+                </div>
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="District"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.district}
+                  />
+                  <input
+                    type="text"
+                    placeholder="City/Province"
+                    className="outline-none text-sm md:text-lg w-full"
+                    disabled={true}
+                    value={order.province}
+                  />
+                </div>
+                <div className="h-[1px] bg-[#D9D9D9] my-4"></div>
+              </div>
               {order.orderStatus === "Shipping" && (
                 <form onSubmit={onSubmit} className="grid grid-cols-2 gap-4">
                   <Input
