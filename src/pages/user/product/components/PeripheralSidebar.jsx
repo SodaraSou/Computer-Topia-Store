@@ -6,7 +6,7 @@ import Headphone from "../../../../assets/img/headphones.webp";
 import Microphone from "../../../../assets/img/mic.webp";
 import Webcam from "../../../../assets/img/web-camera.png";
 
-function PeripheralSidebar() {
+function PeripheralSidebar({ toggleMenu }) {
   const peripheralType = [
     {
       name: "Headphone",
@@ -34,11 +34,12 @@ function PeripheralSidebar() {
     },
   ];
   return (
-    <ul className="sticky top-20 left-0 flex md:flex-col items-start gap-4 md:gap-10 mr-4 md:mr-10">
+    <ul className="sticky top-20 left-0 flex flex-col items-start gap-4 lg:mr-10">
       {peripheralType.map((peripheralType, index) => (
         <li key={index}>
           <Link
             activeClass="active"
+            onClick={toggleMenu}
             to={peripheralType.name}
             spy={true}
             smooth={true}
@@ -51,7 +52,7 @@ function PeripheralSidebar() {
               alt="hardware_type"
               className="w-8 md:w-10 h-8 md:h-10"
             />
-            <p className="hidden lg:block">{peripheralType.name}</p>
+            <p>{peripheralType.name}</p>
           </Link>
         </li>
       ))}

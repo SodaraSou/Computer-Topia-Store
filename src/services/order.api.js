@@ -147,7 +147,13 @@ export const getListItemFromCart = async (callback) => {
   }
 };
 
-export const checkout = async (checkoutList, checkoutPrice) => {
+export const checkout = async (
+  checkoutList,
+  checkoutPrice,
+  address,
+  username,
+  phoneNumber
+) => {
   try {
     const orderRef = collection(dbFirestore, "order");
     const totalIncome = checkoutList.reduce(
@@ -161,6 +167,11 @@ export const checkout = async (checkoutList, checkoutPrice) => {
       totalIncome,
       orderStatus: "Pending",
       orderAt: serverTimestamp(),
+      deliveryBy: "",
+      trackingCode: "",
+      ...address,
+      username,
+      phoneNumber,
     });
     const orderRefToRemove = doc(dbFirestore, "cart", auth.currentUser.uid);
     await setDoc(orderRefToRemove, { items: [], totalPrice: 0 });

@@ -39,13 +39,14 @@ function Product() {
     setQuantity(quantityReturn);
   };
   const addToCart = async () => {
-    const { model, price, productImgs, buyInPrice } = product;
+    const { model, price, productImgs, buyInPrice, offer } = product;
+    const priceToAdd = offer === 0 ? price : offer;
     const reponse = await addItemToCart(
       productId,
       productImgs[0],
       model,
       buyInPrice,
-      price,
+      priceToAdd,
       quantity
     );
     if (reponse) {
@@ -74,7 +75,15 @@ function Product() {
           </h1>
           <hr className="mb-5" />
           <h1 className="text-2xl md:text-4xl font-bold mb-5">
-            {priceToDisplay}
+            {/* {priceToDisplay} */}
+            {product.offer === 0 ? (
+              <>{priceToDisplay}</>
+            ) : (
+              <div className="flex gap-4">
+                <p className="text-red-500 ">{formatCurrency(product.offer)}</p>
+                <s className="text-sm md:text-base">{priceToDisplay}</s>
+              </div>
+            )}
           </h1>
           <hr className="mb-5" />
           <div className="flex gap-5 items-center mb-5">

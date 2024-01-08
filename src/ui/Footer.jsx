@@ -30,9 +30,6 @@ function Footer() {
               <Link>About Us</Link>
             </li>
             <li>
-              <Link>Services</Link>
-            </li>
-            <li>
               <Link>Partners</Link>
             </li>
           </ul>

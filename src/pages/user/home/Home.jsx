@@ -21,7 +21,7 @@ function Home() {
     containScroll: "trimSnaps",
   };
   const [emblaRef1, emblaApi1] = useEmblaCarousel(OPTIONS);
-  const [emblaRef2, emblaApi2] = useEmblaCarousel(OPTIONS);
+  // const [emblaRef2, emblaApi2] = useEmblaCarousel(OPTIONS);
   const [emblaRef3, emblaApi3] = useEmblaCarousel(OPTIONS);
 
   const [emblaRef4, emblaApi4] = useEmblaCarousel(OPTIONS);
@@ -41,17 +41,17 @@ function Home() {
     }
   }, [emblaApi1]);
 
-  const scrollPrev2 = useCallback(() => {
-    if (emblaApi2) {
-      emblaApi2.scrollPrev();
-    }
-  }, [emblaApi2]);
+  // const scrollPrev2 = useCallback(() => {
+  //   if (emblaApi2) {
+  //     emblaApi2.scrollPrev();
+  //   }
+  // }, [emblaApi2]);
 
-  const scrollNext2 = useCallback(() => {
-    if (emblaApi2) {
-      emblaApi2.scrollNext();
-    }
-  }, [emblaApi2]);
+  // const scrollNext2 = useCallback(() => {
+  //   if (emblaApi2) {
+  //     emblaApi2.scrollNext();
+  //   }
+  // }, [emblaApi2]);
 
   const scrollPrev3 = useCallback(() => {
     if (emblaApi3) {
@@ -117,17 +117,17 @@ function Home() {
     {
       id: 1,
       brand: "APPLE",
-      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FAPPLE.webp?alt=media&token=ff9ae895-bdda-457e-9a19-8993dcecc34c",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FAPPLE.png?alt=media&token=c6d4d6f6-9a8d-40cd-9a6a-f77eead46f81",
     },
     {
       id: 2,
       brand: "ASUS",
-      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FASUS.png?alt=media&token=4212ea6e-6a12-48ed-83da-d85192b58f0a",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FASUS-LOGO.png?alt=media&token=22b6795d-5dc5-41f7-b81d-aff51f0cbbcf",
     },
     {
       id: 3,
       brand: "ASUS TUF GAMING",
-      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2FTUFGAMING.png?alt=media&token=09fde5d4-2a1e-4e5f-8ad8-5827bb719490",
+      img: "https://firebasestorage.googleapis.com/v0/b/computer-store-d3f3d.appspot.com/o/store-assets%2Ftuf_logo.png?alt=media&token=82e1acfb-b88d-4f69-b151-ca90bd5e1043",
     },
     {
       id: 4,
@@ -276,18 +276,18 @@ function Home() {
               <Link
                 to={`productList/brand/${brand.brand}`}
                 key={brand.id}
-                className="w-full bg-[#EAECF6] p-4 hidden xl:flex flex-col items-center justify-center gap-4"
+                className="w-full bg-[#EAECF6] p-2 hidden lg:flex flex-col items-center justify-center gap-4"
               >
                 <img
                   src={brand.img ? brand.img : StockImg}
                   alt="avatar"
-                  className="w-[100px] h-[100px] object-cover xl:object-contain bg-white rounded-full"
+                  className="w-full"
                 />
-                <h1 className=" font-semibold">{brand.brand}</h1>
+                {/* <h1 className=" font-semibold">{brand.brand}</h1> */}
               </Link>
             ))}
           </div>
-          <div className="block xl:hidden">
+          <div className="block lg:hidden">
             <div className="embla">
               <div className="embla__viewport" ref={emblaRef3}>
                 <div className="embla__container">
@@ -296,14 +296,14 @@ function Home() {
                       <Link
                         to={`productList/brand/${brand.brand}`}
                         key={brand.id}
-                        className="w-full bg-[#EAECF6] p-4 flex flex-col items-center justify-center gap-4"
+                        className="w-full bg-[#EAECF6] p-2 flex flex-col items-center justify-center gap-4"
                       >
                         <img
                           src={brand.img ? brand.img : StockImg}
                           alt="avatar"
                           className="w-full"
                         />
-                        <h1 className=" font-semibold">{brand.brand}</h1>
+                        {/* <h1 className=" font-semibold">{brand.brand}</h1> */}
                       </Link>
                     </div>
                   ))}
@@ -342,7 +342,7 @@ function Home() {
           <div className="hidden xl:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {productList
               .filter((product) => product.data.type === "Laptop")
-              .slice(0, 4)
+              .slice(0, 8)
               .map((item) => (
                 <ProductItem item={item.data} id={item.id} key={item.id} />
               ))}
@@ -353,7 +353,7 @@ function Home() {
                 <div className="embla__container">
                   {productList
                     .filter((product) => product.data.type === "Laptop")
-                    .slice(0, 4)
+                    .slice(0, 8)
                     .map((item, index) => (
                       <div className="embla__slide" key={index}>
                         <ProductItem item={item.data} id={item.id} />
@@ -401,7 +401,7 @@ function Home() {
           <div className="hidden xl:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {productList
               .filter((product) => product.data.type === "PC-Hardware")
-              .slice(0, 4)
+              .slice(0, 8)
               .map((item) => (
                 <ProductItem item={item.data} id={item.id} key={item.id} />
               ))}
@@ -412,7 +412,7 @@ function Home() {
                 <div className="embla__container">
                   {productList
                     .filter((product) => product.data.type === "PC-Hardware")
-                    .slice(0, 4)
+                    .slice(0, 8)
                     .map((item, index) => (
                       <div className="embla__slide" key={index}>
                         <ProductItem item={item.data} id={item.id} />
@@ -461,7 +461,7 @@ function Home() {
           <div className="hidden xl:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {productList
               .filter((product) => product.data.type === "Peripherals")
-              .slice(0, 4)
+              .slice(0, 8)
               .map((item) => (
                 <ProductItem item={item.data} id={item.id} key={item.id} />
               ))}
@@ -472,7 +472,7 @@ function Home() {
                 <div className="embla__container">
                   {productList
                     .filter((product) => product.data.type === "Peripherals")
-                    .slice(0, 4)
+                    .slice(0, 8)
                     .map((item, index) => (
                       <div className="embla__slide" key={index}>
                         <ProductItem item={item.data} id={item.id} />
@@ -521,7 +521,7 @@ function Home() {
           <div className="hidden xl:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {productList
               .filter((product) => product.data.type === "Accessories")
-              .slice(0, 4)
+              .slice(0, 8)
               .map((item) => (
                 <ProductItem item={item.data} id={item.id} key={item.id} />
               ))}
@@ -532,7 +532,7 @@ function Home() {
                 <div className="embla__container">
                   {productList
                     .filter((product) => product.data.type === "Accessories")
-                    .slice(0, 4)
+                    .slice(0, 8)
                     .map((item, index) => (
                       <div className="embla__slide" key={index}>
                         <ProductItem item={item.data} id={item.id} />

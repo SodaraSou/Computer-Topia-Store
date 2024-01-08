@@ -50,7 +50,8 @@ html {
 }
 
 :root {
-  --slide-size-multiple: 50%;
+  /* --slide-size-multiple: 50%; */
+  --slide-size-multiple: 33.33%;
 }
 
 @media (min-width: 640px) {
@@ -61,13 +62,14 @@ html {
 
 @media (min-width: 768px) {
   :root {
-    --slide-size-multiple: 33.33%;
+    /* --slide-size-multiple: 33.33%; */
+    --slide-size-multiple: 25%;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --slide-size-multiple: 25%;
+    --slide-size-multiple: calc((100% - (4 * var(--slide-spacing))) / 5);
   }
 }
 
@@ -93,6 +95,13 @@ html {
 }
 .embla__slide__multiple {
   flex: 0 0 var(--slide-size-multiple);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+}
+.embla__slide__multiple__v2 {
+  /* flex: 0 0 var(--slide-size-multiple-v2); */
+  flex: 0 0 calc((100% - (4 * var(--slide-spacing))) / 5);
   min-width: 0;
   padding-left: var(--slide-spacing);
   position: relative;

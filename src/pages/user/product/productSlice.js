@@ -5,6 +5,7 @@ const initialState = {
   product: {},
   productList: [],
   isEmpty: false,
+  openMenuProduct: false,
 };
 
 const productSlice = createSlice({
@@ -32,7 +33,7 @@ const productSlice = createSlice({
         };
       },
       reducer(state, action) {
-        const originalList = [...action.payload.productList];
+        const originalList = [...state.productList];
         let sortedList = [...originalList];
 
         switch (action.payload.sort) {
@@ -60,6 +61,9 @@ const productSlice = createSlice({
         state.isEmpty = sortedList.length === 0 && true;
       },
     },
+    setOpenMenuProduct: (state, action) => {
+      state.openMenuProduct = action.payload;
+    },
   },
 });
 
@@ -69,6 +73,7 @@ export const {
   setProductList,
   sortByPrice,
   setIsEmpty,
+  setOpenMenuProduct,
 } = productSlice.actions;
 
 export default productSlice.reducer;

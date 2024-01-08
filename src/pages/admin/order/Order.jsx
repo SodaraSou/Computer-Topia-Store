@@ -48,9 +48,19 @@ function Order() {
         <Modal handleModal={handleModal}>
           <section className="max-w-7xl flex flex-col gap-4 md:gap-10">
             <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
-              <h2 className="text-xl font-bold">
-                Order Id: <span className="text-blue-500">{orderId}</span>
-              </h2>
+              <div>
+                <h2 className="text-xl font-bold">
+                  Order Id: <span className="text-blue-500">{orderId}</span>
+                </h2>
+                <h2 className="text-xl font-bold">
+                  Username:{" "}
+                  <span className="text-blue-500">{order.username}</span>
+                </h2>
+                <h2 className="text-xl font-bold">
+                  Phone Number:{" "}
+                  <span className="text-blue-500">{order.phoneNumber}</span>
+                </h2>
+              </div>
               <div className="h-[1px] w-full bg-[#D9D9D9]"></div>
               {order.items.map((item, index) => (
                 <div key={index} className="flex justify-between items-center">
@@ -88,7 +98,8 @@ function Order() {
                     (order.orderStatus === "Approved" && "text-green-500") ||
                     (order.orderStatus === "Shipping" && "text-blue-500") ||
                     (order.orderStatus === "Cancelled" && "text-red-500") ||
-                    (order.orderStatus === "Pending" && "text-orange-500")
+                    (order.orderStatus === "Pending" && "text-orange-500") ||
+                    (order.orderStatus === "Complete" && "text-green-500")
                   }`}
                 >
                   {order.orderStatus}
