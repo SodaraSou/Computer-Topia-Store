@@ -15,6 +15,7 @@ import OrderHistory from "./components/OrderHistory";
 import Address from "./components/Address";
 import Payment from "./components/Payment";
 import Spinner from "../../../ui/Spinner";
+import { toast } from "react-toastify";
 
 function Profile({ setMainLoading }) {
   const dispatch = useDispatch();
@@ -39,12 +40,13 @@ function Profile({ setMainLoading }) {
       unsubscribeGetOrderList;
     };
   }, [dispatch]);
-  const logOut = () => {
-    dispatch(setCartWhenLogOut());
+  const logOut = async () => {
     setMainLoading(true);
-    const response = signOutUser();
+    dispatch(setCartWhenLogOut());
+    const response = await signOutUser();
     setMainLoading(false);
     if (response) {
+      toast.success("Successfully Log Out!");
       navigate("/authentication");
     }
   };

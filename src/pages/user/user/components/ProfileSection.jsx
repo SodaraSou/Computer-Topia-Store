@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  resetPassword,
   updateUserProfile,
 } from "../../../../services/user.api";
 import SaveSvg from "../../../../assets/svg/floppy-disk-solid.svg";

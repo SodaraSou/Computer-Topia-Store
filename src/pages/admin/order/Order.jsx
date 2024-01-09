@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { formatCurrency } from "../../../utils/helpers";
+import { formatCurrency, formatDate } from "../../../utils/helpers";
 import { updateDelivery } from "../../../contexts/order/OrderAction";
 import OrderContext from "../../../contexts/order/OrderContext";
 import OrderList from "./components/OrderList";
@@ -18,8 +18,8 @@ function Order() {
     orderDispatch({ type: "SET_MODAL", payload: false });
   };
   const [delivery, setDelivery] = useState({
-    deliveryBy: order.deliveryBy ? order.deliveryBy : "",
-    trackingCode: order.trackingCode ? order.trackingCode : "",
+    deliveryBy: order ? order.deliveryBy : "",
+    trackingCode: order ? order.trackingCode : "",
   });
   const onChangeDelivery = (e) => {
     setDelivery((prevState) => ({
@@ -49,17 +49,53 @@ function Order() {
           <section className="max-w-7xl flex flex-col gap-4 md:gap-10">
             <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
               <div>
-                <h2 className="text-xl font-bold">
+                <h1 className="text-4xl font-bold mb-4">Order</h1>
+                <p className="font-semibold">
                   Order Id: <span className="text-blue-500">{orderId}</span>
-                </h2>
-                <h2 className="text-xl font-bold">
-                  Username:{" "}
-                  <span className="text-blue-500">{order.username}</span>
-                </h2>
-                <h2 className="text-xl font-bold">
-                  Phone Number:{" "}
-                  <span className="text-blue-500">{order.phoneNumber}</span>
-                </h2>
+                </p>
+                <p>
+                  <span className="font-semibold">Order At:</span>{" "}
+                  {formatDate(order.orderAt.toDate())}
+                </p>
+                <p className="font-semibold">
+                  Order Status:{" "}
+                  <span
+                    className={`font-semibold ${
+                      (order.orderStatus === "Approved" && "text-green-500") ||
+                      (order.orderStatus === "Shipping" && "text-blue-500") ||
+                      (order.orderStatus === "Cancelled" && "text-red-500") ||
+                      (order.orderStatus === "Pending" && "text-orange-500") ||
+                      (order.orderStatus === "Complete" && "text-green-500")
+                    }`}
+                  >
+                    {order.orderStatus}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-semibold">Order from: </span>
+                  {order.username}
+                </p>
+                <p>
+                  <span className="font-semibold">Phone Number: </span>
+                  {order.phoneNumber}
+                </p>
+                <p>
+                  <span className="font-semibold">Address:</span>{" "}
+                  {order.houseNo}, {order.streetNo}, {order.village},{" "}
+                  {order.commune}, {order.district}, {order.province}
+                </p>
+                {order.orderStatus === "Shipping" && (
+                  <>
+                    <p>
+                      <span className="font-semibold">Delivery by:</span>{" "}
+                      {order.deliveryBy}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Tracking Code:</span>{" "}
+                      {order.trackingCode}
+                    </p>
+                  </>
+                )}
               </div>
               <div className="h-[1px] w-full bg-[#D9D9D9]"></div>
               {order.items.map((item, index) => (
@@ -90,75 +126,8 @@ function Order() {
                 Total: {formatCurrency(order.checkoutPrice)}
               </p>
             </div>
-            <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
-              <h2 className="text-xl font-bold">
-                Order Status:{" "}
-                <span
-                  className={`font-semibold ${
-                    (order.orderStatus === "Approved" && "text-green-500") ||
-                    (order.orderStatus === "Shipping" && "text-blue-500") ||
-                    (order.orderStatus === "Cancelled" && "text-red-500") ||
-                    (order.orderStatus === "Pending" && "text-orange-500") ||
-                    (order.orderStatus === "Complete" && "text-green-500")
-                  }`}
-                >
-                  {order.orderStatus}
-                </span>
-              </h2>
-              <div>
-                <h1 className="text-xl font-bold">User Address</h1>
-                <div className="h-[1px] bg-[#D9D9D9] my-4"></div>
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="House No"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.houseNo}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Street No"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.streetNo}
-                  />
-                </div>
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="Village"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.village}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Commune"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.commune}
-                  />
-                </div>
-                <div className="flex">
-                  <input
-                    type="text"
-                    placeholder="District"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.district}
-                  />
-                  <input
-                    type="text"
-                    placeholder="City/Province"
-                    className="outline-none text-sm md:text-lg w-full"
-                    disabled={true}
-                    value={order.province}
-                  />
-                </div>
-                <div className="h-[1px] bg-[#D9D9D9] my-4"></div>
-              </div>
-              {order.orderStatus === "Shipping" && (
+            {order.orderStatus === "Approved" && (
+              <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
                 <form onSubmit={onSubmit} className="grid grid-cols-2 gap-4">
                   <Input
                     title="Delivery by"
@@ -176,23 +145,23 @@ function Order() {
                   />
                   <Button type="submit">Add</Button>
                 </form>
-              )}
-              {/* <div>
+                {/* <div>
                 <p>Tracking</p>
                 <ul className="">
-                  <li className="text-sm">
-                    For VET Express, customers are required to download the VET
-                    Express app to track the package.
-                  </li>
-                  <li className="text-sm">
-                    For J&T, go to{" "}
-                    <a href=" https://www.jtexpresskh.com/trajectoryQuery?waybillNo=&flag=1">
-                      link here
-                    </a>
-                  </li>
+                <li className="text-sm">
+                For VET Express, customers are required to download the VET
+                Express app to track the package.
+                </li>
+                <li className="text-sm">
+                For J&T, go to{" "}
+                <a href=" https://www.jtexpresskh.com/trajectoryQuery?waybillNo=&flag=1">
+                link here
+                </a>
+                </li>
                 </ul>
               </div> */}
-            </div>
+              </div>
+            )}
           </section>
         </Modal>
       )}

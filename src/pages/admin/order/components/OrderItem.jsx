@@ -1,11 +1,5 @@
 import { useContext } from "react";
 import { formatCurrency, formatDate } from "../../../../utils/helpers";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleXmark,
-  faCircleCheck,
-  faTruckFast,
-} from "@fortawesome/free-solid-svg-icons";
 import { changeOrderStatus } from "../../../../contexts/order/OrderAction";
 import OrderContext from "../../../../contexts/order/OrderContext";
 import Button from "../../../../ui/shared/Button";
@@ -13,18 +7,23 @@ import Button from "../../../../ui/shared/Button";
 function OrderItem({ order, orderId, index }) {
   const { orderDispatch } = useContext(OrderContext);
   let statusTagColor = "";
+  let statusColor = "";
   switch (order.orderStatus) {
     case "Pending":
       statusTagColor = "bg-orange-500";
+      statusColor = "text-orange-500";
       break;
     case "Shipping":
       statusTagColor = "bg-blue-500";
+      statusColor = "text-blue-500";
       break;
     case "Cancelled":
       statusTagColor = "bg-red-500";
+      statusColor = "text-red-500";
       break;
     default:
       statusTagColor = "bg-green-500";
+      statusColor = "text-green-500";
       break;
   }
   const handleApproval = () => {
@@ -72,52 +71,49 @@ function OrderItem({ order, orderId, index }) {
             <>
               <Button
                 onClick={handleApproval}
-                customClass="bg-green-500 flex gap-2 justify-center items-center text-sm"
+                customClass="bg-green-500 gap-2 text-sm"
               >
-                Approve{" "}
-                <FontAwesomeIcon icon={faCircleCheck} className="w-5 h-5" />
+                Approve
               </Button>
               <Button
                 onClick={handleDenied}
-                customClass="bg-red-500 flex gap-2 justify-center items-center text-sm"
+                customClass="bg-red-500 gap-2 text-sm"
               >
-                Cancel{" "}
-                <FontAwesomeIcon icon={faCircleXmark} className="w-5 h-5" />
+                Cancel
               </Button>
             </>
           )}
           {order.orderStatus === "Approved" && (
             <Button
               onClick={handleShipping}
-              customClass="bg-blue-500 flex gap-2 justify-center items-center text-sm"
+              customClass="bg-blue-500 gap-2 text-sm"
             >
-              Ship <FontAwesomeIcon icon={faTruckFast} className="w-5 h-5" />
+              Ship
             </Button>
           )}
         </div>
       </div>
       <div className="block xl:hidden p-4 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex justify-between items-center">
-          <span>
+        <div>
+          <p>
             Order ID:{" "}
             <button
               onClick={() => handleViewOrder(orderId, order)}
               className="font-semibold hover:underline text-blue-500"
             >
-              #{orderId}
+              {orderId}
             </button>
-          </span>
-          <span
-            className={`text-white p-2 md:h-10 md:w-auto text-sm md:text-base rounded-xl ${statusTagColor}`}
-          >
-            {order.orderStatus}
-          </span>
-        </div>
-        <div>
+          </p>
           <p>
             Order At:{" "}
             <span className="font-semibold">
               {formatDate(order.orderAt.toDate())}
+            </span>
+          </p>
+          <p>
+            Order Status:{" "}
+            <span className={`font-semibold ${statusColor}`}>
+              {order.orderStatus}
             </span>
           </p>
           <p>
