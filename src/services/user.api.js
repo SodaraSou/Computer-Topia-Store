@@ -167,13 +167,13 @@ export const signInWithGoogle = async () => {
   return true;
 };
 
-export const signOutUser = () => {
+export const signOutUser = async () => {
   try {
-    signOut(auth);
-    toast.success("Log Out Successfully!");
+    await signOut(auth);
     return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
@@ -268,27 +268,24 @@ export const getUser = (callback) => {
 };
 
 export const getUserOrderList = (callback) => {
-  try {
-    const docRef = collection(dbFirestore, "order");
-    // const q = query(
-    //   docRef,
-    //   where("userId", "==", auth.currentUser.uid),
-    //   orderBy("orderAt", "desc")
-    // );
-    const q = query(docRef, where("userId", "==", auth.currentUser.uid));
-    const unsubscirbe = onSnapshot(q, (orderSnap) => {
+  const orderRef = collection(dbFirestore, "order");
+  const orderQuery = query(orderRef, orderBy("orderAt", "desc"));
+  const unsubscribe = onSnapshot(
+    orderQuery,
+    (docSnap) => {
       const list = [];
-      orderSnap.forEach((order) => {
+      docSnap.forEach((order) =>
         list.push({
           id: order.id,
           data: order.data(),
-        });
-      });
+        })
+      );
       callback(list);
-    });
-    return unsubscirbe;
-  } catch (error) {
-    console.log(error);
-    toast.error("Can't Load Order!");
-  }
+    },
+    (error) => {
+      console.log(error);
+      toast.error("Something Went Wrong!");
+    }
+  );
+  return unsubscribe;
 };

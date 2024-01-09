@@ -276,14 +276,13 @@ function Home() {
               <Link
                 to={`productList/brand/${brand.brand}`}
                 key={brand.id}
-                className="w-full bg-[#EAECF6] p-2 hidden lg:flex flex-col items-center justify-center gap-4"
+                className="w-full bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-2 hidden lg:flex flex-col items-center justify-center gap-4 transform transition duration-300 hover:scale-110"
               >
                 <img
                   src={brand.img ? brand.img : StockImg}
                   alt="avatar"
                   className="w-full"
                 />
-                {/* <h1 className=" font-semibold">{brand.brand}</h1> */}
               </Link>
             ))}
           </div>
@@ -296,14 +295,13 @@ function Home() {
                       <Link
                         to={`productList/brand/${brand.brand}`}
                         key={brand.id}
-                        className="w-full bg-[#EAECF6] p-2 flex flex-col items-center justify-center gap-4"
+                        className="w-full p-2 flex flex-col items-center justify-center gap-4 bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700"
                       >
                         <img
                           src={brand.img ? brand.img : StockImg}
                           alt="avatar"
                           className="w-full"
                         />
-                        {/* <h1 className=" font-semibold">{brand.brand}</h1> */}
                       </Link>
                     </div>
                   ))}

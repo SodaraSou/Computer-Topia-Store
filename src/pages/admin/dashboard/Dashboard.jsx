@@ -208,7 +208,7 @@ function Dashboard() {
               listType="NewOrder"
             />
           </div>
-          <div className="p-4 md:p-10 w-full bg-[#EAECF6]">
+          {/* <div className="p-4 md:p-10 w-full bg-[#EAECF6]">
             <div className="flex justify-between items-center mb-4 md:mb-10">
               <h1 className="text-2xl md:text-4xl font-bold">Shipping Order</h1>
               <Link
@@ -224,7 +224,7 @@ function Dashboard() {
               )}
               listType="Shipping"
             />
-          </div>
+          </div> */}
         </div>
       </motion.div>
     </section>

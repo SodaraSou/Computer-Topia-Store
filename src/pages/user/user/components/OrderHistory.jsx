@@ -9,7 +9,9 @@ function OrderHistory({ orderList }) {
 
   useEffect(() => {
     const completedOrders = orderList.filter(
-      (order) => order.data.orderStatus === "Complete"
+      (order) =>
+        order.data.orderStatus === "Complete" ||
+        order.data.orderStatus === "Cancelled"
     );
     setOrderHistory(completedOrders);
   }, [orderList]);

@@ -34,28 +34,6 @@ export const getOrderList = (callback) => {
   return unsubscribe;
 };
 
-export const getCompletedOrderList = (callback) => {
-  const orderRef = collection(dbFirestore, "orderHistory");
-  const unsubscribe = onSnapshot(
-    orderRef,
-    (docSnap) => {
-      const list = [];
-      docSnap.forEach((order) =>
-        list.push({
-          id: order.id,
-          data: order.data(),
-        })
-      );
-      callback(list);
-    },
-    (error) => {
-      console.log(error);
-      toast.error("Something Went Wrong!");
-    }
-  );
-  return unsubscribe;
-};
-
 export const updateDelivery = async (delivery, orderId) => {
   try {
     const orderRef = doc(dbFirestore, "order", orderId);
