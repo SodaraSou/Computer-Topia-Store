@@ -269,7 +269,11 @@ export const getUser = (callback) => {
 
 export const getUserOrderList = (callback) => {
   const orderRef = collection(dbFirestore, "order");
-  const orderQuery = query(orderRef, orderBy("orderAt", "desc"));
+  const orderQuery = query(
+    orderRef,
+    where("userId", "==", auth.currentUser.uid),
+    orderBy("orderAt", "desc")
+  );
   const unsubscribe = onSnapshot(
     orderQuery,
     (docSnap) => {
