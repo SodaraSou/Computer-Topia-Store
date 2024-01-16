@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QrCode from "../../../../assets/img/ABA_QR_Code.webp";
+// import QrCode from "../../../../assets/img/ABA_QR_Code.webp";
 import VisaABA from "../../../../assets/img/visa_aba.webp";
 import VisaAceleda from "../../../../assets/img/visa_aceleda.webp";
 import VisaPrince from "../../../../assets/img/visa_prince.webp";
@@ -12,10 +12,12 @@ import {
   updateUserPayment,
   updatePhoneNumber,
 } from "../../../../services/user.api";
+import { formatCurrency } from "../../../../utils/helpers";
 
 function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
   const navigate = useNavigate();
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const checkoutPriceWithDelivery = checkoutPrice + 2;
+  // const [paymentMethod, setPaymentMethod] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState({
     houseNo: "",
@@ -66,9 +68,9 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
   const onChangePhone = (e) => {
     setPhoneNumber(e.target.value);
   };
-  const onChangePaymentMethod = (e) => {
-    setPaymentMethod(e.target.value);
-  };
+  // const onChangePaymentMethod = (e) => {
+  //   setPaymentMethod(e.target.value);
+  // };
   const handleCheckout = async (e) => {
     e.preventDefault();
     const newPayment = { cardName, cardNumber, cardExpDate };
@@ -77,7 +79,7 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
     await updatePhoneNumber(phoneNumber);
     const response = await checkout(
       checkoutList,
-      checkoutPrice,
+      checkoutPriceWithDelivery,
       address,
       cardName,
       phoneNumber
@@ -95,8 +97,8 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
       <div className="h-[1px] bg-[#D9D9D9]"></div>
       <div className="flex flex-col gap-4">
         <h1 className="text-lg font-semibold">Payment Details</h1>
-        <div className="flex flex-col gap-4">
-          {/* <div className="flex items-center">
+        {/* <div className="flex flex-col gap-4"> */}
+        {/* <div className="flex items-center">
             <input
               id="default-radio-2"
               type="radio"
@@ -126,7 +128,7 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
               Credit Card
             </label>
           </div> */}
-        </div>
+        {/* </div> */}
       </div>
       {/* {paymentMethod === "QR_Code" && (
         <>
@@ -246,17 +248,19 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
         value={phoneNumber}
         isRequired={true}
       />
-      {/* <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Shipping Cost</h3>
-        <p className="text-md">$0.00</p>
-      </div> */}
       <div className="h-[1px] bg-[#D9D9D9]"></div>
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Total</h3>
-        <p className="text-md">${checkoutPrice}</p>
+      <div>
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-lg font-semibold">Total</h3>
+          <p className="text-md">{formatCurrency(checkoutPrice)}</p>
+        </div>
+        <div className="flex justify-between items-center">
+          <h3 className="font-semibold">Shipping Cost</h3>
+          <p>$2.00</p>
+        </div>
       </div>
       <Button type="submit" customClass="md:w-full">
-        Pay ${checkoutPrice}
+        Pay {formatCurrency(checkoutPriceWithDelivery)}
       </Button>
     </form>
   );

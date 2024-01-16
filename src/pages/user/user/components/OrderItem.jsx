@@ -101,6 +101,9 @@ function OrderItem({ item }) {
               </div>
             ))}
             <div className="h-[1px] w-full bg-[#D9D9D9] mb-4"></div>
+            <p className="flex justify-end text-sm text-gray-500">
+              Include Delivery Fee $2.00
+            </p>
             <p className="font-semibold flex justify-end text-lg">
               Total: {formatCurrency(item.data.checkoutPrice)}
             </p>
