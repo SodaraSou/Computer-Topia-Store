@@ -58,7 +58,7 @@ export const createAccount = async (inputData) => {
         await setDoc(doc(dbFirestore, "users", user.uid), {
           username,
           email,
-          phoneNumber: "XXX-XXX-XXX",
+          phoneNumber: "",
           profileImg: "",
           role: "user",
           cardNumber: "",
@@ -70,6 +70,11 @@ export const createAccount = async (inputData) => {
           commune: "",
           district: "",
           province: "",
+        });
+        await setDoc(doc(dbFirestore, "cart", user.uid), {
+          items: [],
+          totalPrice: 0,
+          totalIncome: 0,
         });
         toast.success("Successfully Registered!");
         return true;

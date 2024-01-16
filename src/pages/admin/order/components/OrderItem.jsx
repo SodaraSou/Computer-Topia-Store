@@ -3,6 +3,7 @@ import { formatCurrency, formatDate } from "../../../../utils/helpers";
 import { changeOrderStatus } from "../../../../contexts/order/OrderAction";
 import OrderContext from "../../../../contexts/order/OrderContext";
 import Button from "../../../../ui/shared/Button";
+import { toast } from "react-toastify";
 
 function OrderItem({ order, orderId, index }) {
   const { orderDispatch } = useContext(OrderContext);
@@ -28,12 +29,19 @@ function OrderItem({ order, orderId, index }) {
   }
   const handleApproval = () => {
     changeOrderStatus(orderId, order, "Approved");
+    toast.success("Order Approved!");
   };
   const handleDenied = () => {
     changeOrderStatus(orderId, order, "Cancelled");
+    toast.success("Order Cancelled!");
   };
   const handleShipping = () => {
-    changeOrderStatus(orderId, order, "Shipping");
+    if (order.deliveryBy !== "" || order.trackingCode !== "") {
+      changeOrderStatus(orderId, order, "Shipping");
+      toast.success("Order Shipping!");
+    } else {
+      toast.error("Delivery Information Required!");
+    }
   };
   const handleViewOrder = () => {
     orderDispatch({ type: "SET_ORDER", payload: { order, orderId } });

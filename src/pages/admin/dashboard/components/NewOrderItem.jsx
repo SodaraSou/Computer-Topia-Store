@@ -31,7 +31,9 @@ function NewOrderItem({ order, orderId }) {
             Order ID:{" "}
             <span className="text-blue-500 font-semibold">{orderId}</span>
           </p>
-          <Button onClick={() => handleOpenOrder(!openOrder)}>Detail</Button>
+          <Button onClick={() => handleOpenOrder(!openOrder)}>
+            {openOrder ? "Close" : "Detail"}
+          </Button>
         </div>
         <p>
           Order At:{" "}
@@ -91,12 +93,17 @@ function NewOrderItem({ order, orderId }) {
             </div>
           </>
         )}
-        <p>
-          Checkout Total:{" "}
-          <span className="font-semibold">
-            {formatCurrency(order.checkoutPrice)}
-          </span>
+        <p className="flex justify-end text-sm text-gray-500">
+          Include Delivery Fee $2.00
         </p>
+        <div className="flex justify-end">
+          <p>
+            Total:{" "}
+            <span className="font-semibold">
+              {formatCurrency(order.checkoutPrice)}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );

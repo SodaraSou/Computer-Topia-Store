@@ -46,7 +46,7 @@ function Order() {
       </div>
       {openOrder && (
         <Modal handleModal={handleModal}>
-          <section className="max-w-7xl flex flex-col gap-4 md:gap-10">
+          <section className="max-w-2xl flex flex-col gap-4 md:gap-10">
             <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
               <div>
                 <h1 className="text-4xl font-bold mb-4">Order</h1>
@@ -122,44 +122,38 @@ function Order() {
                 </div>
               ))}
               <div className="h-[1px] w-full bg-[#D9D9D9]"></div>
-              <p className="font-semibold flex justify-end">
-                Total: {formatCurrency(order.checkoutPrice)}
-              </p>
+              <div>
+                <p className="flex justify-end text-sm text-gray-500">
+                  Include Delivery Fee $2.00
+                </p>
+                <p className="font-semibold flex justify-end">
+                  Total: {formatCurrency(order.checkoutPrice)}
+                </p>
+              </div>
             </div>
             {order.orderStatus === "Approved" && (
               <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
-                <form onSubmit={onSubmit} className="grid grid-cols-2 gap-4">
-                  <Input
-                    title="Delivery by"
-                    id="deliveryBy"
-                    onChange={onChangeDelivery}
-                    value={delivery.deliveryBy}
-                    isRequired={true}
-                  />
-                  <Input
-                    title="Tracking Code"
-                    id="trackingCode"
-                    onChange={onChangeDelivery}
-                    value={delivery.trackingCode}
-                    isRequired={true}
-                  />
-                  <Button type="submit">Add</Button>
+                <form onSubmit={onSubmit}>
+                  <div className="flex gap-4 mb-4">
+                    <Input
+                      title="Delivery by"
+                      id="deliveryBy"
+                      onChange={onChangeDelivery}
+                      value={delivery.deliveryBy}
+                      isRequired={true}
+                    />
+                    <Input
+                      title="Tracking Code"
+                      id="trackingCode"
+                      onChange={onChangeDelivery}
+                      value={delivery.trackingCode}
+                      isRequired={true}
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <Button type="submit">Add</Button>
+                  </div>
                 </form>
-                {/* <div>
-                <p>Tracking</p>
-                <ul className="">
-                <li className="text-sm">
-                For VET Express, customers are required to download the VET
-                Express app to track the package.
-                </li>
-                <li className="text-sm">
-                For J&T, go to{" "}
-                <a href=" https://www.jtexpresskh.com/trajectoryQuery?waybillNo=&flag=1">
-                link here
-                </a>
-                </li>
-                </ul>
-              </div> */}
               </div>
             )}
           </section>
