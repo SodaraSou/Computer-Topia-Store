@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Element } from "react-scroll";
-import { Carousel } from "@material-tailwind/react";
 import {
   getProductByType,
   getProductByBrand,
@@ -16,7 +15,7 @@ import {
 } from "./productSlice";
 import { setOpenMenu } from "../home/homeslice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBox } from "@fortawesome/free-solid-svg-icons";
 import BrandSidebar from "./components/BrandSidebar";
 import ProductList from "../../../ui/ProductList";
 import DropdownButton from "../../../ui/shared/DropdownButton";
@@ -242,16 +241,28 @@ function ProductListPage() {
                   {productType === "Laptop" && (
                     <>
                       {isEmpty ? (
-                        <div className="flex justify-center">
-                          <p className="text-lg md:text-2xl">No Product</p>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                          <FontAwesomeIcon
+                            icon={faBox}
+                            className="text-[#5E17EB] w-10 h-10"
+                          />
+                          <p className="text-xl md:text-2xl font-semibold">
+                            No Products
+                          </p>
                         </div>
                       ) : (
                         <>
                           {productList.filter(
                             (product) => product.data.brand === section.name
                           ).length === 0 ? (
-                            <div className="flex justify-center">
-                              <p className="text-lg md:text-2xl">No Product</p>
+                            <div className="flex flex-col justify-center items-center gap-4">
+                              <FontAwesomeIcon
+                                icon={faBox}
+                                className="text-[#5E17EB] w-10 h-10"
+                              />
+                              <p className="text-xl md:text-2xl font-semibold">
+                                No Products
+                              </p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -271,8 +282,14 @@ function ProductListPage() {
                   {productType === "PC-Hardware" && (
                     <>
                       {isEmpty ? (
-                        <div className="flex justify-center">
-                          <p className="text-lg md:text-2xl">No Product</p>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                          <FontAwesomeIcon
+                            icon={faBox}
+                            className="text-[#5E17EB] w-10 h-10"
+                          />
+                          <p className="text-xl md:text-2xl font-semibold">
+                            No Products
+                          </p>
                         </div>
                       ) : (
                         <>
@@ -280,8 +297,14 @@ function ProductListPage() {
                             (product) =>
                               product.data.hardwareType === section.name
                           ).length === 0 ? (
-                            <div className="flex justify-center">
-                              <p className="text-lg md:text-2xl">No Product</p>
+                            <div className="flex flex-col justify-center items-center gap-4">
+                              <FontAwesomeIcon
+                                icon={faBox}
+                                className="text-[#5E17EB] w-10 h-10"
+                              />
+                              <p className="text-xl md:text-2xl font-semibold">
+                                No Products
+                              </p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -301,8 +324,14 @@ function ProductListPage() {
                   {productType === "Peripherals" && (
                     <>
                       {isEmpty ? (
-                        <div className="flex justify-center">
-                          <p className="text-lg md:text-2xl">No Product</p>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                          <FontAwesomeIcon
+                            icon={faBox}
+                            className="text-[#5E17EB] w-10 h-10"
+                          />
+                          <p className="text-xl md:text-2xl font-semibold">
+                            No Products
+                          </p>
                         </div>
                       ) : (
                         <>
@@ -310,8 +339,14 @@ function ProductListPage() {
                             (product) =>
                               product.data.peripheralType === section.name
                           ).length === 0 ? (
-                            <div className="flex justify-center">
-                              <p className="text-lg md:text-2xl">No Product</p>
+                            <div className="flex flex-col justify-center items-center gap-4">
+                              <FontAwesomeIcon
+                                icon={faBox}
+                                className="text-[#5E17EB] w-10 h-10"
+                              />
+                              <p className="text-xl md:text-2xl font-semibold">
+                                No Products
+                              </p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -331,8 +366,14 @@ function ProductListPage() {
                   {productType === "Accessories" && (
                     <>
                       {isEmpty ? (
-                        <div className="flex justify-center">
-                          <p className="text-lg md:text-2xl">No Product</p>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                          <FontAwesomeIcon
+                            icon={faBox}
+                            className="text-[#5E17EB] w-10 h-10"
+                          />
+                          <p className="text-xl md:text-2xl font-semibold">
+                            No Products
+                          </p>
                         </div>
                       ) : (
                         <>
@@ -340,8 +381,14 @@ function ProductListPage() {
                             (product) =>
                               product.data.accessoriesType === section.name
                           ).length === 0 ? (
-                            <div className="flex justify-center">
-                              <p className="text-lg md:text-2xl">No Product</p>
+                            <div className="flex flex-col justify-center items-center gap-4">
+                              <FontAwesomeIcon
+                                icon={faBox}
+                                className="text-[#5E17EB] w-10 h-10"
+                              />
+                              <p className="text-xl md:text-2xl font-semibold">
+                                No Products
+                              </p>
                             </div>
                           ) : (
                             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -365,16 +412,26 @@ function ProductListPage() {
             {type === "brand" && (
               <>
                 {isEmpty ? (
-                  <div className="flex justify-center">
-                    <p className="text-2xl md:text-4xl font-semibold">
-                      No Product
+                  <div className="flex flex-col justify-center items-center gap-4">
+                    <FontAwesomeIcon
+                      icon={faBox}
+                      className="text-[#5E17EB] w-10 h-10"
+                    />
+                    <p className="text-xl md:text-2xl font-semibold">
+                      No Products
                     </p>
                   </div>
                 ) : (
                   <>
                     {productList.length === 0 ? (
-                      <div className="flex justify-center">
-                        <p className="text-lg md:text-2xl">No Product</p>
+                      <div className="flex flex-col justify-center items-center gap-4">
+                        <FontAwesomeIcon
+                          icon={faBox}
+                          className="text-[#5E17EB] w-10 h-10"
+                        />
+                        <p className="text-xl md:text-2xl font-semibold">
+                          No Products
+                        </p>
                       </div>
                     ) : (
                       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

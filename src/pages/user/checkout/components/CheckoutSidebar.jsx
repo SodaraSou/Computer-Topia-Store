@@ -91,7 +91,7 @@ function CheckoutSidebar({ checkoutPrice, checkoutList, userProfile }) {
   return (
     <form
       onSubmit={handleCheckout}
-      className="w-full lg:w-4/12 flex flex-col gap-4 p-4 md:p-10 border"
+      className="w-full lg:w-4/12 flex flex-col gap-4 p-4 md:p-10 border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 "
     >
       <h1 className="text-2xl font-bold">Order Summary</h1>
       <div className="h-[1px] bg-[#D9D9D9]"></div>

@@ -49,7 +49,7 @@ function Cart() {
   };
   return (
     <section className="p-4 md:p-10">
-      <div className="max-w-[1000px] mx-auto border border-[#D9D9D9] p-4 xl:p-10">
+      <div className="max-w-[1000px] mx-auto border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700  p-4 xl:p-10">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-2xl md:text-4xl font-bold">My Cart</h1>
           <h2 className="text-xl md:text-2xl font-bold">

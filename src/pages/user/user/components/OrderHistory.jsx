@@ -18,11 +18,10 @@ function OrderHistory({ orderList }) {
   }, [orderList]);
   return (
     <section className="w-full border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
-      <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-10">
-        Order History
-      </h1>
+      <h1 className="text-2xl md:text-4xl font-bold mb-4">Order History</h1>
+      <div className="h-[1px] bg-[#D9D9D9] mb-4"></div>
       {orderHistory.length === 0 ? (
-        <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center gap-4 p-10">
           <FontAwesomeIcon
             icon={faBoxesPacking}
             className="text-[#5E17EB] w-10 h-10"
