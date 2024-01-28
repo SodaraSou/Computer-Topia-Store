@@ -4,7 +4,7 @@
 // function Modal({ children, handleModal }) {
 //   const modalRef = useRef();
 //   useEffect(() => {
-//     const handler = (e) => {
+//     const clickHandler = (e) => {
 //       if (
 //         modalRef.current &&
 //         !modalRef.current.contains(e.target) &&
@@ -13,10 +13,10 @@
 //         handleModal(false);
 //       }
 //     };
-//     document.addEventListener("mousedown", handler);
+//     document.addEventListener("mousedown", clickHandler);
 
 //     return () => {
-//       document.removeEventListener("mousedown", handler);
+//       document.removeEventListener("mousedown", clickHandler);
 //     };
 //   }, []);
 //   return (
@@ -40,11 +40,13 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 function Modal({ children, handleModal }) {
   const modalRef = useRef();
   useEffect(() => {
-    const handler = (e) => {
+    const clickHandler = (e) => {
       if (
         modalRef.current &&
         !modalRef.current.contains(e.target) &&
@@ -53,9 +55,16 @@ function Modal({ children, handleModal }) {
         handleModal(false);
       }
     };
-    document.addEventListener("mousedown", handler);
+    const keydownHandler = (e) => {
+      if (e.key === "Escape") {
+        handleModal(false);
+      }
+    };
+    document.addEventListener("mousedown", clickHandler);
+    document.addEventListener("keydown", keydownHandler);
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("mousedown", clickHandler);
+      document.addEventListener("keydown", keydownHandler);
     };
   }, []);
   return (
@@ -67,8 +76,14 @@ function Modal({ children, handleModal }) {
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         ref={modalRef}
-        className="p-4 md:p-10 bg-[#EAECF6] max-h-[80vh] overflow-y-auto"
+        className="p-4 md:p-10 bg-[#EAECF6] max-h-[80vh] overflow-y-auto relative"
       >
+        <button
+          className="absolute top-3 right-4"
+          onClick={() => handleModal(false)}
+        >
+          <FontAwesomeIcon icon={faX} className="text-[#5E17EB]" />
+        </button>
         {children}
       </motion.div>
     </div>
