@@ -46,10 +46,10 @@ function Order() {
       </div>
       {openOrder && (
         <Modal handleModal={handleModal}>
-          <section className="max-w-2xl flex flex-col gap-4 md:gap-10">
+          <section className="max-w-2xl md:w-[600px] flex flex-col gap-4 md:gap-10">
             <div className="w-full p-4 md:p-10 border bg-white border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4">
               <div>
-                <h1 className="text-4xl font-bold mb-4">Order</h1>
+                <h1 className="text-2xl md:text-4xl font-bold mb-4">Order</h1>
                 <p className="font-semibold">
                   Order Id: <span className="text-blue-500">{orderId}</span>
                 </p>
