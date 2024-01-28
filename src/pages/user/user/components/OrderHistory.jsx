@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBoxesPacking } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import OrderItem from "./OrderItem";
+// import OrderItem from "./OrderItem";
+import Pagination from "../../../../ui/shared/Pagination";
 
 function OrderHistory({ orderList }) {
   const [orderHistory, setOrderHistory] = useState([]);
@@ -35,11 +36,12 @@ function OrderHistory({ orderList }) {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-col gap-6">
-          {orderHistory.map((item) => (
-            <OrderItem item={item} key={item.id} />
-          ))}
-        </div>
+        // <div className="flex flex-col gap-6">
+        //   {orderHistory.map((item) => (
+        //     <OrderItem item={item} key={item.id} />
+        //   ))}
+        // </div>
+        <Pagination listType="UserOrder" listItem={orderHistory} />
       )}
     </section>
   );
