@@ -32,20 +32,22 @@ function Address({ editSvg, userProfile }) {
   };
   return (
     <div className="w-full border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
-      <div className="flex justify-between items-center mb-4 md:mb-10">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-bold">Address</h1>
-        <button onClick={onSubmit}>
+        <button onClick={onSubmit} className="text-lg flex items-center gap-2">
           {editMode ? (
             <>
               <img src={editSvg} alt="editMode" width={18} height={18} />
+              Edit
             </>
           ) : (
             <>
-              <img src={SaveSvg} alt="editMode" width={18} height={18} />
+              <img src={SaveSvg} alt="editMode" width={18} height={18} /> Save
             </>
           )}
         </button>
       </div>
+      <div className="h-[1px] bg-[#D9D9D9] mb-4"></div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
         <Input
           title="House No"

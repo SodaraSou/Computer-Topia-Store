@@ -1,7 +1,6 @@
 import { useState } from "react";
-import {
-  updateUserProfile,
-} from "../../../../services/user.api";
+import { updateUserProfile } from "../../../../services/user.api";
+import { toast } from "react-toastify";
 import SaveSvg from "../../../../assets/svg/floppy-disk-solid.svg";
 import Button from "../../../../ui/shared/Button";
 import ProfileAvatar from "../../../../ui/ProfileAvatar";
@@ -30,19 +29,23 @@ function ProfileSection({ editSvg, logOut, userProfile, loading }) {
   };
   const onSubmit = async () => {
     if (!editMode) {
-      await updateUserProfile(username, phoneNumber, imgUrl);
+      const response = await updateUserProfile(username, phoneNumber, imgUrl);
+      if (response) {
+        toast.success("Successfully Updated!");
+      }
     }
     setEditMode(!editMode);
   };
   return (
     <section className="flex flex-col gap-4 md:gap-10">
       <div className="w-full border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-10">
-        <div className="flex justify-between items-center mb-4 md:mb-10">
+        <div className="flex justify-between items-center mb-4">
           <h1 className="font-bold text-2xl md:text-4xl">My Profile</h1>
           <Button onClick={logOut} customClass="bg-red-500">
             Log Out
           </Button>
         </div>
+        <div className="h-[1px] bg-[#D9D9D9] mb-4"></div>
         <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-10">
           <div className="flex flex-col gap-4 justify-center items-center">
             <ProfileAvatar
